@@ -14,15 +14,14 @@ const svg = d3.select("#densitytype")
 // Tooltip
 const tooltip = d3.select("body").append("div")
   .attr("class", "tooltip")
-  .style("opacity", 0);
+  .style("opacity", 0)
+  .style("position", "absolute");
 
-d3.csv("combined_data_with_keystroke_averages.csv", d => {
-  return {
-    typing_speed: d.typingSpeed ? +d.typingSpeed : NaN,
-    gt: String(d.gt).toLowerCase() === "true"
-  };
-}).then(data => {
-  // Filter out bad rows
+// Load CSV
+d3.csv("combined_data_with_keystroke_averages.csv", d => ({
+  typing_speed: d.typingSpeed ? +d.typingSpeed : NaN,
+  gt: String(d.gt).toLowerCase() === "true"
+})).then(data => {
   const validData = data.filter(d => !isNaN(d.typing_speed));
 
   if (validData.length === 0) {
@@ -40,7 +39,7 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => {
     .nice()
     .range([0, width]);
 
-  // Histogram
+  // Histogram bins
   const histogram = d3.bin()
     .value(d => d.typing_speed)
     .domain(x.domain())
@@ -49,9 +48,16 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => {
   const binsTrue = histogram(validData.filter(d => d.gt));
   const binsFalse = histogram(validData.filter(d => !d.gt));
 
-  // Y Scale
+  // Density adjustment
+  const totalTrue = d3.sum(binsTrue, d => d.length);
+  const totalFalse = d3.sum(binsFalse, d => d.length);
+
+  binsTrue.forEach(d => d.density = d.length / totalTrue);
+  binsFalse.forEach(d => d.density = d.length / totalFalse);
+
+  // Y Scale (density)
   const y = d3.scaleLinear()
-    .domain([0, d3.max([...binsTrue, ...binsFalse], d => d.length)])
+    .domain([0, d3.max([...binsTrue, ...binsFalse], d => d.density)])
     .nice()
     .range([height, 0]);
 
@@ -63,47 +69,42 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => {
     .data(binsTrue)
     .join("rect")
     .attr("x", d => x(d.x0))
-    .attr("y", d => y(d.length))
-    .attr("width", d => {
-      const w = x(d.x1) - x(d.x0) - 1;
-      return isNaN(w) || w < 0 ? 0 : w;
-    })
-    .attr("height", d => height - y(d.length))
+    .attr("y", d => y(d.density))
+    .attr("width", d => Math.max(0, x(d.x1) - x(d.x0) - 1))
+    .attr("height", d => height - y(d.density))
     .attr("fill", colorMap.true)
-    .on("mouseover", (e, d) => {
-      tooltip.transition().duration(200).style("opacity", 0.9);
-      tooltip.html(`gt = True<br>Range: ${d.x0.toFixed(1)} - ${d.x1.toFixed(1)}<br>Count: ${d.length}`)
+    .attr("opacity", 0.5)
+    .on("mousemove", (e, d) => {
+      tooltip.style("opacity", 0.9)
+        .html(`gt = True<br>Range: ${d.x0.toFixed(1)} - ${d.x1.toFixed(1)}<br>Density: ${d.density.toFixed(3)}`)
         .style("left", (e.pageX + 10) + "px")
         .style("top", (e.pageY - 28) + "px");
     })
-    .on("mouseout", () => tooltip.transition().duration(300).style("opacity", 0));
+    .on("mouseout", () => tooltip.style("opacity", 0));
 
   // Bars for False
   svg.selectAll(".bar-false")
     .data(binsFalse)
     .join("rect")
     .attr("x", d => x(d.x0))
-    .attr("y", d => y(d.length))
-    .attr("width", d => {
-      const w = x(d.x1) - x(d.x0) - 1;
-      return isNaN(w) || w < 0 ? 0 : w;
-    })
-    .attr("height", d => height - y(d.length))
+    .attr("y", d => y(d.density))
+    .attr("width", d => Math.max(0, x(d.x1) - x(d.x0) - 1))
+    .attr("height", d => height - y(d.density))
     .attr("fill", colorMap.false)
-    .on("mouseover", (e, d) => {
-      tooltip.transition().duration(200).style("opacity", 0.9);
-      tooltip.html(`gt = False<br>Range: ${d.x0.toFixed(1)} - ${d.x1.toFixed(1)}<br>Count: ${d.length}`)
+    .attr("opacity", 0.5)
+    .on("mousemove", (e, d) => {
+      tooltip.style("opacity", 0.9)
+        .html(`gt = False<br>Range: ${d.x0.toFixed(1)} - ${d.x1.toFixed(1)}<br>Density: ${d.density.toFixed(3)}`)
         .style("left", (e.pageX + 10) + "px")
         .style("top", (e.pageY - 28) + "px");
     })
-    .on("mouseout", () => tooltip.transition().duration(300).style("opacity", 0));
+    .on("mouseout", () => tooltip.style("opacity", 0));
 
-  // X Axis
+  // Axes
   svg.append("g")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x));
 
-  // Y Axis
   svg.append("g")
     .call(d3.axisLeft(y));
 
@@ -119,5 +120,33 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => {
     .attr("y", -40)
     .attr("transform", "rotate(-90)")
     .attr("text-anchor", "middle")
-    .text("Count");
+    .text("Density");
+
+  // Legend
+  const legend = svg.append("g")
+    .attr("transform", `translate(${width - 150}, 20)`);
+
+  const legendData = [{ label: "gt = True", color: colorMap.true },
+                      { label: "gt = False", color: colorMap.false }];
+
+  legend.selectAll("rect")
+    .data(legendData)
+    .enter()
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", (d, i) => i * 20)
+    .attr("width", 12)
+    .attr("height", 12)
+    .attr("fill", d => d.color)
+    .attr("opacity", 0.5);
+
+  legend.selectAll("text")
+    .data(legendData)
+    .enter()
+    .append("text")
+    .attr("x", 20)
+    .attr("y", (d, i) => i * 20 + 10)
+    .text(d => d.label)
+    .attr("font-size", "12px")
+    .attr("alignment-baseline", "middle");
 });
