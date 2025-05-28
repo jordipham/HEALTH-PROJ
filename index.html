@@ -1,77 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Silent Signs: Typing Patterns and Parkinson's Risk</title>
     <link rel="stylesheet" href="style.css" />
-
-
     <script src="global.js" type="module"></script>
-
     <script src="densitytype.js" type="module"></script>
-
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-</head>
-<body>
+  </head>
+  <body>
     <h1 id="big-title">Silent Signs: Typing Patterns and Parkinson's Risk</h1>
     <p>
-    Welcome to the Silent Signs project! This project aims to explore the relationship between typing patterns and the risk of Parkinson's disease. 
-    By analyzing how people type, we hope to identify early signs that could indicate a higher risk of developing PD.
+      Welcome to the Silent Signs project! This project aims to explore the
+      relationship between typing patterns and the risk of Parkinson's disease.
+      By analyzing how people type, we hope to identify early signs that could
+      indicate a higher risk of developing PD.
     </p>
 
     <div class="basic-about">
-        <h2>About Parkinson's Disease</h2>
-        <p>
-        Parkinson's disease is a progressive neurological disorder that affects movement. It occurs when nerve cells in the brain that produce dopamine become damaged or die. 
-            
-        Early signs of Parkinson's can include tremors, stiffness, and changes in movement patterns. Research has shown that changes in typing patterns may be an early indicator of Parkinson's disease.
-        By studying these patterns, we can potentially identify individuals at risk and provide them with early interventions.
-        </p>
-        
+      <h2>About Parkinson's Disease</h2>
+      <p>
+        Parkinson's disease is a progressive neurological disorder that affects
+        movement. It occurs when nerve cells in the brain that produce dopamine
+        become damaged or die. Early signs of Parkinson's can include tremors,
+        stiffness, and changes in movement patterns. Research has shown that
+        changes in typing patterns may be an early indicator of Parkinson's
+        disease. By studying these patterns, we can potentially identify
+        individuals at risk and provide them with early interventions.
+      </p>
 
-        <h2>About Our Dataset</h2>
-        <p>
-        Our data set was conducted by the Massachusetts Institute of Technology (MIT) on two movement disorder units from Madrid, Spain. Subjects were given standardadized equipment and wwere told to type as they usually would at home, free
-        to correct mistakes if they chose to. The first group conducted the study twice with 13 healthy controls and 18 PD sufferers, while the second group conducted the study once with 30 healthy controls and 24 PD sufferers. 
+      <h2>About Our Dataset</h2>
+      <p>
+        Our dataset was collected by the Massachusetts Institute of Technology
+        (MIT) on two movement disorder units from Madrid, Spain. Subjects were
+        given standardized equipment and were told to type as they usually would
+        at home, free to correct mistakes if they chose to. The first group
+        conducted the study twice with 13 healthy controls and 18 PD sufferers,
+        while the second group conducted the study once with 30 healthy controls
+        and 24 PD sufferers.
+      </p>
+      <p>
+        Besides the keylogging data (measuring the key pressed, hold time,
+        release time, and press time), the subjects also took finger tapping
+        tests, which measure the speed and rhythm of finger movements, providing
+        additional insights into the progression of Parkinson's disease.
+      </p>
+      <p>
+        Subjects also completed a questionnaire to assess their Parkinson's
+        disease severity using the Unified Parkinson's Disease Rating Scale
+        (UPDRS), which assesses motor and non-motor symptoms on a scale from
+        0–4, with a total score range of 108.
+      </p>
 
-        Besides the keylogging data (measuring the key pressed, hold time, release time, and press time), the subjects also took finger tapping tests, which measure the speed and rhythm of finger movements, measuring motor function which can provide additional insights into the progression of Parkinson's disease.
-
-        Subjects also completed a questionnaire to assess their Parkinson's disease severity using Unified Parkinson's Disease Rating Scale (UPDRS), which assesses motor and non-motor symptoms on a scale from 0-4 and has a total score range of 108.
-        </p>
-
-        <div>
-
-        <!-- insert graph here -->
-
-            <svg id = "densitytype"></svg>
-
-        </div>
-
-
+      <div>
+        <!-- density histogram of typing speeds for gt vs. non-gt patients -->
+        <svg id="densitytype"></svg>
+      </div>
     </div>
 
-    <div class="typing-test-zone"></div>
-        <h2>Typing Test Comparison</h2>
-        <ol>
-            <li>Click the "Start Typing" button below to begin the typing test.</li>
-            <li>Type the provided text as accurately and quickly as possible.</li>
-            <li>Once you finish, your typing data will be collected for analysis.</li>
-            <li>After completing the test, you will receive feedback on your typing performance.</li>
-        </ol>
+    <div class="typing-test-zone">
+      <h2>Typing Test Comparison</h2>
+      <ol>
+        <li>Click the "Start Typing" button below to begin the typing test.</li>
+        <li>Type the provided text as accurately and quickly as possible.</li>
+        <li>
+          Once you finish, your typing data will be collected for analysis.
+        </li>
+        <li>
+          After completing the test, you will receive feedback on your typing
+          performance.
+        </li>
+      </ol>
     </div>
 
     <div class="prototye-one">
-        <h2>PROTOTYPE ONE CHECKPOINT</h2>
-        <p>
-            1. So far in the project, we have focused on creating an overarching theme to the dataset we chose along with an overview of what we are looking to explore in regards to Parkinson's and typing patterns. In regards to visualiztions, we have created a density histogram
-            of the typing speeds of patients with/without Parkinson's. On the graph, we have also created a interactive tooltip that allows user to see different areas and values of the graph. We have also established a general introduction to the project, such as the which columns of
-            the dataset are crucial to our analysis, and in terms of style, we have streamlined our content so far with margins and proper centering. <br><br>
+      <h2>PROTOTYPE ONE CHECKPOINT</h2>
+      <p>
+        1. So far in the project, we have focused on creating an overarching
+        theme to the dataset we chose along with an overview of what we are
+        looking to explore regarding Parkinson's and typing patterns. In terms
+        of visualizations, we have created a density histogram of the typing
+        speeds of patients with and without Parkinson's. On the graph, we have
+        also created an interactive tooltip that allows users to see different
+        areas and values of the graph. We have also established a general
+        introduction to the project, such as which columns of the dataset are
+        crucial to our analysis. In terms of style, we have streamlined our
+        content with margins and proper centering. <br /><br />
 
-            2. The hardest part of the project for us, we believe, will be the creation of the typing test in which we use the datasets we have to compare a user's typings speeds/patterns. It will require us to find a way to initiate a typing test along with the creation of an interface
-            to show how a person is typing in real-time. Furthermore, a bit of computation will have to go in to create a general summary of their stats for comparison to stats we already have of PD patients. At this point so far though, one of the challenges we have already encountered
-            was how to bring all the datasets together: we not only had to combine both cohorts of patients (two datasets of patients) but we have to also link each patient to their typing tests (each typing test was its own file).
-        </p>
+        2. The hardest part of the project for us, we believe, will be the
+        creation of the typing test in which we use the datasets we have to
+        compare a user's typing speeds and patterns. It will require us to find
+        a way to initiate a typing test, along with the creation of an interface
+        to show how a person is typing in real-time. Furthermore, a bit of
+        computation will have to go into creating a general summary of their
+        stats for comparison to stats we already have from PD patients. At this
+        point so far, one of the challenges we have already encountered was how
+        to bring all the datasets together: we not only had to combine both
+        cohorts of patients (two datasets of patients), but we also had to link
+        each patient to their typing tests (each typing test was its own file).
+      </p>
     </div>
-</body>
+  </body>
 </html>
