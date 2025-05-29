@@ -1,11 +1,11 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
 // Set dimensions and margins
-const margin = { top: 20, right: 30, bottom: 50, left: 50 },
+const margin = { top: 20, right: 30, bottom: 50, left: 70 },
       width = 800 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
-const svg = d3.select("#densitytype")
+const svg = d3.select("#densitytype2")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -124,7 +124,7 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
 
   // Legend
   const legend = svg.append("g")
-    .attr("transform", `translate(${width - 100}, 20)`);
+    .attr("transform", `translate(${width - 150}, 20)`);
 
   const legendData = [{ label: "gt = True", color: colorMap.true },
                       { label: "gt = False", color: colorMap.false }];
