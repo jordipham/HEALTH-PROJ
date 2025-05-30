@@ -9,6 +9,16 @@ body {
   accent-color: var(--color-accent); /* Added for Step 2.4 */
 }
 
+#densitytype {
+  display: block;
+  margin: 0 auto;
+}
+
+#scatterplot {
+  display: block;
+  margin: 0 auto;
+}
+
 #densitytype2 {
   display: block;
   margin: 0 auto;

@@ -126,8 +126,8 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
   const legend = svg.append("g")
     .attr("transform", `translate(${width - 150}, 20)`);
 
-  const legendData = [{ label: "gt = True", color: colorMap.true },
-                      { label: "gt = False", color: colorMap.false }];
+ const legendData = [{ label: "Has Parkinson's", color: colorMap.true },
+                      { label: "No Parkinson's", color: colorMap.false }];
 
   legend.selectAll("rect")
     .data(legendData)
