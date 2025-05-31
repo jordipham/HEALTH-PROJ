@@ -79,10 +79,14 @@ const y = d3.scaleLinear()
     .attr("fill", d => colorMap[d.gt])
     // .attr("opacity", 0.7)
     .on("mousemove", (e, d) => {
-      tooltip.style("opacity", 0.9)
-        .html(`gt = ${d.gt}<br>Typing Speed: ${d.typingSpeed}<br>UPDRS: ${d.updrs108}`)
-        .style("left", (e.pageX + 10) + "px")
-        .style("top", (e.pageY - 28) + "px");
+tooltip.style("opacity", 0.9)
+  .html(`
+    <strong>Typing Speed:</strong> ${d.typingSpeed}<br>
+    <strong>UPDRS:</strong> ${d.updrs108}<br>
+    <span style="color:${colorMap[d.gt]}">${d.gt ? "Has Parkinson's" : "No Parkinson's"}</span>
+  `)
+  .style("left", (e.pageX + 10) + "px")
+  .style("top", (e.pageY - 28) + "px");
     })
     .on("mouseout", () => tooltip.style("opacity", 0));
 
@@ -116,7 +120,7 @@ const y = d3.scaleLinear()
     .attr("width", 12)
     .attr("height", 12)
     .attr("fill", d => d.color)
-    .attr("opacity", 0.7);
+    // .attr("opacity", 0.7);
 
   legend.selectAll("text")
     .data(legendData)

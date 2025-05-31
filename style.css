@@ -38,7 +38,3 @@ body {
   font-family: sans-serif;
   z-index: 1000;
 }
-
-.tooltip strong {
-  color: #ffd700; /* Optional: Highlight important text */
-}

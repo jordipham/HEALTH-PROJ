@@ -2,8 +2,8 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 // Set dimensions and margins
 const margin = { top: 20, right: 30, bottom: 50, left: 60 },
-      width = 800 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+  width = 800 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
 
 const svg = d3.select("#densitytype")
   .attr("width", width + margin.left + margin.right)
@@ -52,13 +52,13 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
 
   // Kernel density estimator
   function kernelDensityEstimator(kernel, X) {
-    return function(V) {
+    return function (V) {
       return X.map(x => [x, d3.mean(V, v => kernel(x - v))]);
     };
   }
 
   function kernelEpanechnikov(k) {
-    return function(v) {
+    return function (v) {
       return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
     };
   }
@@ -84,7 +84,7 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
     if (showFalse) groups.push(false);
 
     const xTicks = x.ticks(100);
-    const bandwidth = 1.5;
+    const bandwidth = 15;
 
     if (groups.length === 2) {
       // Density plot
@@ -143,11 +143,15 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
           return { gt: d.gt, density };
         });
 
-        tooltip
-          .style("opacity", 0.9)
-          .html(tooltipData.map(d => `<span style="color:${colorMap[d.gt]}">gt = ${d.gt}: ${d.density.toFixed(3)}</span>`).join("<br>"))
-          .style("left", (event.pageX + 10) + "px")
-          .style("top", (event.pageY - 28) + "px");
+tooltip
+  .style("opacity", 0.9)
+  .html(`
+    <strong>Typing Speed:</strong> ${x0.toFixed(2)}<br>
+    <span style="color:${colorMap[true]}">Parkinson's Density:</span> ${tooltipData.find(d => d.gt === true)?.density.toFixed(3) || "0.000"}<br>
+    <span style="color:${colorMap[false]}">No Parkinson's Density:</span> ${tooltipData.find(d => d.gt === false)?.density.toFixed(3) || "0.000"}
+  `)
+  .style("left", (event.pageX + 10) + "px")
+  .style("top", (event.pageY - 28) + "px");
       }
 
     } else if (groups.length === 1) {
@@ -181,4 +185,56 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
         .on("mouseout", () => tooltip.style("opacity", 0));
     }
   }
+
+
+
+  // Axes
+  svg.append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x));
+
+  svg.append("g")
+    .call(d3.axisLeft(y));
+
+  // Labels
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", height + 40)
+    .attr("text-anchor", "middle")
+    .text("Typing Speed");
+
+  svg.append("text")
+    .attr("x", -height / 2)
+    .attr("y", -40)
+    .attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle")
+    .text("Density");
+
+  // Legend
+  const legend = svg.append("g")
+    .attr("transform", `translate(${width - 150}, 20)`);
+
+  const legendData = [{ label: "Has Parkinson's", color: colorMap.true },
+  { label: "No Parkinson's", color: colorMap.false }];
+
+  legend.selectAll("rect")
+    .data(legendData)
+    .enter()
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", (d, i) => i * 20)
+    .attr("width", 12)
+    .attr("height", 12)
+    .attr("fill", d => d.color)
+    // .attr("opacity", 0.5);
+
+  legend.selectAll("text")
+    .data(legendData)
+    .enter()
+    .append("text")
+    .attr("x", 20)
+    .attr("y", (d, i) => i * 20 + 10)
+    .text(d => d.label)
+    .attr("font-size", "12px")
+    .attr("alignment-baseline", "middle");
 });
