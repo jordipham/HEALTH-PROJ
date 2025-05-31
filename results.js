@@ -62,7 +62,7 @@ d3.csv("combined_data_with_keystroke_averages.csv", d => ({
     .range([height, 0]);
 
   // Colors
-  const colorMap = { true: "steelblue", false: "orange" };
+  const colorMap = { true: ' #00bcd4', false: "#F4A261" };
 
   // Bars for True
   svg.selectAll(".bar-true")

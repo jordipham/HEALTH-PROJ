@@ -35,7 +35,7 @@ const y = d3.scaleLinear()
     .range([height, 0]);
 
   // Colors
-  const colorMap = { true: "steelblue", false: "orange" };
+  const colorMap = { true:' #00bcd4', false: '#F4A261'};
 
   // Single regression line for all data
   const xMean = d3.mean(validData, d => d.updrs108);

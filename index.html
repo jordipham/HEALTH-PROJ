@@ -10,6 +10,7 @@
   <script src="densitytype.js" type="module"></script>
   <script src="results.js" type="module"></script>
   <script src="scatter.js" type="module"></script>
+  <script src="typingtest.js" type="module"></script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 </head>
 
@@ -96,7 +97,28 @@
     </ol>
   </div>
 
-  <div class="prototye-one">
+  <div class="typing-test">
+  <h2>Typing Test</h2>
+  <div id="timer-area">
+    <span id="time-left">Time: 15s</span>
+  </div>
+  <div id="test-area">
+    <div id="words"></div>
+    <input type="text" id="input" autocomplete="off" autofocus placeholder="Start typing here...">
+    <div id="stats">
+      <span id="wpm">WPM: 0</span>
+      <span id="accuracy">Accuracy: 100%</span>
+    </div>
+  </div>
+  <div id="results-area" class="hidden">
+    <h3>Results</h3>
+    <span id="final-wpm">WPM: 0</span>
+    <span id="final-accuracy">Accuracy: 0%</span>
+  </div>
+  <button id="restart">Restart Test</button>
+</div>
+
+  <!-- <div class="prototye-one">
     <h2>PROTOTYPE ONE CHECKPOINT</h2>
     <p>
       1. So far in the project, we have focused on creating an overarching
@@ -122,23 +144,10 @@
       cohorts of patients (two datasets of patients), but we also had to link
       each patient to their typing tests (each typing test was its own file).
     </p>
-  </div>
+  </div> -->
 
-  <div classs="results">
-    <svg id="resultsgraph"></svg>
-    <p>Your Results!
+  <svg id="resultsgraph"></svg>
 
-      <br />
-      After completing the typing test, you will receive feedback on your
-      typing performance, including your speed and accuracy. This data will be
-      compared to the dataset we have on Parkinson's patients to see how your
-      typing patterns align with those of individuals with and without
-      Parkinson's disease.
-      <br />
-    </p>
-
-    <button id="reset">Test Again!</button>
-  </div>
 </body>
 
 </html>
