@@ -33,6 +33,21 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   const xAxis = svg.append("g").attr("transform", `translate(0,${height})`);
   const yAxis = svg.append("g");
 
+   svg
+    .append("text")
+    .attr("x", width / 2)
+    .attr("y", height + 40)
+    .attr("text-anchor", "middle")
+    .text("Typing Speed");
+
+  svg
+    .append("text")
+    .attr("x", -height / 2)
+    .attr("y", -40)
+    .attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle")
+    .text("Density");
+
   const line = d3
     .line()
     .curve(d3.curveBasis)
