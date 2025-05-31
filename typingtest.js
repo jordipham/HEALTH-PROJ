@@ -90,6 +90,7 @@ function endTest() {
 }
 
 function resetTest() {
+clearInterval(timerInterval);
   words = getRandomWords(50);
   currentWord = 0;
   totalCharsTyped = 0;
@@ -103,7 +104,7 @@ function resetTest() {
   timeLeftSpan.textContent = `Time: ${timeLeft}s`;
   renderWords();
   input.disabled = false;
-  input.focus();
+//   input.focus();
   resultsArea.classList.add("hidden");
 }
 
