@@ -37,8 +37,6 @@ const y = d3.scaleLinear()
   // Colors
   const colorMap = { true: "steelblue", false: "orange" };
 
-
-
   // Single regression line for all data
   const xMean = d3.mean(validData, d => d.updrs108);
   const yMean = d3.mean(validData, d => d.typingSpeed);

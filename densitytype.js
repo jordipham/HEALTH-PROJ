@@ -178,7 +178,7 @@ tooltip
         .on("mousemove", (event, d) => {
           tooltip
             .style("opacity", 0.9)
-            .html(`Range: ${d.x0.toFixed(2)} - ${d.x1.toFixed(2)}<br>Count: ${d.length}`)
+            .html(`<strong>Range: </strong>${d.x0.toFixed(2)} - ${d.x1.toFixed(2)}<br><strong>Count: </strong>${d.length}`)
             .style("left", (event.pageX + 10) + "px")
             .style("top", (event.pageY - 28) + "px");
         })
@@ -186,15 +186,6 @@ tooltip
     }
   }
 
-
-
-  // Axes
-  svg.append("g")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x));
-
-  svg.append("g")
-    .call(d3.axisLeft(y));
 
   // Labels
   svg.append("text")
