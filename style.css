@@ -19,7 +19,7 @@ body {
   margin: 0 auto;
 }
 
-#densitytype2 {
+#resultsgraph {
   display: block;
   margin: 0 auto;
 }
@@ -57,7 +57,7 @@ body {
 /* Basic styling for SVGs to make them visible */
 #densitytype,
 #scatterplot,
-#densitytype2 { /* Added densitytype2 here too, if it's meant to be in a grid item or similar */
+#resultsgraph { /* Added resultsgraph here too, if it's meant to be in a grid item or similar */
   width: 100%; /* Make them fill the width of their parent grid item */
   height: 400px; /* Increased height for better visualization */
   border: 1px solid #ffffff; /* Darker border for visualization */
