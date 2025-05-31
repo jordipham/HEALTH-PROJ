@@ -4,8 +4,8 @@ body {
          and use the OS’s UI font as the website font
        */
   font: 100%/1.5 system-ui;
-  max-width: 100ch; /*helps with content width*/
-  margin-inline: max(1em, (100% - 100ch) / 2); /* helps with L&R margin */
+  max-width: 150ch; /*helps with content width*/
+  margin-inline: max(1em, (100% - 150ch) / 2); /* helps with L&R margin */
   accent-color: var(--color-accent); /* Added for Step 2.4 */
 }
 
@@ -37,4 +37,66 @@ body {
   line-height: 1.4;
   font-family: sans-serif;
   z-index: 1000;
+}
+
+/* CSS starting here is for the 2x2 grid of the density charts + linear regression */
+#grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
+  gap: 30px; /* Increased gap for more space between graphs */
+  max-width: 1400px; /* Adjusted to a slightly smaller max-width for better fit within typical screens, but you can increase this if you want a much wider layout */
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 1800px;
+}
+
+/* Basic styling for SVGs to make them visible */
+#densitytype,
+#scatterplot,
+#densitytype2 { /* Added densitytype2 here too, if it's meant to be in a grid item or similar */
+  width: 100%; /* Make them fill the width of their parent grid item */
+  height: 400px; /* Increased height for better visualization */
+  border: 1px solid #ffffff; /* Darker border for visualization */
+  margin-top: 15px;
+  background-color: #ffffff; /* Darker background for the SVG areas */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  width: 800px; /* Set back to fixed width if D3 scripts use fixed widths */
+  height: 500px;
+}
+
+/* Optional styling for the individual grid items */
+#grid-item-1,
+#grid-item-2,
+#grid-item-3,
+#grid-item-4 {
+  background-color: #ffffff; /* A slightly darker background for grid items */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgb(255, 255, 255);
+  text-align: center;
+}
+
+#grid-item-1 #controls {
+  margin-bottom: 20px;
+}
+
+#grid-item-1 #controls label {
+  margin-right: 15px;
+  font-size: 1.1em;
+}
+
+#grid-item-1 #controls input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Styling for the filler text paragraphs */
+#grid-item-1 p,
+#grid-item-2 p,
+#grid-item-3 p,
+#grid-item-4 p {
+  font-size: 0.95em;
+  line-height: 1.6;
+  color: #c5c5c5;
+  margin-top: 20px;
 }

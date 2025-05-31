@@ -55,28 +55,33 @@
         0–4, with a total score range of 108.
       </p>
 
-      <div>
+      <div id="grid-container">
+        <div id="grid-item-1">
           <div id="controls">
-            <label><input type="checkbox" id="toggle-true" checked /> Has Parkinson's</label>
-            <label><input type="checkbox" id="toggle-false" checked /> No Parkinson's</label>
+            <label
+              ><input type="checkbox" id="toggle-true" checked /> Has
+              Parkinson's</label
+            >
+            <label
+              ><input type="checkbox" id="toggle-false" checked /> No
+              Parkinson's</label
+            >
           </div>
-        <!-- density histogram of typing speeds for gt vs. non-gt patients -->
-        <svg id="densitytype"></svg>
+          <svg id="densitytype"></svg>
+        </div>
 
-        <p>
-          Filler Text For Graph Breakdown
-        </p>
+        <div id="grid-item-3">
+          <p>Filler Text For Graph Breakdown</p>
+        </div>
+
+        <div id="grid-item-2">
+          <svg id="scatterplot"></svg>
+        </div>
+
+        <div id="grid-item-4">
+          <p>Filler Text For Graph Breakdown</p>
+        </div>
       </div>
-
-      <div>
-        <!-- scatterplot of updrs and typing speeds for gt vs. non-gt patients -->
-        <svg id="scatterplot"></svg>
-
-        <p>
-          Filler Text For Graph Breakdown (include explanation of regression line)
-        </p>
-      </div>
-
     </div>
 
     <div class="typing-test-zone">
@@ -123,12 +128,7 @@
     </div>
 
     <div>
-
-        <svg id = "densitytype2"></svg>
-
+      <svg id="densitytype2"></svg>
     </div>
-
-</body>
-</html>
   </body>
 </html>
