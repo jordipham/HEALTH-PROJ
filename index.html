@@ -58,15 +58,10 @@
       <div id="grid-container">
         <div id="grid-item-1">
           <div id="controls">
-            <label
-              ><input type="checkbox" id="toggle-true" checked /> Has
-              Parkinson's</label
-            >
-            <label
-              ><input type="checkbox" id="toggle-false" checked /> No
-              Parkinson's</label
-            >
-          </div>
+  <label><input type="radio" name="groupToggle" id="show-both" checked> Both</label>
+  <label><input type="radio" name="groupToggle" id="show-true"> Has Parkinson's</label>
+  <label><input type="radio" name="groupToggle" id="show-false"> No Parkinson's</label>
+</div>
           <svg id="densitytype"></svg>
         </div>
 
@@ -127,8 +122,20 @@
       </p>
     </div>
 
-    <div>
+    <div classs = "results">
       <svg id="densitytype2"></svg>
+      <p>Your Results!
+
+        <br />
+        After completing the typing test, you will receive feedback on your
+        typing performance, including your speed and accuracy. This data will be
+        compared to the dataset we have on Parkinson's patients to see how your
+        typing patterns align with those of individuals with and without
+        Parkinson's disease.
+        <br />
+      </p>
+
+      <button id="reset">Test Again!</button>
     </div>
   </body>
 </html>
