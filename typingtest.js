@@ -65,7 +65,7 @@ function displayFinalStats(wpm) {
       const count = speeds.length;
       const below = speeds.filter(v => v <= wpm).length;
       const percentile = Math.round((below / count) * 100);
-      percentileText.textContent = `Your typing speed is higher than approximately ${percentile}% of users.`;
+      percentileText.textContent = `Your typing speed is higher than approximately ${percentile}% of test participants.`;
     });
 
   resultsArea.classList.remove("hidden");
@@ -81,6 +81,9 @@ function endTest() {
   const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
 
    document.getElementById("grid-container").classList.remove("hidden");
+   setTimeout(() => {
+  document.getElementById("results-area").scrollIntoView({ behavior: "smooth" });
+}, 50); // 50ms is enough to let the DOM reflow
 
   displayFinalStats(wpm);
 
