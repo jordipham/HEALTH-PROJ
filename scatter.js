@@ -73,20 +73,25 @@ const y = d3.scaleLinear()
     .join("circle")
     .attr("cx", d => x(d.updrs108))
     .attr("cy", d => y(d.typingSpeed))
-    .attr("r", 6)
+    .attr("r", 7)
     .attr("fill", d => colorMap[d.gt])
     // .attr("opacity", 0.7)
-    .on("mousemove", (e, d) => {
-tooltip.style("opacity", 0.9)
-  .html(`
-    <strong>Typing Speed:</strong> ${d.typingSpeed}<br>
-    <strong>UPDRS:</strong> ${d.updrs108}<br>
-    <span style="color:${colorMap[d.gt]}">${d.gt ? "Has Parkinson's" : "No Parkinson's"}</span>
-  `)
-  .style("left", (e.pageX + 10) + "px")
-  .style("top", (e.pageY - 28) + "px");
-    })
-    .on("mouseout", () => tooltip.style("opacity", 0));
+    .on("mouseover", function (e, d) {
+  d3.select(this).transition().duration(100).attr("r", 12);
+
+  tooltip.style("opacity", 0.9)
+    .html(`
+      <strong>Typing Speed:</strong> ${d.typingSpeed}<br>
+      <strong>UPDRS:</strong> ${d.updrs108}<br>
+      <span style="color:${colorMap[d.gt]}">${d.gt ? "Has Parkinson's" : "No Parkinson's"}</span>
+    `)
+    .style("left", (e.pageX + 10) + "px")
+    .style("top", (e.pageY - 28) + "px");
+})
+.on("mouseout", function () {
+  d3.select(this).transition().duration(100).attr("r", 7);
+  tooltip.style("opacity", 0);
+});
 
   // Axis labels (swapped)
   svg.append("text")
