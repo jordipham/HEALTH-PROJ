@@ -1,4 +1,4 @@
-// typingtest.js - Accurate WPM + Word Completion Highlight
+// typingtest.js - Final Version with WPM & Percentile
 
 const wordsList = [
   "the", "and", "is", "it", "to", "in", "you", "that", "of", "on", "for", "with", "this", "was", "but",
@@ -24,13 +24,12 @@ let timeLeft = 15;
 
 const wordsDiv = document.getElementById("words");
 const input = document.getElementById("input");
-const wpmSpan = document.getElementById("wpm");
-const accuracySpan = document.getElementById("accuracy");
 const restartBtn = document.getElementById("restart");
 const timeLeftSpan = document.getElementById("time-left");
 const resultsArea = document.getElementById("results-area");
 const finalWpmSpan = document.getElementById("final-wpm");
 const finalAccuracySpan = document.getElementById("final-accuracy");
+const percentileText = document.getElementById("percentile-text");
 
 function getRandomWords(n) {
   return Array.from({ length: n }, () => wordsList[Math.floor(Math.random() * wordsList.length)]);
@@ -50,26 +49,25 @@ function renderWords() {
   });
 }
 
-function updateStats() {
-  const duration = ((endTime || Date.now()) - startTime) / 1000 / 60; // minutes
-  const wordsTyped = totalCharsTyped / 5;
-  const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
-
-  const accuracy = attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100;
-
-  wpmSpan.textContent = `WPM: ${wpm}`;
-  accuracySpan.textContent = `Accuracy: ${accuracy}%`;
-}
-
-function displayFinalStats() {
-  const duration = (endTime - startTime) / 1000 / 60;
-  const wordsTyped = totalCharsTyped / 5;
-  const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
-
-  const accuracy = attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100;
-
+function displayFinalStats(wpm) {
   finalWpmSpan.textContent = `WPM: ${wpm}`;
-  finalAccuracySpan.textContent = `Accuracy: ${accuracy}%`;
+  finalAccuracySpan.textContent = `Accuracy: ${attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100}%`;
+
+  // Save WPM for graph
+  localStorage.setItem("latestWPM", wpm);
+
+  // Fetch CSV and compute percentile
+  fetch("combined_data_with_keystroke_averages.csv")
+    .then(response => response.text())
+    .then(text => {
+      const rows = text.trim().split("\n").slice(1);
+      const speeds = rows.map(r => parseFloat(r.split(",")[3])).filter(v => !isNaN(v)).sort((a, b) => a - b);
+      const count = speeds.length;
+      const below = speeds.filter(v => v <= wpm).length;
+      const percentile = Math.round((below / count) * 100);
+      percentileText.textContent = `Your typing speed is higher than approximately ${percentile}% of users.`;
+    });
+
   resultsArea.classList.remove("hidden");
 }
 
@@ -77,8 +75,18 @@ function endTest() {
   endTime = Date.now();
   clearInterval(timerInterval);
   input.disabled = true;
-  updateStats();
-  displayFinalStats();
+
+  const duration = (endTime - startTime) / 1000 / 60;
+  const wordsTyped = totalCharsTyped / 5;
+  const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
+
+   document.getElementById("grid-container").classList.remove("hidden");
+
+  displayFinalStats(wpm);
+
+  const event = new CustomEvent("testCompleted", { detail: { wpm: wpm } });
+    window.dispatchEvent(event);
+
 }
 
 function resetTest() {
@@ -131,10 +139,8 @@ input.addEventListener("input", () => {
 
     currentWord++;
     input.value = "";
-    renderWords();  // Important: Re-render after word completion to mark `.done`
+    renderWords();
   }
-
-  updateStats();
 });
 
 input.addEventListener("keydown", (e) => {

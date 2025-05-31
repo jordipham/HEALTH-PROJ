@@ -98,25 +98,26 @@
   </div>
 
   <div class="typing-test">
-  <h2>Typing Test</h2>
-  <div id="timer-area">
-    <span id="time-left">Time: 15s</span>
-  </div>
-  <div id="test-area">
-    <div id="words"></div>
-    <input type="text" id="input" autocomplete="off" autofocus placeholder="Start typing here...">
-    <div id="stats">
-      <span id="wpm">WPM: 0</span>
-      <span id="accuracy">Accuracy: 100%</span>
+    <h2>Typing Test</h2>
+    <div id="timer-area">
+      <span id="time-left">Time: 15s</span>
+    </div>
+    <div id="test-area">
+      <div id="words"></div>
+      <input type="text" id="input" autocomplete="off" autofocus placeholder="Start typing here...">
     </div>
   </div>
-  <div id="results-area" class="hidden">
-    <h3>Results</h3>
-    <span id="final-wpm">WPM: 0</span>
-    <span id="final-accuracy">Accuracy: 0%</span>
-  </div>
+
   <button id="restart">Restart Test</button>
-</div>
+
+  <div id="results-area" class="hidden">
+    <svg id="resultsgraph"></svg>
+    <h2>Results</h2>
+    <p id="final-wpm"></p>
+    <p id="final-accuracy"></p>
+    <p id="percentile-text"></p>
+  </div>
+
 
   <!-- <div class="prototye-one">
     <h2>PROTOTYPE ONE CHECKPOINT</h2>
@@ -146,7 +147,6 @@
     </p>
   </div> -->
 
-  <svg id="resultsgraph"></svg>
 
 </body>
 

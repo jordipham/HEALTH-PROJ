@@ -22,10 +22,10 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   const validData = data.filter((d) => !isNaN(d.typingSpeed));
 
   const x = d3
-    .scaleLinear()
-    .domain(d3.extent(validData, (d) => d.typingSpeed))
-    .nice()
-    .range([0, width]);
+  .scaleLinear()
+  .domain([0, d3.max(validData, (d) => d.typingSpeed)])
+  .nice()
+  .range([0, width]);
 
   const y = d3.scaleLinear().range([height, 0]);
   const colorMap = { true: ' #00bcd4', false: "#F4A261" };
