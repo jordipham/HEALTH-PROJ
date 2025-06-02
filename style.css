@@ -254,3 +254,75 @@ h1, h2 {
   flex-direction: column;
   gap: 10px;
 }
+
+#scrolly {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 2em 1em;
+}
+
+#sticky-graphic {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex: 1;
+  background: #f9f9f9;
+}
+
+#article {
+  flex: 1;
+}
+
+.step {
+  margin: 0 auto 3em auto;
+  padding: 3em 1em;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  opacity: 0.2;
+  transition: opacity 0.4s ease;
+  min-height: 80vh;
+}
+
+.step.is-active {
+  opacity: 1;
+}
+
+#densitytype,
+#scatterplot,
+.typing-test,
+#results-area {
+  display: none;
+}
+
+.basic-about {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1em;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+#team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  gap: 1.5em;
+  margin-top: 2em;
+  background-color: #f5f5f5;
+  padding: 1em;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.team-member h3 {
+  margin: 0.2em 0;
+  font-size: 1.2em;
+}
+
+.team-member p {
+  margin: 0;
+  color: #666;
+  font-size: 1em;
+}
