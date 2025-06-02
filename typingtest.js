@@ -109,6 +109,8 @@ clearInterval(timerInterval);
   input.disabled = false;
 //   input.focus();
   resultsArea.classList.add("hidden");
+
+  restartBtn.blur();
 }
 
 function startTimer() {
