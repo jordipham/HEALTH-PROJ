@@ -255,7 +255,7 @@ h1, h2 {
   gap: 10px;
 }
 
-#scrolly {
+/* #scrolly {
   position: relative;
   display: flex;
   margin: 0 auto;
@@ -303,7 +303,7 @@ h1, h2 {
   padding: 0 1em;
   font-size: 1.1em;
   line-height: 1.6;
-}
+} */
 
 #team-grid {
   display: grid;
