@@ -11,6 +11,8 @@ const svg = d3
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
+const wpmGroup = svg.append("g").attr("id", "wpm-group");
+
 let x, y;
 
 d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
@@ -74,7 +76,10 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
 function updateGraph(userWPM) {
   if (!x || !y) return; // Ensure scales exist
 
-  svg.append("line")
+  wpmGroup.selectAll("*").remove();
+
+  // Add vertical line
+  wpmGroup.append("line")
     .attr("x1", x(userWPM))
     .attr("x2", x(userWPM))
     .attr("y1", height)
@@ -83,13 +88,31 @@ function updateGraph(userWPM) {
     .attr("stroke-width", 2)
     .attr("stroke-dasharray", "4");
 
-  svg.append("text")
+  // Add label
+  wpmGroup.append("text")
     .attr("x", x(userWPM))
     .attr("y", -10)
     .attr("text-anchor", "middle")
     .attr("font-size", "12px")
     .attr("fill", "red")
     .text(`Your WPM: ${userWPM}`);
+
+  // svg.append("line")
+  //   .attr("x1", x(userWPM))
+  //   .attr("x2", x(userWPM))
+  //   .attr("y1", height)
+  //   .attr("y2", 0)
+  //   .attr("stroke", "red")
+  //   .attr("stroke-width", 2)
+  //   .attr("stroke-dasharray", "4");
+
+  // svg.append("text")
+  //   .attr("x", x(userWPM))
+  //   .attr("y", -10)
+  //   .attr("text-anchor", "middle")
+  //   .attr("font-size", "12px")
+  //   .attr("fill", "red")
+  //   .text(`Your WPM: ${userWPM}`);
 }
 
 function kernelDensityEstimator(kernel, X) {
@@ -107,5 +130,6 @@ function kernelEpanechnikov(k) {
 // 🎯 Listen for test completion event:
 window.addEventListener("testCompleted", (e) => {
   const userWPM = e.detail.wpm;
+
   updateGraph(userWPM);
 });
