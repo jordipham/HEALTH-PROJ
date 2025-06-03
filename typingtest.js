@@ -1,14 +1,111 @@
 // typingtest.js - Final Version with WPM & Percentile
 
 const wordsList = [
-  "the", "and", "is", "it", "to", "in", "you", "that", "of", "on", "for", "with", "this", "was", "but",
-  "not", "are", "have", "be", "at", "or", "from", "by", "as", "an", "if", "they", "all", "we", "your",
-  "one", "can", "there", "so", "what", "about", "more", "when", "just", "like", "up", "how", "out",
-  "now", "will", "then", "them", "who", "time", "into", "also", "good", "people", "see", "know", "some",
-  "could", "very", "think", "want", "say", "make", "new", "way", "look", "day", "use", "back", "work",
-  "first", "life", "man", "woman", "child", "world", "over", "after", "again", "still", "right", "find",
-  "help", "long", "place", "too", "never", "under", "same", "high", "small", "while", "few", "last",
-  "leave", "feel", "ask", "keep", "love", "give", "try", "call", "tell", "best", "next", "sure"
+  "the",
+  "and",
+  "is",
+  "it",
+  "to",
+  "in",
+  "you",
+  "that",
+  "of",
+  "on",
+  "for",
+  "with",
+  "this",
+  "was",
+  "but",
+  "not",
+  "are",
+  "have",
+  "be",
+  "at",
+  "or",
+  "from",
+  "by",
+  "as",
+  "an",
+  "if",
+  "they",
+  "all",
+  "we",
+  "your",
+  "one",
+  "can",
+  "there",
+  "so",
+  "what",
+  "about",
+  "more",
+  "when",
+  "just",
+  "like",
+  "up",
+  "how",
+  "out",
+  "now",
+  "will",
+  "then",
+  "them",
+  "who",
+  "time",
+  "into",
+  "also",
+  "good",
+  "people",
+  "see",
+  "know",
+  "some",
+  "could",
+  "very",
+  "think",
+  "want",
+  "say",
+  "make",
+  "new",
+  "way",
+  "look",
+  "day",
+  "use",
+  "back",
+  "work",
+  "first",
+  "life",
+  "man",
+  "woman",
+  "child",
+  "world",
+  "over",
+  "after",
+  "again",
+  "still",
+  "right",
+  "find",
+  "help",
+  "long",
+  "place",
+  "too",
+  "never",
+  "under",
+  "same",
+  "high",
+  "small",
+  "while",
+  "few",
+  "last",
+  "leave",
+  "feel",
+  "ask",
+  "keep",
+  "love",
+  "give",
+  "try",
+  "call",
+  "tell",
+  "best",
+  "next",
+  "sure",
 ];
 
 let words = [];
@@ -32,7 +129,10 @@ const finalAccuracySpan = document.getElementById("final-accuracy");
 const percentileText = document.getElementById("percentile-text");
 
 function getRandomWords(n) {
-  return Array.from({ length: n }, () => wordsList[Math.floor(Math.random() * wordsList.length)]);
+  return Array.from(
+    { length: n },
+    () => wordsList[Math.floor(Math.random() * wordsList.length)]
+  );
 }
 
 function renderWords() {
@@ -51,28 +151,39 @@ function renderWords() {
 
 function displayFinalStats(wpm) {
   finalWpmSpan.innerHTML = `<strong>WPM:</strong> ${wpm}`;
-  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100}%`;
+  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${
+    attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100
+  }%`;
 
   // Save WPM for graph
   localStorage.setItem("latestWPM", wpm);
 
   // Fetch CSV and compute percentile
-  fetch("combined_data_with_keystroke_averages.csv")
-    .then(response => response.text())
-    .then(text => {
+  fetch("data/combined_data_with_keystroke_averages.csv")
+    .then((response) => response.text())
+    .then((text) => {
       const rows = text.trim().split("\n").slice(1);
-      const speeds = rows.map(r => parseFloat(r.split(",")[3])).filter(v => !isNaN(v)).sort((a, b) => a - b);
+      const speeds = rows
+        .map((r) => parseFloat(r.split(",")[3]))
+        .filter((v) => !isNaN(v))
+        .sort((a, b) => a - b);
       const count = speeds.length;
-      const below = speeds.filter(v => v <= wpm).length;
+      const below = speeds.filter((v) => v <= wpm).length;
       const percentile = Math.round((below / count) * 100);
-
 
       const wpmValue = parseFloat(localStorage.getItem("latestWPM"));
       let updrsEstimate = "N/A";
 
       // Ensure slope and intercept exist
-      if (!isNaN(wpmValue) && typeof window.slope !== "undefined" && typeof window.intercept !== "undefined" && window.slope !== 0) {
-        updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(2);
+      if (
+        !isNaN(wpmValue) &&
+        typeof window.slope !== "undefined" &&
+        typeof window.intercept !== "undefined" &&
+        window.slope !== 0
+      ) {
+        updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(
+          2
+        );
       }
 
       percentileText.innerHTML = `Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. According to the linear 
@@ -100,14 +211,15 @@ function endTest() {
 
   document.getElementById("grid-container").classList.remove("hidden");
   setTimeout(() => {
-    document.getElementById("results-area").scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("results-area")
+      .scrollIntoView({ behavior: "smooth" });
   }, 50); // 50ms is enough to let the DOM reflow
 
   displayFinalStats(wpm);
 
   const event = new CustomEvent("testCompleted", { detail: { wpm: wpm } });
   window.dispatchEvent(event);
-
 }
 
 function resetTest() {

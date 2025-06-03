@@ -14,12 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .onStepEnter((response) => {
       // Make current step active, others inactive
-      document.querySelectorAll(".step").forEach((step) =>
-        step.classList.remove("is-active")
-      );
+      document
+        .querySelectorAll(".step")
+        .forEach((step) => step.classList.remove("is-active"));
       response.element.classList.add("is-active");
-
-      
 
       // Get step number from data attribute
       const stepNum = response.element.dataset.step;
@@ -33,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show relevant visual
       if (stepNum === "4") {
         document.getElementById("densitytype").style.display = "block";
-        } else if (stepNum === "5") {
+      } else if (stepNum === "5") {
         document.getElementById("scatterplot").style.display = "block";
-        } else if (stepNum === "6") {
+      } else if (stepNum === "6") {
         document.querySelector(".typing-test").style.display = "block";
         document.getElementById("results-area").classList.remove("hidden");
-        }
+      }
     });
 
   window.addEventListener("resize", scroller.resize);

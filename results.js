@@ -4,13 +4,12 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 //   width = 800 - margin.left - margin.right,
 //   height = 500 - margin.top - margin.bottom;
 
-
 const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
 const container = document.getElementById("grid-item-2").parentElement; // or 'densitytype'
 const boundingBox = container.getBoundingClientRect();
-const width = (boundingBox.width * .55) - margin.left - margin.right;
-const height = (boundingBox.width * .27) - margin.top - margin.bottom; // Adjust ratio as needed
+const width = boundingBox.width * 0.55 - margin.left - margin.right;
+const height = boundingBox.width * 0.27 - margin.top - margin.bottom; // Adjust ratio as needed
 
 const svg = d3
   .select("#resultsgraph")
@@ -24,13 +23,14 @@ const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 let x, y, densities;
 
-d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
+d3.csv("data/combined_data_with_keystroke_averages.csv", (d) => ({
   typingSpeed: +d.typingSpeed,
   gt: String(d.gt).toLowerCase() === "true",
 })).then((data) => {
   const validData = data.filter((d) => !isNaN(d.typingSpeed));
 
-  x = d3.scaleLinear()
+  x = d3
+    .scaleLinear()
     .domain([0, d3.max(validData, (d) => d.typingSpeed)])
     .range([0, width]);
 
@@ -40,37 +40,45 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   const xTicks = x.ticks(100);
 
   densities = [true, false].map((gtVal) => {
-    const groupData = validData.filter((d) => d.gt === gtVal).map((d) => d.typingSpeed);
-    const density = kernelDensityEstimator(kernelEpanechnikov(bandwidth), xTicks)(groupData);
+    const groupData = validData
+      .filter((d) => d.gt === gtVal)
+      .map((d) => d.typingSpeed);
+    const density = kernelDensityEstimator(
+      kernelEpanechnikov(bandwidth),
+      xTicks
+    )(groupData);
     return { gt: gtVal, density, color: gtVal ? "#00bcd4" : "#F4A261" };
   });
 
   y.domain([
     0,
-    d3.max(densities, (d) => d3.max(d.density, (dd) => dd[1]))
+    d3.max(densities, (d) => d3.max(d.density, (dd) => dd[1])),
   ]).nice();
 
-  svg.append("g")
+  svg
+    .append("g")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(10).tickFormat(d3.format(".1f")));
 
-  svg.append("g")
-    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".3f")));
+  svg.append("g").call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".3f")));
 
-  svg.append("text")
+  svg
+    .append("text")
     .attr("x", width / 2)
     .attr("y", height + 40)
     .attr("text-anchor", "middle")
     .text("Typing Speed");
 
-  svg.append("text")
+  svg
+    .append("text")
     .attr("x", -height / 2)
     .attr("y", -40)
     .attr("transform", "rotate(-90)")
     .attr("text-anchor", "middle")
     .text("Density");
 
-  svg.selectAll(".density")
+  svg
+    .selectAll(".density")
     .data(densities)
     .enter()
     .append("path")
@@ -78,11 +86,16 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .attr("fill", "none")
     .attr("stroke", (d) => d.color)
     .attr("stroke-width", 2)
-    .attr("d", (d) => d3.line().curve(d3.curveBasis)
-      .x(d => x(d[0]))
-      .y(d => y(d[1]))(d.density));
+    .attr("d", (d) =>
+      d3
+        .line()
+        .curve(d3.curveBasis)
+        .x((d) => x(d[0]))
+        .y((d) => y(d[1]))(d.density)
+    );
 
-  svg.append("rect")
+  svg
+    .append("rect")
     .attr("class", "overlay")
     .attr("width", width)
     .attr("height", height)
@@ -101,7 +114,8 @@ function mousemove(event) {
 
   svg.selectAll(".vertical-line-hover").remove();
 
-  svg.append("line")
+  svg
+    .append("line")
     .attr("class", "vertical-line-hover")
     .attr("x1", x(x0))
     .attr("x2", x(x0))
@@ -136,7 +150,8 @@ function updateGraph(userWPM) {
 
   wpmGroup.selectAll("*").remove();
 
-  wpmGroup.append("line")
+  wpmGroup
+    .append("line")
     .attr("x1", x(userWPM))
     .attr("x2", x(userWPM))
     .attr("y1", height)
@@ -145,7 +160,8 @@ function updateGraph(userWPM) {
     .attr("stroke-width", 2)
     .attr("stroke-dasharray", "4");
 
-  wpmGroup.append("text")
+  wpmGroup
+    .append("text")
     .attr("x", x(userWPM))
     .attr("y", -10)
     .attr("text-anchor", "middle")

@@ -1,215 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Silent Signs: Typing Patterns and Parkinson's Risk</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="densitytype.js" type="module"></script>
+    <script src="results.js" type="module"></script>
+    <script src="scatter.js" type="module"></script>
+    <script src="typingtest.js" type="module"></script>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Silent Signs: Typing Patterns and Parkinson's Risk
-  </title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- <script src="global.js" type="module"></script> -->
-  <script src="densitytype.js" type="module"></script>
-  <script src="results.js" type="module"></script>
-  <script src="scatter.js" type="module"></script>
-  <script src="typingtest.js" type="module"></script>
-  <!-- <script src="https://unpkg.com/scrollama"></script> -->
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-</head>
+  <body>
+    <div class="step" data-step="1">
+      <div id="header">
+        <h1 id="big-title">
+          Silent Signs: Typing Patterns and Parkinson's Risk
+        </h1>
 
-<body>
-  <!-- <div id="scrolly">
-    <div id="sticky-graphic"></div>
-    <div id="article"> -->
-
-
-  <div class="step" data-step="1">
-
-
-    <div id = "header">
-
-    <h1 id="big-title">Silent Signs: Typing Patterns and Parkinson's Risk
-    </h1>
-
-    <button class="demo-button" onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')">
-      View Demo Video
-    </button>
-    <p id="intro-text">
-      This project aims to explore the relationship between individual’s typing trends and their risk of 
-      Parkinson’s disease (PD). By analyzing the way people type, we hope to identify those with higher risks 
-      of developing PD more easily. 
-    </div>
-
-    <div id="team-grid">
-      <div class="team-member">
-        <h3>Aiden Lai</h3>
-        <p>Back-End/Interactions</p>
+        <button
+          class="demo-button"
+          onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')"
+        >
+          View Demo Video
+        </button>
+        <p id="intro-text">
+          This project aims to explore the relationship between individual’s
+          typing trends and their risk of Parkinson’s disease (PD). By analyzing
+          the way people type, we hope to identify those with higher risks of
+          developing PD more easily.
+        </p>
       </div>
-      <div class="team-member">
-        <h3>Jordi Pham</h3>
-        <p>Front-End/Typing Test</p>
-      </div>
-      <div class="team-member">
-        <h3>Coltrane Gowan</h3>
-        <p>Designer</p>
-      </div>
-      <div class="team-member">
-        <h3>Jennifer Kuei</h3>
-        <p>Video</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="step" data-step="2">
-    <div class="basic-about">
-      <h2>About Parkinson's Disease
-      </h2>
-      <p>
-        Parkinson’s disease is a movement disorder impacted by the nervous system. It causes neurons in the brain
-        to become damaged and weakened which impacts lifestyle such as movement issues, tremors, stiffness, and 
-        impaired balances. Severe PD patients might have troubles with walking, talking, and completing other daily 
-        tasks. The damage in the neurons causes the affected individuals to have a decrease in dopamine. The decrease 
-        in dopamine is why the main treatment for PD, Levodopa (L-DOPA), attempts to replace dopamine although a major
-        side effect is that it can cause paralysis or involuntary movement. Both symptoms of PD and the side effects 
-        of the treatment impacts movement, leading back to our project goal to see the interaction it has with typing.  
-        Research has implied that varying typing patterns can be an indicator of PD. By utilizing and analysing these
-        patterns, we can hopefully identify those at risk and provide earlier interventions.
-
-      </p>
-    </div>
-  </div>
-
-  <div class="step" data-step="3">
-    <div class="basic-about">
-      <h2>About Our Dataset
-
-      </h2>
-
-      <button class="dataset-button" onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')">
-        View Original Dataset
-      </button>
-
-      <p>
-        The original dataset was collected by the Massachusetts Institute of Technology (MIT) 
-        on 85 subjects from Madrid, Spain. The dataset contains keystroke logs from subjects both
-        with and without PD. Typing data was collected on standardized equipment.
-      </p>
-      <p>
-        
-        Besides the keylogged data (measuring the key pressed, hold time, etc.), finger tapping tests
-         were also taken that measured the speed and rhythm of finger movements, providing additional 
-         insights of the likelihood of PD.
-      </p>
-      <p>
-        One of the main takeaway points of the dataset is also the Unified Parkinson's Disease Rating Scale (UPDRS) 
-        score. The score is based upon a questionnaire that subjects complete, that assesses subjects on motor and
-        non-motor symptoms on a scale from 0-4. It provides a final score range from 0-108 with 0 being minimal 
-        chances of PD and 108 being higher risk.
-
-      </p>
-    </div>
-  </div>
-
-  <div class="step" data-step="4">
-    <div id="grid-container">
-      <div id="grid-item-1">
-        <div id="controls">
-          <label><input type="radio" name="groupToggle" id="show-both" checked> Both</label>
-          <label><input type="radio" name="groupToggle" id="show-true"> Has Parkinson's</label>
-          <label><input type="radio" name="groupToggle" id="show-false"> No Parkinson's</label>
+      <div id="team-grid">
+        <div class="team-member">
+          <h3>Aiden Lai</h3>
+          <p>Back-End/Interactions</p>
         </div>
-        <svg id="densitytype"></svg>
-      </div>
-
-      <div id="grid-item-3">
-        <p>Filler Text For Graph Breakdown</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="step" data-step="5">
-    <div id="grid-container">
-      <div id="grid-item-2">
-        <svg id="scatterplot"></svg>
-      </div>
-
-      <div id="grid-item-4">
-        <p>Filler Text For Graph Breakdown</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="step" data-step="6">
-    <div class="typing-test-zone">
-      <h2>Typing Test Comparison</h2>
-      <ol>
-        <li>Click the "Start Typing" button below to begin the typing test.</li>
-        <li>Type the provided text as accurately and quickly as possible.</li>
-        <li>Once you finish, your typing data will be collected for analysis.</li>
-        <li>After completing the test, you will receive feedback on your typing performance.</li>
-      </ol>
-    </div>
-
-    <div class="typing-test">
-      <h2>Typing Test</h2>
-      <div id="timer-area">
-        <span id="time-left">Time: 15s</span>
-      </div>
-      <div id="test-area">
-        <div id="words"></div>
-        <input type="text" id="input" autocomplete="off" placeholder="Start typing here...">
-      </div>
-    </div>
-
-    <button id="restart">Restart Test</button>
-
-    <div id="results-area" class="hidden">
-      <h2>Results</h2>
-      <div id="results-content">
-        <svg id="resultsgraph"></svg>
-        <div id="results-text">
-          <p id="final-wpm"></p>
-          <p id="final-accuracy"></p>
-          <p id="percentile-text"></p>
+        <div class="team-member">
+          <h3>Jordi Pham</h3>
+          <p>Front-End/Typing Test</p>
+        </div>
+        <div class="team-member">
+          <h3>Coltrane Gowan</h3>
+          <p>Designer</p>
+        </div>
+        <div class="team-member">
+          <h3>Jennifer Kuei</h3>
+          <p>Video</p>
         </div>
       </div>
     </div>
-  </div>
 
+    <div class="step" data-step="2">
+      <div class="basic-about">
+        <h2>About Parkinson's Disease</h2>
+        <p>
+          Parkinson’s disease is a movement disorder impacted by the nervous
+          system. It causes neurons in the brain to become damaged and weakened
+          which impacts lifestyle such as movement issues, tremors, stiffness,
+          and impaired balances. Severe PD patients might have troubles with
+          walking, talking, and completing other daily tasks. The damage in the
+          neurons causes the affected individuals to have a decrease in
+          dopamine. The decrease in dopamine is why the main treatment for PD,
+          Levodopa (L-DOPA), attempts to replace dopamine although a major side
+          effect is that it can cause paralysis or involuntary movement. Both
+          symptoms of PD and the side effects of the treatment impacts movement,
+          leading back to our project goal to see the interaction it has with
+          typing. Research has implied that varying typing patterns can be an
+          indicator of PD. By utilizing and analysing these patterns, we can
+          hopefully identify those at risk and provide earlier interventions.
+        </p>
+      </div>
+    </div>
 
+    <div class="step" data-step="3">
+      <div class="basic-about">
+        <h2>About Our Dataset</h2>
 
-  </div>
-  <!-- </div> -->
+        <button
+          class="dataset-button"
+          onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')"
+        >
+          View Original Dataset
+        </button>
 
+        <p>
+          The original dataset was collected by the Massachusetts Institute of
+          Technology (MIT) on 85 subjects from Madrid, Spain. The dataset
+          contains keystroke logs from subjects both with and without PD. Typing
+          data was collected on standardized equipment.
+        </p>
+        <p>
+          Besides the keylogged data (measuring the key pressed, hold time,
+          etc.), finger tapping tests were also taken that measured the speed
+          and rhythm of finger movements, providing additional insights of the
+          likelihood of PD.
+        </p>
+        <p>
+          One of the main takeaway points of the dataset is also the Unified
+          Parkinson's Disease Rating Scale (UPDRS) score. The score is based
+          upon a questionnaire that subjects complete, that assesses subjects on
+          motor and non-motor symptoms on a scale from 0-4. It provides a final
+          score range from 0-108 with 0 being minimal chances of PD and 108
+          being higher risk.
+        </p>
+      </div>
+    </div>
 
-  <!-- <div class="prototye-one">
-    <h2>PROTOTYPE ONE CHECKPOINT</h2>
-    <p>
-      1. So far in the project, we have focused on creating an overarching
-      theme to the dataset we chose along with an overview of what we are
-      looking to explore regarding Parkinson's and typing patterns. In terms
-      of visualizations, we have created a density histogram of the typing
-      speeds of patients with and without Parkinson's. On the graph, we have
-      also created an interactive tooltip that allows users to see different
-      areas and values of the graph. We have also established a general
-      introduction to the project, such as which columns of the dataset are
-      crucial to our analysis. In terms of style, we have streamlined our
-      content with margins and proper centering. <br /><br />
+    <div class="step" data-step="4">
+      <div id="grid-container">
+        <div id="grid-item-1">
+          <div id="controls">
+            <label
+              ><input type="radio" name="groupToggle" id="show-both" checked />
+              Both</label
+            >
+            <label
+              ><input type="radio" name="groupToggle" id="show-true" /> Has
+              Parkinson's</label
+            >
+            <label
+              ><input type="radio" name="groupToggle" id="show-false" /> No
+              Parkinson's</label
+            >
+          </div>
+          <svg id="densitytype"></svg>
+        </div>
 
-      2. The hardest part of the project for us, we believe, will be the
-      creation of the typing test in which we use the datasets we have to
-      compare a user's typing speeds and patterns. It will require us to find
-      a way to initiate a typing test, along with the creation of an interface
-      to show how a person is typing in real-time. Furthermore, a bit of
-      computation will have to go into creating a general summary of their
-      stats for comparison to stats we already have from PD patients. At this
-      point so far, one of the challenges we have already encountered was how
-      to bring all the datasets together: we not only had to combine both
-      cohorts of patients (two datasets of patients), but we also had to link
-      each patient to their typing tests (each typing test was its own file).
-    </p>
-  </div> -->
+        <div id="grid-item-3">
+          <p>Filler Text For Graph Breakdown</p>
+        </div>
+      </div>
+    </div>
 
+    <div class="step" data-step="5">
+      <div id="grid-container">
+        <div id="grid-item-2">
+          <svg id="scatterplot"></svg>
+        </div>
 
-</body>
+        <div id="grid-item-4">
+          <p>Filler Text For Graph Breakdown</p>
+        </div>
+      </div>
+    </div>
 
+    <div class="step" data-step="6">
+      <div class="typing-test-zone">
+        <h2>Typing Test Comparison</h2>
+        <ol>
+          <li>
+            Click the "Start Typing" button below to begin the typing test.
+          </li>
+          <li>Type the provided text as accurately and quickly as possible.</li>
+          <li>
+            Once you finish, your typing data will be collected for analysis.
+          </li>
+          <li>
+            After completing the test, you will receive feedback on your typing
+            performance.
+          </li>
+        </ol>
+      </div>
+
+      <div class="typing-test">
+        <h2>Typing Test</h2>
+        <div id="timer-area">
+          <span id="time-left">Time: 15s</span>
+        </div>
+        <div id="test-area">
+          <div id="words"></div>
+          <input
+            type="text"
+            id="input"
+            autocomplete="off"
+            placeholder="Start typing here..."
+          />
+        </div>
+      </div>
+
+      <button id="restart">Restart Test</button>
+
+      <div id="results-area" class="hidden">
+        <h2>Results</h2>
+        <div id="results-content">
+          <svg id="resultsgraph"></svg>
+          <div id="results-text">
+            <p id="final-wpm"></p>
+            <p id="final-accuracy"></p>
+            <p id="percentile-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -2,16 +2,15 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 // Set dimensions
 // const margin = { top: 20, right: 30, bottom: 50, left: 60 },
-//       width = window.innerWidth * 0.45 - margin.left - margin.right, 
+//       width = window.innerWidth * 0.45 - margin.left - margin.right,
 //       height = window.innerWidth * 0.27 - margin.top - margin.bottom;
-
 
 const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
 const container = document.getElementById("grid-item-2").parentElement; // or 'densitytype'
 const boundingBox = container.getBoundingClientRect();
-const width = (boundingBox.width * .45) - margin.left - margin.right;
-const height = (boundingBox.width * .27) - margin.top - margin.bottom; // Adjust ratio as needed
+const width = boundingBox.width * 0.45 - margin.left - margin.right;
+const height = boundingBox.width * 0.27 - margin.top - margin.bottom; // Adjust ratio as needed
 
 const svg = d3
   .select("#densitytype")
@@ -23,25 +22,25 @@ const svg = d3
 const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 // Load data
-d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
+d3.csv("data/combined_data_with_keystroke_averages.csv", (d) => ({
   typingSpeed: +d.typingSpeed,
   gt: String(d.gt).toLowerCase() === "true",
 })).then((data) => {
   const validData = data.filter((d) => !isNaN(d.typingSpeed));
 
   const x = d3
-  .scaleLinear()
-  .domain([0, d3.max(validData, (d) => d.typingSpeed)])
-  .nice()
-  .range([0, width]);
+    .scaleLinear()
+    .domain([0, d3.max(validData, (d) => d.typingSpeed)])
+    .nice()
+    .range([0, width]);
 
   const y = d3.scaleLinear().range([height, 0]);
-  const colorMap = { true: ' #00bcd4', false: "#F4A261" };
+  const colorMap = { true: " #00bcd4", false: "#F4A261" };
 
   const xAxis = svg.append("g").attr("transform", `translate(0,${height})`);
   const yAxis = svg.append("g");
 
-   svg
+  svg
     .append("text")
     .attr("x", width / 2)
     .attr("y", height + 40)
@@ -88,7 +87,9 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   updateChart();
 
   function updateChart() {
-    svg.selectAll(".density, .bar, .overlay, .vertical-line, .empty-message").remove();
+    svg
+      .selectAll(".density, .bar, .overlay, .vertical-line, .empty-message")
+      .remove();
 
     const both = d3.select("#show-both").property("checked");
     const showTrue = d3.select("#show-true").property("checked");
@@ -174,10 +175,12 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
           .html(
             `<strong>Typing Speed:</strong> ${x0.toFixed(2)}<br>
             <span style="color:${colorMap[true]}">Has Parkinson's</span>: ${
-              tooltipData.find((d) => d.gt === true)?.density.toFixed(3) || "0.000"
+              tooltipData.find((d) => d.gt === true)?.density.toFixed(3) ||
+              "0.000"
             }<br>
             <span style="color:${colorMap[false]}">No Parkinson's</span>: ${
-              tooltipData.find((d) => d.gt === false)?.density.toFixed(3) || "0.000"
+              tooltipData.find((d) => d.gt === false)?.density.toFixed(3) ||
+              "0.000"
             }`
           )
           .style("left", event.pageX + 10 + "px")
