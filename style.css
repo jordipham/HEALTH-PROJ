@@ -1,4 +1,10 @@
 /* Work on Body - Centering, Margins, Width, and In-Line */
+:root {
+  --text-color: #2c3e50; /* Navy blue-gray for main text */
+  --color-accent: #00bcd4; /* Existing accent color */
+  --super-light-gray: #f2f2f2; /* Super light gray for background */
+}
+
 body {
   /* Set line height to 1.5 times the font size
          and use the OS’s UI font as the website font
@@ -7,21 +13,29 @@ body {
   max-width: 150ch; /*helps with content width*/
   margin-inline: max(1em, (100% - 150ch) / 2); /* helps with L&R margin */
   accent-color: var(--color-accent); /* Added for Step 2.4 */
+  background-color: var(--super-light-gray); /* Super light gray background */
+  color: var(--text-color); /* Apply main text color */
 }
 
-#densitytype {
-  display: block;
-  margin: 0 auto;
+h1,
+h2 {
+  color: var(--text-color); /* Ensure headings use the theme color */
 }
 
-#scatterplot {
-  display: block;
-  margin: 0 auto;
+p,
+li,
+label {
+  color: var(
+    --text-color
+  ); /* Ensure paragraphs, list items, and labels use the theme color */
 }
 
+/* These SVGs are now inside grid items, so their display/margin needs to be managed by the grid item */
+#densitytype,
+#scatterplot,
 #resultsgraph {
-  display: block;
-  margin: 0 auto;
+  display: block; /* Ensure they behave as blocks */
+  margin: 0 auto; /* Center within their container if smaller than 100% */
 }
 
 .tooltip {
@@ -38,8 +52,8 @@ body {
   font-family: sans-serif;
   z-index: 1000;
 
-  top: -9999px;   /* Hide off-screen */
-  left: -9999px;  /* Hide off-screen */
+  top: -9999px; /* Hide off-screen */
+  left: -9999px; /* Hide off-screen */
 }
 
 /* CSS starting here is for the 2x2 grid of the density charts + linear regression */
@@ -48,24 +62,25 @@ body {
   grid-template-columns: 1fr 1fr; /* Two equal columns */
   grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
   gap: 30px; /* Increased gap for more space between graphs */
-  max-width: 1400px; /* Adjusted to a slightly smaller max-width for better fit within typical screens, but you can increase this if you want a much wider layout */
+  max-width: 1800px; /* Maintained large width for D3 objects */
   margin: 0 auto;
   padding: 20px;
-  max-width: 1800px;
 }
 
 /* Basic styling for SVGs to make them visible */
 #densitytype,
 #scatterplot,
-#resultsgraph { /* Added resultsgraph here too, if it's meant to be in a grid item or similar */
+#resultsgraph {
+  /* Added resultsgraph here too, if it's meant to be in a grid item or similar */
   width: 100%; /* Make them fill the width of their parent grid item */
-  height: 400px; /* Increased height for better visualization */
+  height: 500px; /* Consistent height for D3 visualizations */
   border: 1px solid #ffffff; /* Darker border for visualization */
   margin-top: 15px;
   background-color: #ffffff; /* Darker background for the SVG areas */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  width: 800px; /* Set back to fixed width if D3 scripts use fixed widths */
-  height: 500px;
+  /* Removed fixed width and height that were conflicting:
+  width: 800px;
+  height: 500px; */
 }
 
 /* Optional styling for the individual grid items */
@@ -73,10 +88,10 @@ body {
 #grid-item-2,
 #grid-item-3,
 #grid-item-4 {
-  background-color: #ffffff; /* A slightly darker background for grid items */
+  background-color: #ffffff; /* Keeping grid items white for contrast */
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgb(255, 255, 255);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle dark shadow for lift */
   text-align: center;
 }
 
@@ -100,24 +115,54 @@ body {
 #grid-item-4 p {
   font-size: 0.95em;
   line-height: 1.6;
-  color: #c5c5c5;
+  /* Removed fixed color to inherit --text-color */
   margin-top: 20px;
 }
 
+.typing-test-zone {
+  max-width: 1000px; /* Align with typing test itself */
+  margin: 60px auto 30px auto; /* Add margin to separate from next section */
+  text-align: center;
+  padding: 20px;
+}
 
+.typing-test-zone ol {
+  list-style: none; /* Remove default list bullets */
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px; /* Constrain width of instructions */
+  text-align: left;
+}
+
+.typing-test-zone li {
+  margin-bottom: 10px;
+  padding-left: 1.5em; /* Space for custom bullet */
+  position: relative;
+}
+
+.typing-test-zone li::before {
+  content: "•"; /* Custom bullet point */
+  color: var(--color-accent); /* Accent color for bullet */
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1.5em;
+  position: absolute;
+}
 
 .typing-test {
   max-width: 1000px;
-  margin: 60px auto;
+  margin: 30px auto 60px auto; /* Adjusted margins */
   border-radius: 12px;
   padding: 2.5em 2em 2em 2em;
   text-align: center;
-  background: #fff;
-  color: #333;
+  background: #fff; /* Kept white for contrast */
+  color: var(--text-color); /* Apply theme color */
   font-family: sans-serif;
 }
 
-h1, h2 {
+h1,
+h2 {
   margin-bottom: 1em;
   font-size: 2.2em;
   font-weight: 700;
@@ -130,7 +175,7 @@ h1, h2 {
   color: #333;
   display: inline-block;
   padding: 0.2em 0.6em;
-  border: 2px solid #00bcd4;
+  border: 2px solid var(--color-accent);
   border-radius: 6px;
 }
 
@@ -155,14 +200,14 @@ h1, h2 {
   border-radius: 4px;
   font-weight: 700;
   font-style: italic;
-  box-shadow: inset 0 -2px 0 #00bcd4;
+  box-shadow: inset 0 -2px 0 var(--color-accent);
 }
 
 #words .done {
   background: #f0faff;
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  /* color: #555; */
+  /* color: #555; */ /* Keeping commented to inherit theme color */
 }
 
 #input {
@@ -174,12 +219,12 @@ h1, h2 {
   border-radius: 6px;
   outline: none;
   background: #fff;
-  color: #333;
+  color: #333; /* Kept as dark for input contrast */
 }
 
 #input:focus {
-  border-color: #00bcd4;
-  box-shadow: 0 0 3px #00bcd4;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 3px var(--color-accent);
 }
 
 #results-area {
@@ -203,7 +248,7 @@ h1, h2 {
 .results-bar span {
   font-size: 1.4em;
   font-weight: 600;
-  color: #333;
+  color: #333; /* Kept as dark */
   background: none;
   padding: 0.5em 1em;
   border-radius: 6px;
@@ -211,8 +256,8 @@ h1, h2 {
 
 #restart {
   display: block;
-  margin: 1em auto 0 auto;  /* Top margin 1em, left/right auto, bottom 0 */
-  background: #00bcd4;
+  margin: 1em auto 0 auto; /* Top margin 1em, left/right auto, bottom 0 */
+  background: var(--color-accent);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -295,22 +340,25 @@ h1, h2 {
 .typing-test,
 #results-area {
   display: none;
-}
+} */
 
 .basic-about {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 900px; /* Constrain text width in these sections */
+  margin: 0 auto; /* Center basic-about content */
   padding: 0 1em;
   font-size: 1.1em;
   line-height: 1.6;
-} */
+}
 
 #team-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Responsive grid for team members */
   gap: 1.5em;
   margin-top: 2em;
-  background-color: #f5f5f5;
+  background-color: #f5f5f5; /* Light gray background for the team grid */
   padding: 1em;
   border-radius: 10px;
   text-align: center;
@@ -323,6 +371,8 @@ h1, h2 {
 
 .team-member p {
   margin: 0;
-  color: #666;
+  color: var(
+    --text-color
+  ); /* Ensure team member descriptions use theme color */
   font-size: 1em;
 }
