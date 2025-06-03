@@ -29,7 +29,7 @@ const tooltip = d3
   .style("position", "absolute");
 
 // Load CSV
-d3.csv("../data/combined_data_with_keystroke_averages.csv", (d) => ({
+d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   typingSpeed: +d.typingSpeed,
   updrs108: +d.updrs108,
   gt: String(d.gt).toLowerCase() === "true",

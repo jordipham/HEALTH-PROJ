@@ -159,7 +159,7 @@ function displayFinalStats(wpm) {
   localStorage.setItem("latestWPM", wpm);
 
   // Fetch CSV and compute percentile
-  fetch("../data/combined_data_with_keystroke_averages.csv")
+  fetch("combined_data_with_keystroke_averages.csv")
     .then((response) => response.text())
     .then((text) => {
       const rows = text.trim().split("\n").slice(1);

@@ -23,7 +23,7 @@ const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 let x, y, densities;
 
-d3.csv("../data/combined_data_with_keystroke_averages.csv", (d) => ({
+d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   typingSpeed: +d.typingSpeed,
   gt: String(d.gt).toLowerCase() === "true",
 })).then((data) => {
