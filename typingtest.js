@@ -214,7 +214,7 @@ function endTest() {
     document
       .getElementById("results-area")
       .scrollIntoView({ behavior: "smooth" });
-  }, 50); // 50ms is enough to let the DOM reflow
+  }, 50);
 
   displayFinalStats(wpm);
 
@@ -239,6 +239,12 @@ function resetTest() {
   input.disabled = false;
   //   input.focus();
   resultsArea.classList.add("hidden");
+
+  setTimeout(() => {
+    document
+      .getElementById("typing-test")
+      .scrollIntoView({ behavior: "smooth" });
+  }, 50); // 50ms is enough to let the DOM reflow
 
   restartBtn.blur();
 }
