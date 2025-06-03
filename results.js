@@ -1,8 +1,16 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-const margin = { top: 20, right: 30, bottom: 50, left: 60 },
-  width = 800 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+// const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+//   width = 800 - margin.left - margin.right,
+//   height = 500 - margin.top - margin.bottom;
+
+
+const margin = { top: 20, right: 30, bottom: 50, left: 60 };
+
+const container = document.getElementById("grid-item-2").parentElement; // or 'densitytype'
+const boundingBox = container.getBoundingClientRect();
+const width = (boundingBox.width * .55) - margin.left - margin.right;
+const height = (boundingBox.width * .27) - margin.top - margin.bottom; // Adjust ratio as needed
 
 const svg = d3
   .select("#resultsgraph")

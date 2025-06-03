@@ -1,8 +1,11 @@
 /* Work on Body - Centering, Margins, Width, and In-Line */
 :root {
-  --text-color: #2c3e50; /* Navy blue-gray for main text */
-  --color-accent: #00bcd4; /* Existing accent color */
-  --super-light-gray: #f2f2f2; /* Super light gray for background */
+  --text-color: #2c3e50;
+  /* Navy blue-gray for main text */
+  --color-accent: #00bcd4;
+  /* Existing accent color */
+  --super-light-gray: #f2f2f2;
+  /* Super light gray for background */
 }
 
 body {
@@ -10,31 +13,37 @@ body {
          and use the OS’s UI font as the website font
        */
   font: 100%/1.5 system-ui;
-  max-width: 150ch; /*helps with content width*/
-  margin-inline: max(1em, (100% - 150ch) / 2); /* helps with L&R margin */
-  accent-color: var(--color-accent); /* Added for Step 2.4 */
-  background-color: var(--super-light-gray); /* Super light gray background */
-  color: var(--text-color); /* Apply main text color */
+  max-width: 150ch;
+  /*helps with content width*/
+  margin-inline: max(1em, (100% - 150ch) / 2);
+  /* helps with L&R margin */
+  accent-color: var(--color-accent);
+  /* Added for Step 2.4 */
+  background-color: var(--super-light-gray);
+  /* Super light gray background */
+  color: var(--text-color);
+  /* Apply main text color */
 }
 
-#header{
+#header {
   text-align: center;
   max-width: 900px;
-  margin: 0 auto; /* Center header */
+  margin: 0 auto;
+  /* Center header */
 }
 
 
 h1,
 h2 {
-  color: var(--text-color); /* Ensure headings use the theme color */
+  color: var(--text-color);
+  /* Ensure headings use the theme color */
 }
 
 p,
 li,
 label {
-  color: var(
-    --text-color
-  ); /* Ensure paragraphs, list items, and labels use the theme color */
+  color: var(--text-color);
+  /* Ensure paragraphs, list items, and labels use the theme color */
 }
 
 
@@ -52,17 +61,23 @@ label {
   font-family: sans-serif;
   z-index: 1000;
 
-  top: -9999px; /* Hide off-screen */
-  left: -9999px; /* Hide off-screen */
+  top: -9999px;
+  /* Hide off-screen */
+  left: -9999px;
+  /* Hide off-screen */
 }
 
 /* CSS starting here is for the 2x2 grid of the density charts + linear regression */
 #grid-container {
   display: grid;
-  grid-template-columns: 0.6fr 0.4fr; /* Two equal columns */
-  grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
-  gap: 30px; /* Increased gap for more space between graphs */
-  max-width: 90vw; /* Maintained large width for D3 objects */
+  grid-template-columns: 0.6fr 0.4fr;
+  /* Two equal columns */
+  grid-template-rows: auto auto;
+  /* Rows adjust to content, or use 1fr 1fr for equal height */
+  gap: 30px;
+  /* Increased gap for more space between graphs */
+  max-width: 90vw;
+  /* Maintained large width for D3 objects */
   margin: 0 auto;
   padding: 20px;
 }
@@ -73,10 +88,13 @@ label {
 #resultsgraph {
   /* Added resultsgraph here too, if it's meant to be in a grid item or similar */
 
-  border: 1px solid #ffffff; /* Darker border for visualization */
+  border: 1px solid #ffffff;
+  /* Darker border for visualization */
   margin-top: 15px;
-  background-color: #ffffff; /* Darker background for the SVG areas */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  background-color: #ffffff;
+  /* Darker background for the SVG areas */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
   /* Removed fixed width and height that were conflicting:
   width: 800px;
   height: 500px; */
@@ -87,10 +105,12 @@ label {
 #grid-item-2,
 #grid-item-3,
 #grid-item-4 {
-  background-color: #ffffff; /* Keeping grid items white for contrast */
+  background-color: #ffffff;
+  /* Keeping grid items white for contrast */
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle dark shadow for lift */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Subtle dark shadow for lift */
   text-align: center;
 }
 
@@ -119,29 +139,36 @@ label {
 }
 
 .typing-test-zone {
-  max-width: 1000px; /* Align with typing test itself */
-  margin: 20px auto 20px auto; /* Add margin to separate from next section */
+  max-width: 1000px;
+  /* Align with typing test itself */
+  margin: 20px auto 20px auto;
+  /* Add margin to separate from next section */
   text-align: center;
   padding: 20px;
 }
 
 .typing-test-zone ol {
-  list-style: none; /* Remove default list bullets */
+  list-style: none;
+  /* Remove default list bullets */
   padding: 0;
   margin: 0 auto;
-  max-width: 600px; /* Constrain width of instructions */
+  max-width: 600px;
+  /* Constrain width of instructions */
   text-align: left;
 }
 
 .typing-test-zone li {
   margin-bottom: 10px;
-  padding-left: 1.5em; /* Space for custom bullet */
+  padding-left: 1.5em;
+  /* Space for custom bullet */
   position: relative;
 }
 
 .typing-test-zone li::before {
-  content: "•"; /* Custom bullet point */
-  color: var(--color-accent); /* Accent color for bullet */
+  content: "•";
+  /* Custom bullet point */
+  color: var(--color-accent);
+  /* Accent color for bullet */
   font-weight: bold;
   display: inline-block;
   width: 1em;
@@ -151,12 +178,15 @@ label {
 
 .typing-test {
   max-width: 1000px;
-  margin: 20px auto 20px auto; /* Adjusted margins */
+  margin: 20px auto 20px auto;
+  /* Adjusted margins */
   border-radius: 12px;
   padding: 2.5em 2em 2em 2em;
   text-align: center;
-  background: #fff; /* Kept white for contrast */
-  color: var(--text-color); /* Apply theme color */
+  background: #fff;
+  /* Kept white for contrast */
+  color: var(--text-color);
+  /* Apply theme color */
   font-family: sans-serif;
 }
 
@@ -206,7 +236,8 @@ h2 {
   background: #f0faff;
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  /* color: #555; */ /* Keeping commented to inherit theme color */
+  /* color: #555; */
+  /* Keeping commented to inherit theme color */
 }
 
 #input {
@@ -218,7 +249,8 @@ h2 {
   border-radius: 6px;
   outline: none;
   background: #fff;
-  color: #333; /* Kept as dark for input contrast */
+  color: #333;
+  /* Kept as dark for input contrast */
 }
 
 #input:focus {
@@ -228,18 +260,25 @@ h2 {
 
 #results-area {
   margin-top: 2em;
-  max-width: 1400px; /* Maintain width for graph */
-  margin: 2em auto; /* Center the results area with some vertical margin */
-  padding: 30px; /* Increased padding */
-  background-color: #ffffff; /* White background for the results card */
+  max-width: 1400px;
+  /* Maintain width for graph */
+  margin: 2em auto;
+  /* Center the results area with some vertical margin */
+  padding: 30px;
+  /* Increased padding */
+  background-color: #ffffff;
+  /* White background for the results card */
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for lift */
-  text-align: center; /* Center the h2 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for lift */
+  text-align: center;
+  /* Center the h2 */
 }
 
 #results-area h2 {
   margin-top: 0;
-  font-size: 2.2em; /* Same size as other h2 */
+  font-size: 2.2em;
+  /* Same size as other h2 */
   font-weight: 700;
   margin-bottom: 1em;
 }
@@ -254,7 +293,8 @@ h2 {
 .results-bar span {
   font-size: 1.4em;
   font-weight: 600;
-  color: #333; /* Kept as dark */
+  color: #333;
+  /* Kept as dark */
   background: none;
   padding: 0.5em 1em;
   border-radius: 6px;
@@ -262,19 +302,21 @@ h2 {
 
 #restart {
   display: block;
-  margin: 1em auto 0 auto; 
+  margin: 1em auto 0 auto;
 }
 
 
-.hidden {
+/* .hidden {
   display: none !important;
-}
+} */
 
 #results-content {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Graph wider than text */
+  grid-template-columns: 2fr 1fr;
+  /* Graph wider than text */
   gap: 30px;
-  align-items: start; /* Align text at the top */
+  align-items: start;
+  /* Align text at the top */
 }
 
 #resultsgraph {
@@ -285,34 +327,50 @@ h2 {
 #results-text {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Increased gap between text results */
-  justify-content: center; /* Center text vertically if space allows */
+  gap: 15px;
+  /* Increased gap between text results */
+  justify-content: center;
+  /* Center text vertically if space allows */
 }
 
 #final-wpm,
 #final-accuracy {
-    font-size: 1.6em; /* Larger font for key stats */
-    font-weight: bold;
-    color: var(--text-color); /* Ensure theme color */
-    margin-bottom: 5px; /* Add some space below */
+  font-size: 2em;
+  /* Larger font for key stats */
+  /* font-weight: bold; */
+  color: var(--text-color);
+  /* Ensure theme color */
+  margin-bottom: 5px;
+  /* Add some space below */
+  background-color: #e0f7fa;
+  padding: 0.4em 0.8em;
+  border-radius: 8px;
+  display: inline-block;
 }
 
 #percentile-text {
-    font-size: 1.1em; /* Standard font for percentile text */
-    line-height: 1.5;
-    color: var(--text-color); /* Ensure theme color */
+  font-size: 1.1em;
+  /* Standard font for percentile text */
+  line-height: 1.5;
+  color: var(--text-color);
+  /* Ensure theme color */
+  text-align: left;
 }
 
 
 /* Media query for responsiveness: stack graph and text on smaller screens */
 @media (max-width: 900px) {
-    #results-content {
-        grid-template-columns: 1fr; /* Single column layout */
-    }
-    #results-text {
-        text-align: center; /* Center text when stacked */
-        margin-top: 20px; /* Add space between graph and text when stacked */
-    }
+  #results-content {
+    grid-template-columns: 1fr;
+    /* Single column layout */
+  }
+
+  #results-text {
+    text-align: center;
+    /* Center text when stacked */
+    margin-top: 20px;
+    /* Add space between graph and text when stacked */
+  }
 }
 
 
@@ -359,8 +417,10 @@ h2 {
 } */
 
 .basic-about {
-  max-width: 900px; /* Constrain text width in these sections */
-  margin: 0 auto; /* Center basic-about content */
+  max-width: 900px;
+  /* Constrain text width in these sections */
+  margin: 0 auto;
+  /* Center basic-about content */
   padding: 0 1em;
   font-size: 1.1em;
   line-height: 1.6;
@@ -369,7 +429,8 @@ h2 {
 #team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, 240px);
-  gap: 0.5em; /* Smaller gap for tighter layout */
+  gap: 0.5em;
+  /* Smaller gap for tighter layout */
   margin-top: 2em;
   background-color: #f5f5f5;
   padding: 1em;
@@ -385,27 +446,38 @@ h2 {
 
 .team-member p {
   margin: 0;
-  color: var(--text-color); /* Ensure team member descriptions use theme color */
+  color: var(--text-color);
+  /* Ensure team member descriptions use theme color */
   font-size: 1em;
 }
 
-.demo-button, .dataset-button, #restart {
+.demo-button,
+.dataset-button,
+#restart {
   background-color: var(--color-accent);
   color: white;
-  font-size: 1em;             /* More readable size */
-  padding: 0.6em 1.2em;       /* Add padding for breathing room */
+  font-size: 1em;
+  /* More readable size */
+  padding: 0.6em 1.2em;
+  /* Add padding for breathing room */
   border: none;
-  border-radius: 6px;         /* Subtle rounding */
+  border-radius: 6px;
+  /* Subtle rounding */
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Soft shadow */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  /* Soft shadow */
 }
 
-.demo-button:hover, .dataset-button:hover, #restart:hover {
+.demo-button:hover,
+.dataset-button:hover,
+#restart:hover {
   background-color: #0097a7;
-  transform: translateY(-2px); /* Subtle lift on hover */
+  transform: translateY(-2px);
+  /* Subtle lift on hover */
 }
 
 #restart {
-  margin-bottom: 2em;;
+  margin-bottom: 2em;
+  ;
 }

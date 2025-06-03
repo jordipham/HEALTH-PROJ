@@ -50,8 +50,8 @@ function renderWords() {
 }
 
 function displayFinalStats(wpm) {
-  finalWpmSpan.textContent = `WPM: ${wpm}`;
-  finalAccuracySpan.textContent = `Accuracy: ${attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100}%`;
+  finalWpmSpan.innerHTML = `<strong>WPM:</strong> ${wpm}`;
+  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100}%`;
 
   // Save WPM for graph
   localStorage.setItem("latestWPM", wpm);
@@ -75,8 +75,8 @@ function displayFinalStats(wpm) {
         updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(2);
       }
 
-      percentileText.innerHTML = `Your typing speed is higher than approximately ${percentile}% of test participants. According to the linear 
-      regression of our data, a score of ${wpmValue} WPM would approximately correspond to a UPDRS score of ${updrsEstimate}. 
+      percentileText.innerHTML = `Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. According to the linear 
+      regression of our data, a score of <strong>${wpmValue} WPM</strong> would approximately correspond to a UPDRS score of <strong>${updrsEstimate}</strong>. 
       
       <br><br>
 
