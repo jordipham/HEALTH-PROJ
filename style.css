@@ -376,3 +376,31 @@ h2 {
   ); /* Ensure team member descriptions use theme color */
   font-size: 1em;
 }
+
+.dataset-button {
+  background-color: var(--color-accent);
+  color: white;
+  font-size: 0.5em;           /* Larger font */
+  border: none;
+  border-radius: 8px;       /* Slightly rounder corners */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dataset-button:hover {
+  background-color: #0097a7;
+}
+
+.demo-button {
+  background-color: var(--color-accent);
+  color: white;
+  font-size: 0.7em;           /* Larger font */
+  border: none;
+  border-radius: 8px;       /* Slightly rounder corners */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.demo-button:hover {
+  background-color: #0097a7;
+}
