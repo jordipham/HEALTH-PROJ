@@ -1,9 +1,11 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
-// Set dimensions and margins
-const margin = { top: 20, right: 30, bottom: 50, left: 70 },
-      width = 800 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+const container = document.getElementById("resultsgraph").parentElement;
+const containerWidth = container.getBoundingClientRect().width;
+
+const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+      width = containerWidth - margin.left - margin.right,
+      height = width * 0.5625 - margin.top - margin.bottom; // 16:9 aspect ratio
 
 const svg = d3.select("#scatterplot")
   .attr("width", width + margin.left + margin.right)
