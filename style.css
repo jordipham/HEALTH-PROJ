@@ -37,18 +37,6 @@ label {
   ); /* Ensure paragraphs, list items, and labels use the theme color */
 }
 
-#densitytype,
-#scatterplot,
-#resultsgraph {
-  width: 90vw;            /* Use 90% of the viewport width */
-  max-width: 1200px;      /* Limit maximum size */
-  height: auto;           /* Let height adjust */
-  aspect-ratio: 16 / 9;   /* Maintain aspect ratio */
-  border: 1px solid #ffffff;
-  margin: 20px auto;      /* Center it */
-  background-color: #ffffff;
-  box-sizing: border-box;
-}
 
 .tooltip {
   position: absolute;
