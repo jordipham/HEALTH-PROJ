@@ -306,9 +306,9 @@ h2 {
 }
 
 
-/* .hidden {
+.hidden {
   display: none !important;
-} */
+}
 
 #results-content {
   display: grid;
@@ -432,7 +432,7 @@ h2 {
   gap: 0.5em;
   /* Smaller gap for tighter layout */
   margin-top: 2em;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   padding: 1em;
   border-radius: 10px;
   text-align: center;
