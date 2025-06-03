@@ -108,7 +108,7 @@ const y = d3.scaleLinear()
 
   svg.append("text")
     .attr("x", -height / 2)
-    .attr("y", -50)
+    .attr("y", -40)
     .attr("transform", "rotate(-90)")
     .attr("text-anchor", "middle")
     .text("Typing Speed");
