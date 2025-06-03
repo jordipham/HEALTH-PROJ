@@ -12,8 +12,9 @@ const svg = d3
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
 const wpmGroup = svg.append("g").attr("id", "wpm-group");
+const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-let x, y;
+let x, y, densities;
 
 d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   typingSpeed: +d.typingSpeed,
@@ -22,28 +23,15 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   const validData = data.filter((d) => !isNaN(d.typingSpeed));
 
   x = d3.scaleLinear()
-  .domain([0, d3.max(validData, (d) => d.typingSpeed)]) // 👈 Start at 0
-  .range([0, width]);
+    .domain([0, d3.max(validData, (d) => d.typingSpeed)])
+    .range([0, width]);
+
   y = d3.scaleLinear().range([height, 0]);
 
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", height + 40)
-    .attr("text-anchor", "middle")
-    .text("Typing Speed");
-
-  svg.append("text")
-    .attr("x", -height / 2)
-    .attr("y", -40)
-    .attr("transform", "rotate(-90)")
-    .attr("text-anchor", "middle")
-    .text("Density");
-
-  const line = d3.line().curve(d3.curveBasis).x((d) => x(d[0])).y((d) => y(d[1]));
   const bandwidth = 15;
   const xTicks = x.ticks(100);
 
-  const densities = [true, false].map((gtVal) => {
+  densities = [true, false].map((gtVal) => {
     const groupData = validData.filter((d) => d.gt === gtVal).map((d) => d.typingSpeed);
     const density = kernelDensityEstimator(kernelEpanechnikov(bandwidth), xTicks)(groupData);
     return { gt: gtVal, density, color: gtVal ? "#00bcd4" : "#F4A261" };
@@ -61,6 +49,19 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   svg.append("g")
     .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format(".3f")));
 
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", height + 40)
+    .attr("text-anchor", "middle")
+    .text("Typing Speed");
+
+  svg.append("text")
+    .attr("x", -height / 2)
+    .attr("y", -40)
+    .attr("transform", "rotate(-90)")
+    .attr("text-anchor", "middle")
+    .text("Density");
+
   svg.selectAll(".density")
     .data(densities)
     .enter()
@@ -69,16 +70,64 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .attr("fill", "none")
     .attr("stroke", (d) => d.color)
     .attr("stroke-width", 2)
-    .attr("d", (d) => line(d.density));
+    .attr("d", (d) => d3.line().curve(d3.curveBasis)
+      .x(d => x(d[0]))
+      .y(d => y(d[1]))(d.density));
+
+  svg.append("rect")
+    .attr("class", "overlay")
+    .attr("width", width)
+    .attr("height", height)
+    .style("fill", "none")
+    .style("pointer-events", "all")
+    .on("mousemove", mousemove)
+    .on("mouseout", () => {
+      tooltip.style("opacity", 0);
+      svg.selectAll(".vertical-line-hover").remove();
+    });
 });
 
-// 🎯 Listen for test result WPM and draw the vertical line:
+function mousemove(event) {
+  const [mouseX] = d3.pointer(event);
+  const x0 = x.invert(mouseX);
+
+  svg.selectAll(".vertical-line-hover").remove();
+
+  svg.append("line")
+    .attr("class", "vertical-line-hover")
+    .attr("x1", x(x0))
+    .attr("x2", x(x0))
+    .attr("y1", height)
+    .attr("y2", 0)
+    .attr("stroke", "black")
+    .attr("stroke-dasharray", "3,3");
+
+  const tooltipData = densities.map((d) => {
+    const i = d3.bisector((d) => d[0]).left(d.density, x0);
+    const density = d.density[i] ? d.density[i][1] : 0;
+    return { gt: d.gt, density };
+  });
+
+  tooltip
+    .style("opacity", 0.9)
+    .html(
+      `<strong>Typing Speed:</strong> ${x0.toFixed(2)}<br>
+      <span style="color:#00bcd4">Has Parkinson's</span>: ${
+        tooltipData.find((d) => d.gt === true)?.density.toFixed(3) || "0.000"
+      }<br>
+      <span style="color:#F4A261">No Parkinson's</span>: ${
+        tooltipData.find((d) => d.gt === false)?.density.toFixed(3) || "0.000"
+      }`
+    )
+    .style("left", event.pageX + 10 + "px")
+    .style("top", event.pageY - 28 + "px");
+}
+
 function updateGraph(userWPM) {
-  if (!x || !y) return; // Ensure scales exist
+  if (!x || !y) return;
 
   wpmGroup.selectAll("*").remove();
 
-  // Add vertical line
   wpmGroup.append("line")
     .attr("x1", x(userWPM))
     .attr("x2", x(userWPM))
@@ -88,7 +137,6 @@ function updateGraph(userWPM) {
     .attr("stroke-width", 2)
     .attr("stroke-dasharray", "4");
 
-  // Add label
   wpmGroup.append("text")
     .attr("x", x(userWPM))
     .attr("y", -10)
@@ -96,23 +144,6 @@ function updateGraph(userWPM) {
     .attr("font-size", "12px")
     .attr("fill", "red")
     .text(`Your WPM: ${userWPM}`);
-
-  // svg.append("line")
-  //   .attr("x1", x(userWPM))
-  //   .attr("x2", x(userWPM))
-  //   .attr("y1", height)
-  //   .attr("y2", 0)
-  //   .attr("stroke", "red")
-  //   .attr("stroke-width", 2)
-  //   .attr("stroke-dasharray", "4");
-
-  // svg.append("text")
-  //   .attr("x", x(userWPM))
-  //   .attr("y", -10)
-  //   .attr("text-anchor", "middle")
-  //   .attr("font-size", "12px")
-  //   .attr("fill", "red")
-  //   .text(`Your WPM: ${userWPM}`);
 }
 
 function kernelDensityEstimator(kernel, X) {
@@ -127,9 +158,7 @@ function kernelEpanechnikov(k) {
   };
 }
 
-// 🎯 Listen for test completion event:
 window.addEventListener("testCompleted", (e) => {
   const userWPM = e.detail.wpm;
-
   updateGraph(userWPM);
 });

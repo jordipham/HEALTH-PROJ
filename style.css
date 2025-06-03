@@ -17,6 +17,13 @@ body {
   color: var(--text-color); /* Apply main text color */
 }
 
+#header{
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto; /* Center header */
+}
+
+
 h1,
 h2 {
   color: var(--text-color); /* Ensure headings use the theme color */
@@ -121,7 +128,7 @@ label {
 
 .typing-test-zone {
   max-width: 1000px; /* Align with typing test itself */
-  margin: 60px auto 30px auto; /* Add margin to separate from next section */
+  margin: 20px auto 20px auto; /* Add margin to separate from next section */
   text-align: center;
   padding: 20px;
 }
@@ -152,7 +159,7 @@ label {
 
 .typing-test {
   max-width: 1000px;
-  margin: 30px auto 60px auto; /* Adjusted margins */
+  margin: 20px auto 20px auto; /* Adjusted margins */
   border-radius: 12px;
   padding: 2.5em 2em 2em 2em;
   text-align: center;
@@ -229,6 +236,13 @@ h2 {
 
 #results-area {
   margin-top: 2em;
+  max-width: 1400px; /* Maintain width for graph */
+  margin: 2em auto; /* Center the results area with some vertical margin */
+  padding: 30px; /* Increased padding */
+  background-color: #ffffff; /* White background for the results card */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for lift */
+  text-align: center; /* Center the h2 */
 }
 
 #results-area h2 {
@@ -256,21 +270,9 @@ h2 {
 
 #restart {
   display: block;
-  margin: 1em auto 0 auto; /* Top margin 1em, left/right auto, bottom 0 */
-  background: var(--color-accent);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.8em 2.2em;
-  font-size: 1.1em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  margin: 1em auto 0 auto; 
 }
 
-#restart:hover {
-  background: #0097a7;
-}
 
 #results-area {
   max-width: 1400px;
@@ -352,16 +354,14 @@ h2 {
 
 #team-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(200px, 1fr)
-  ); /* Responsive grid for team members */
-  gap: 1.5em;
+  grid-template-columns: repeat(auto-fit, 240px);
+  gap: 0.5em; /* Smaller gap for tighter layout */
   margin-top: 2em;
-  background-color: #f5f5f5; /* Light gray background for the team grid */
+  background-color: #f5f5f5;
   padding: 1em;
   border-radius: 10px;
   text-align: center;
+  justify-content: center;
 }
 
 .team-member h3 {
@@ -377,30 +377,23 @@ h2 {
   font-size: 1em;
 }
 
-.dataset-button {
+.demo-button, .dataset-button, #restart {
   background-color: var(--color-accent);
   color: white;
-  font-size: 0.5em;           /* Larger font */
+  font-size: 1em;             /* More readable size */
+  padding: 0.6em 1.2em;       /* Add padding for breathing room */
   border: none;
-  border-radius: 8px;       /* Slightly rounder corners */
+  border-radius: 6px;         /* Subtle rounding */
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Soft shadow */
 }
 
-.dataset-button:hover {
+.demo-button:hover, .dataset-button:hover, #restart:hover {
   background-color: #0097a7;
+  transform: translateY(-2px); /* Subtle lift on hover */
 }
 
-.demo-button {
-  background-color: var(--color-accent);
-  color: white;
-  font-size: 0.7em;           /* Larger font */
-  border: none;
-  border-radius: 8px;       /* Slightly rounder corners */
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.demo-button:hover {
-  background-color: #0097a7;
+#restart {
+  margin-bottom: 2em;;
 }

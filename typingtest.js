@@ -65,7 +65,25 @@ function displayFinalStats(wpm) {
       const count = speeds.length;
       const below = speeds.filter(v => v <= wpm).length;
       const percentile = Math.round((below / count) * 100);
-      percentileText.textContent = `Your typing speed is higher than approximately ${percentile}% of test participants.`;
+
+
+      const wpmValue = parseFloat(localStorage.getItem("latestWPM"));
+      let updrsEstimate = "N/A";
+
+      // Ensure slope and intercept exist
+      if (!isNaN(wpmValue) && typeof window.slope !== "undefined" && typeof window.intercept !== "undefined" && window.slope !== 0) {
+        updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(2);
+      }
+
+      percentileText.innerHTML = `Your typing speed is higher than approximately ${percentile}% of test participants. According to the linear 
+      regression of our data, a score of ${wpmValue} WPM would approximately correspond to a UPDRS score of ${updrsEstimate}. 
+      
+      <br><br>
+
+      This calculated UPDRS score is an estimate based on the linear regression 
+      model of our data, and it should not be interpreted as a medical diagnosis. While the model shows a general relationship between typing speed and UPDRS score, there is no definitive threshold 
+      that can classify an individual’s health status based on typing speed alone. The variability in typing patterns and individual differences means that it is not possible to determine a 
+      clear-cut classification or provide a diagnosis from this data. Any predictions made should be considered speculative and used only for exploratory purposes, not for clinical evaluation.`;
     });
 
   resultsArea.classList.remove("hidden");
@@ -80,20 +98,20 @@ function endTest() {
   const wordsTyped = totalCharsTyped / 5;
   const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
 
-   document.getElementById("grid-container").classList.remove("hidden");
-   setTimeout(() => {
-  document.getElementById("results-area").scrollIntoView({ behavior: "smooth" });
-}, 50); // 50ms is enough to let the DOM reflow
+  document.getElementById("grid-container").classList.remove("hidden");
+  setTimeout(() => {
+    document.getElementById("results-area").scrollIntoView({ behavior: "smooth" });
+  }, 50); // 50ms is enough to let the DOM reflow
 
   displayFinalStats(wpm);
 
   const event = new CustomEvent("testCompleted", { detail: { wpm: wpm } });
-    window.dispatchEvent(event);
+  window.dispatchEvent(event);
 
 }
 
 function resetTest() {
-clearInterval(timerInterval);
+  clearInterval(timerInterval);
   words = getRandomWords(50);
   currentWord = 0;
   totalCharsTyped = 0;
@@ -107,7 +125,7 @@ clearInterval(timerInterval);
   timeLeftSpan.textContent = `Time: ${timeLeft}s`;
   renderWords();
   input.disabled = false;
-//   input.focus();
+  //   input.focus();
   resultsArea.classList.add("hidden");
 
   restartBtn.blur();

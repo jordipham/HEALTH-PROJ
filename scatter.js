@@ -44,6 +44,11 @@ const y = d3.scaleLinear()
                 d3.sum(validData, d => Math.pow(d.updrs108 - xMean, 2));
   const intercept = yMean - slope * xMean;
 
+  window.slope = slope;
+  window.intercept = intercept;
+
+  //make them global
+
   const xVals = d3.extent(validData, d => d.updrs108);
   const linePoints = xVals.map(xVal => ({
     x: xVal,
