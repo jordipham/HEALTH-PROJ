@@ -59,7 +59,7 @@ label {
 /* CSS starting here is for the 2x2 grid of the density charts + linear regression */
 #grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-columns: .6fr .4fr; /* Two equal columns */
   grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
   gap: 30px; /* Increased gap for more space between graphs */
   max-width: 1800px; /* Maintained large width for D3 objects */
