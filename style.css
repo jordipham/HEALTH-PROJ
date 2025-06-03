@@ -72,8 +72,7 @@ label {
 #scatterplot,
 #resultsgraph {
   /* Added resultsgraph here too, if it's meant to be in a grid item or similar */
-  width: 100%; /* Make them fill the width of their parent grid item */
-  height: 500px; /* Consistent height for D3 visualizations */
+
   border: 1px solid #ffffff; /* Darker border for visualization */
   margin-top: 15px;
   background-color: #ffffff; /* Darker background for the SVG areas */
