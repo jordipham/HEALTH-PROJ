@@ -417,3 +417,8 @@ h2 {
 #restart {
   margin-bottom: 2em;
 }
+
+mark {
+  color: var(--color-accent);
+  background-color: transparent;
+}
