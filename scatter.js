@@ -1,9 +1,10 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
 // Set dimensions and margins
-const margin = { top: 20, right: 30, bottom: 50, left: 70 },
-      width = 800 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+const margin = { top: 20, right: 30, bottom: 50, left: 60 },
+      width = window.innerWidth * 0.45 - margin.left - margin.right, 
+      height = window.innerWidth * 0.27 - margin.top - margin.bottom;
+
 
 const svg = d3.select("#scatterplot")
   .attr("width", width + margin.left + margin.right)
