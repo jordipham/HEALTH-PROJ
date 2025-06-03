@@ -74,7 +74,7 @@ label {
   grid-template-columns: 0.6fr 0.4fr; /* Two equal columns */
   grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
   gap: 30px; /* Increased gap for more space between graphs */
-  max-width: 1800px; /* Maintained large width for D3 objects */
+  max-width: 90vw; /* Maintained large width for D3 objects */
   margin: 0 auto;
   padding: 20px;
 }
