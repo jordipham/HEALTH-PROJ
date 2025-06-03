@@ -66,7 +66,7 @@ label {
 /* CSS starting here is for the 2x2 grid of the density charts + linear regression */
 #grid-container {
   display: grid;
-  grid-template-columns: .6fr .4fr; /* Two equal columns */
+  grid-template-columns: 0.6fr 0.4fr; /* Two equal columns */
   grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
   gap: 30px; /* Increased gap for more space between graphs */
   max-width: 1800px; /* Maintained large width for D3 objects */
@@ -274,12 +274,6 @@ h2 {
 }
 
 
-#results-area {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 .hidden {
   display: none !important;
 }
@@ -299,8 +293,36 @@ h2 {
 #results-text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px; /* Increased gap between text results */
+  justify-content: center; /* Center text vertically if space allows */
 }
+
+#final-wpm,
+#final-accuracy {
+    font-size: 1.6em; /* Larger font for key stats */
+    font-weight: bold;
+    color: var(--text-color); /* Ensure theme color */
+    margin-bottom: 5px; /* Add some space below */
+}
+
+#percentile-text {
+    font-size: 1.1em; /* Standard font for percentile text */
+    line-height: 1.5;
+    color: var(--text-color); /* Ensure theme color */
+}
+
+
+/* Media query for responsiveness: stack graph and text on smaller screens */
+@media (max-width: 900px) {
+    #results-content {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+    #results-text {
+        text-align: center; /* Center text when stacked */
+        margin-top: 20px; /* Add space between graph and text when stacked */
+    }
+}
+
 
 /* #scrolly {
   position: relative;
@@ -371,9 +393,7 @@ h2 {
 
 .team-member p {
   margin: 0;
-  color: var(
-    --text-color
-  ); /* Ensure team member descriptions use theme color */
+  color: var(--text-color); /* Ensure team member descriptions use theme color */
   font-size: 1em;
 }
 
