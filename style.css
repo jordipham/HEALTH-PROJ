@@ -59,7 +59,7 @@ label {
 /* CSS starting here is for the 2x2 grid of the density charts + linear regression */
 #grid-container {
   display: grid;
-  grid-template-columns: .6fr .4fr; /* Two equal columns */
+  grid-template-columns: 0.6fr 0.4fr; /* Two equal columns */
   grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
   gap: 30px; /* Increased gap for more space between graphs */
   max-width: 1800px; /* Maintained large width for D3 objects */
@@ -229,6 +229,13 @@ h2 {
 
 #results-area {
   margin-top: 2em;
+  max-width: 1400px; /* Maintain width for graph */
+  margin: 2em auto; /* Center the results area with some vertical margin */
+  padding: 30px; /* Increased padding */
+  background-color: #ffffff; /* White background for the results card */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for lift */
+  text-align: center; /* Center the h2 */
 }
 
 #results-area h2 {
@@ -256,7 +263,7 @@ h2 {
 
 #restart {
   display: block;
-  margin: 1em auto 0 auto; /* Top margin 1em, left/right auto, bottom 0 */
+  margin: 1em auto 0 auto;  /* Top margin 1em, left/right auto, bottom 0 */
   background: var(--color-accent);
   color: #fff;
   border: none;
@@ -270,12 +277,6 @@ h2 {
 
 #restart:hover {
   background: #0097a7;
-}
-
-#results-area {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
 }
 
 .hidden {
@@ -297,8 +298,36 @@ h2 {
 #results-text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px; /* Increased gap between text results */
+  justify-content: center; /* Center text vertically if space allows */
 }
+
+#final-wpm,
+#final-accuracy {
+    font-size: 1.6em; /* Larger font for key stats */
+    font-weight: bold;
+    color: var(--text-color); /* Ensure theme color */
+    margin-bottom: 5px; /* Add some space below */
+}
+
+#percentile-text {
+    font-size: 1.1em; /* Standard font for percentile text */
+    line-height: 1.5;
+    color: var(--text-color); /* Ensure theme color */
+}
+
+
+/* Media query for responsiveness: stack graph and text on smaller screens */
+@media (max-width: 900px) {
+    #results-content {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+    #results-text {
+        text-align: center; /* Center text when stacked */
+        margin-top: 20px; /* Add space between graph and text when stacked */
+    }
+}
+
 
 /* #scrolly {
   position: relative;
@@ -352,10 +381,7 @@ h2 {
 
 #team-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(200px, 1fr)
-  ); /* Responsive grid for team members */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid for team members */
   gap: 1.5em;
   margin-top: 2em;
   background-color: #f5f5f5; /* Light gray background for the team grid */
@@ -371,9 +397,7 @@ h2 {
 
 .team-member p {
   margin: 0;
-  color: var(
-    --text-color
-  ); /* Ensure team member descriptions use theme color */
+  color: var(--text-color); /* Ensure team member descriptions use theme color */
   font-size: 1em;
 }
 
