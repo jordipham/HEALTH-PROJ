@@ -247,6 +247,7 @@ function resetTest() {
   }, 50); // 50ms is enough to let the DOM reflow
 
   restartBtn.blur();
+  // input.focus()
 }
 
 function startTimer() {
@@ -293,5 +294,8 @@ input.addEventListener("keydown", (e) => {
   }
 });
 
-restartBtn.addEventListener("click", resetTest);
+restartBtn.addEventListener("click", () => {
+  resetTest();
+  input.focus();        // Only happens when restart button is clicked
+});
 resetTest();
