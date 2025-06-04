@@ -106,6 +106,39 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
       tooltip.style("opacity", 0);
       svg.selectAll(".vertical-line-hover").remove();
     });
+
+  const legend = svg
+    .append("g")
+    .attr("transform", `translate(${width - 150}, 20)`);
+
+  const legendData = [
+    { label: "Has Parkinson's", color: colorMap.true },
+    { label: "No Parkinson's", color: colorMap.false },
+  ];
+
+  legend
+    .selectAll("rect")
+    .data(legendData)
+    .enter()
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", (d, i) => i * 20)
+    .attr("width", 12)
+    .attr("height", 12)
+    .attr("fill", (d) => d.color);
+  // .attr("opacity", 0.7);
+
+  legend
+    .selectAll("text")
+    .data(legendData)
+    .enter()
+    .append("text")
+    .attr("x", 20)
+    .attr("y", (d, i) => i * 20 + 10)
+    .text((d) => d.label)
+    .attr("font-size", "12px")
+    .attr("alignment-baseline", "middle");
+
 });
 
 function mousemove(event) {
@@ -143,6 +176,8 @@ function mousemove(event) {
     )
     .style("left", event.pageX + 10 + "px")
     .style("top", event.pageY - 28 + "px");
+
+
 }
 
 function updateGraph(userWPM) {
