@@ -162,32 +162,34 @@ function displayFinalStats(wpm) {
   fetch("combined_data_with_keystroke_averages.csv")
     .then((response) => response.text())
     .then((text) => {
+      // ✅ Clamp WPM to zero if negative
+      const rawWPM = parseFloat(localStorage.getItem("latestWPM"));
+      const wpmValue = Math.max(0, isNaN(rawWPM) ? 0 : rawWPM);
+
+      console.log(wpmValue);
+
       const rows = text.trim().split("\n").slice(1);
       const speeds = rows
         .map((r) => parseFloat(r.split(",")[3]))
         .filter((v) => !isNaN(v))
         .sort((a, b) => a - b);
+
       const count = speeds.length;
-      const below = speeds.filter((v) => v <= wpm).length;
-      const percentile = Math.round((below / count) * 100);
+      const below = speeds.filter(v => v <= wpmValue).length;
+      const percentile = count > 0 ? Math.round((below / count) * 100) : 0;
 
-      const wpmValue = parseFloat(localStorage.getItem("latestWPM"));
       let updrsEstimate = "N/A";
-
-      // Ensure slope and intercept exist
       if (
-        !isNaN(wpmValue) &&
         typeof window.slope !== "undefined" &&
         typeof window.intercept !== "undefined" &&
+        !isNaN(wpmValue) &&
         window.slope !== 0
       ) {
-        updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(
-          2
-        );
+        updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(2);
       }
 
       percentileText.innerHTML = `Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. According to the linear 
-      regression of our data, a score of <strong>${wpmValue} WPM</strong> would approximately correspond to a UPDRS score of <strong>${updrsEstimate}</strong>. 
+      regression of our data, a score of <strong>${wpmValue} WPM</strong> would approximately correspond to a UPDRS Part 3 Motor Examination score of <strong>${updrsEstimate}</strong>. 
       
       <br><br>
       This calculated UPDRS score is an estimate based upon our linear regression model dependent on the data collected and should <strong>NOT</strong> be interpreted as a medical diagnosis.`;
@@ -270,7 +272,7 @@ input.addEventListener("input", () => {
   let lastIndex = val.length - 1;
   if (current && val[lastIndex] === current[lastIndex]) correctChars++;
 
-  if ((val.endsWith(" ") || val === current) && val.trim().length > 0) {
+  if ((val.endsWith(" ")) && val.trim().length > 0) {
     attemptedWords++;
     if (val.trim() === current) correctWords++;
 

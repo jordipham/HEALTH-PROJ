@@ -1,15 +1,11 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
-// const margin = { top: 20, right: 30, bottom: 50, left: 60 },
-//   width = 800 - margin.left - margin.right,
-//   height = 500 - margin.top - margin.bottom;
-
 const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
-const container = document.getElementById("grid-item-2").parentElement; // or 'densitytype'
+const container = document.getElementById("grid-item-2").parentElement;
 const boundingBox = container.getBoundingClientRect();
 const width = boundingBox.width * 0.55 - margin.left - margin.right;
-const height = boundingBox.width * 0.27 - margin.top - margin.bottom; // Adjust ratio as needed
+const height = boundingBox.width * 0.27 - margin.top - margin.bottom;
 
 const svg = d3
   .select("#resultsgraph")
@@ -20,6 +16,11 @@ const svg = d3
 
 const wpmGroup = svg.append("g").attr("id", "wpm-group");
 const tooltip = d3.select("body").append("div").attr("class", "tooltip");
+
+const colorMap = {
+  true: "#00bcd4",
+  false: "#F4A261"
+};
 
 let x, y, densities;
 
@@ -47,7 +48,7 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
       kernelEpanechnikov(bandwidth),
       xTicks
     )(groupData);
-    return { gt: gtVal, density, color: gtVal ? "#00bcd4" : "#F4A261" };
+    return { gt: gtVal, density, color: colorMap[gtVal] };
   });
 
   y.domain([
@@ -107,14 +108,14 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
       svg.selectAll(".vertical-line-hover").remove();
     });
 
-  const legend = svg
-    .append("g")
-    .attr("transform", `translate(${width - 150}, 20)`);
-
   const legendData = [
     { label: "Has Parkinson's", color: colorMap.true },
     { label: "No Parkinson's", color: colorMap.false },
   ];
+
+  const legend = svg
+    .append("g")
+    .attr("transform", `translate(${width - 150}, 20)`);
 
   legend
     .selectAll("rect")
@@ -126,7 +127,6 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .attr("width", 12)
     .attr("height", 12)
     .attr("fill", (d) => d.color);
-  // .attr("opacity", 0.7);
 
   legend
     .selectAll("text")
@@ -138,7 +138,6 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .text((d) => d.label)
     .attr("font-size", "12px")
     .attr("alignment-baseline", "middle");
-
 });
 
 function mousemove(event) {
@@ -167,17 +166,15 @@ function mousemove(event) {
     .style("opacity", 0.9)
     .html(
       `<strong>Typing Speed:</strong> ${x0.toFixed(2)}<br>
-      <span style="color:#00bcd4">Has Parkinson's</span>: ${
+      <span style="color:${colorMap.true}">Has Parkinson's</span>: ${
         tooltipData.find((d) => d.gt === true)?.density.toFixed(3) || "0.000"
       }<br>
-      <span style="color:#F4A261">No Parkinson's</span>: ${
+      <span style="color:${colorMap.false}">No Parkinson's</span>: ${
         tooltipData.find((d) => d.gt === false)?.density.toFixed(3) || "0.000"
       }`
     )
     .style("left", event.pageX + 10 + "px")
     .style("top", event.pageY - 28 + "px");
-
-
 }
 
 function updateGraph(userWPM) {
