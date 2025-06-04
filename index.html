@@ -68,9 +68,15 @@
           effect is that it can cause paralysis or involuntary movement. Both
           symptoms of PD and the side effects of the treatment impacts movement,
           leading back to our project goal to see the interaction it has with
-          typing. <mark><b>Research has implied that varying typing patterns can be an
-          indicator of PD. By utilizing and analysing these patterns, we can
-          hopefully identify those at risk and provide earlier interventions.</mark></b>
+          typing.
+          <mark
+            ><b
+              >Research has implied that varying typing patterns can be an
+              indicator of PD. By utilizing and analysing these patterns, we can
+              hopefully identify those at risk and provide earlier
+              interventions.</b
+            ></mark
+          >
         </p>
       </div>
     </div>
@@ -106,6 +112,9 @@
           score range from 0-108 with 0 being minimal chances of PD and 108
           being higher risk.
         </p>
+
+        <!-- Title for section of graphs below -->
+        <h2>Understanding Our Data Subjects:</h2> 
       </div>
     </div>
 
@@ -129,25 +138,31 @@
           <svg id="densitytype"></svg>
         </div>
 
-        <div id="grid-item-3">
+        <div class="bullet-points" id="grid-item-3">
+          <h2>Density Histogram Comparison of WPM</h2>
           <ul>
-            <li>Density histogram of Word per Minute (WPM) separated by those affected by PD 
-              and those that are not
-            </li>
-
-            <li>Parkinson data is displayed in blue while non-PD is displayed in orange
-            </li>
-
-            <li>Although it is expected that there’d be a vast difference in WPM since PD impacts
-              movement, but in reality looking at our data, there is not that drastic of a difference 
-              in typing speed
+            <li>
+              Density histogram of Word per Minute (WPM) separated by those
+              affected by PD and those that are not
             </li>
 
             <li>
-              One of the only noticeable differences is the extremities (maximum) in the data with the 
-              fastest subject without PD being faster than the fastest subject impacted by the disease.
+              Parkinson data is displayed in blue while non-PD is displayed in
+              orange
             </li>
-            
+
+            <li>
+              Although it is expected that there’d be a vast difference in WPM
+              since PD impacts movement, but in reality looking at our data,
+              there is not that drastic of a difference in typing speed,
+              considering how similar the distributions appear.
+            </li>
+
+            <li>
+              One of the only noticeable differences is the extremities
+              (maximum) in the data with the fastest subject being a patient
+              without PD and the slowest subject being a patient with PD.
+            </li>
           </ul>
         </div>
       </div>
@@ -159,23 +174,37 @@
           <svg id="scatterplot"></svg>
         </div>
 
-        <div id="grid-item-4">
+        <div class="bullet-points" id="grid-item-4">
+          <h2>Regressing WPM on UPDRS</h2>
           <ul>
-            <li>A scatter plot of those with and without PD and the relationship between their typing 
-              speed and their UPDRS scores.
-            </li>
-
-            <li>It is shown that there is a slight negative trend in the regression line
-            </li>
-
-            <li>Patients without PD has a much wider range compared to patients with PD 
+            <li>
+              A scatter plot of those with and without PD and the relationship
+              between their typing speed and their UPDRS scores.
             </li>
 
             <li>
-              Although the regression line is generally negative, due to overlapping values, typing speed 
-              alone likely isn't sufficient for diagnosis, other metrics need to be taken into consideration.
+              It is shown that there is a slight negative trend in the
+              regression line
             </li>
-            
+
+            <li>
+              Patients without PD has a much wider range compared to patients
+              with PD
+            </li>
+
+            <li>
+              Although the regression line is generally negative, due to
+              overlapping values, typing speed alone likely isn't sufficient for
+              diagnosis, other metrics need to be taken into consideration.
+            </li>
+
+            <li>
+              From a classification perspective, we can identify that there is a
+              clear linear division boundary in the UPDRS between the two groups
+              that lingers around 6-7 (this is in consideration that the UPDRS
+              score provided is from section 3 of the UDRS examination that
+              focuses on motor movements).
+            </li>
           </ul>
         </div>
       </div>
@@ -185,20 +214,15 @@
       <div class="typing-test-zone">
         <h2>Typing Test Comparison</h2>
         <ol>
-          <li>
-            Click "Start typing here…" below to begin the typing test.
-          </li>
-          <li>
-            Type the provided text as accurately and quickly as possible.
-          </li>
-          <li>
-            Make sure to hit space in between words
-          </li>
+          <li>Click "Start typing here…" below to begin the typing test.</li>
+          <li>Type the provided text as accurately and quickly as possible.</li>
+          <li>Make sure to hit space in between words</li>
           <li>
             Once you finish, your typing data will be collected for analysis.
           </li>
           <li>
-            After completing the test, you will receive feedback on your typing performance.
+            After completing the test, you will receive feedback on your typing
+            performance.
           </li>
         </ol>
       </div>

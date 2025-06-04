@@ -1,7 +1,7 @@
 /* Work on Body - Centering, Margins, Width, and In-Line */
 :root {
   --text-color: #2c3e50; /* Navy blue-gray for main text */
-  --color-accent: #00bcd4; /* Existing accent color */
+  --color-accent: #00bcd4; /* Existing accent color */ /* alt color choice: #1E88E5 */
   --super-light-gray: #f2f2f2; /* Super light gray for background */
 }
 
@@ -26,6 +26,14 @@ body {
 h1,
 h2 {
   color: var(--text-color); /* Ensure headings use the theme color */
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
 }
 
 p,
@@ -59,10 +67,10 @@ label {
   display: grid;
   grid-template-columns: 0.6fr 0.4fr; /* Two equal columns */
   grid-template-rows: auto auto; /* Rows adjust to content, or use 1fr 1fr for equal height */
-  gap: 30px; /* Increased gap for more space between graphs */
+  gap: 25px; /*Increased gap for more space between graphs */
   max-width: 90vw; /* Maintained large width for D3 objects */
   margin: 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 /* Basic styling for SVGs to make them visible */
@@ -421,4 +429,35 @@ h2 {
 mark {
   color: var(--color-accent);
   background-color: transparent;
+}
+
+/* Styling for the .bullet-points section (grid-item-3 and grid-item-4) */
+.bullet-points {
+  /* Inherits general grid-item styling for background, padding, shadow */
+  text-align: left; /* Override parent's center alignment for list text */
+}
+
+.bullet-points h2 {
+  text-align: center; /* Keep the heading centered within its grid item */
+  margin-bottom: 1em; /* Add some space below the heading */
+  font-size: 1.5em; /* Slightly larger font size for emphasis */
+}
+
+.bullet-points ul {
+  list-style-type: disc; /* Use standard bullet points */
+  padding-left: 20px; /* Indent the list slightly */
+  margin: 0; /* Remove default ul margin */
+}
+
+.bullet-points li {
+  margin-bottom: 10px; /* Space between list items */
+  line-height: 1.6; /* Consistent line height for readability */
+  color: var(--text-color); /* Ensure text color aligns with theme */
+  font-size: 0.95em; /* Consistent with filler text in other grid items */
+  text-align: left;
+}
+
+/* Optional: if you want the bullet color to be the accent color */
+.bullet-points li::marker {
+  color: var(--color-accent); /* Make bullet points use the accent color */
 }
