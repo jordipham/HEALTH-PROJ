@@ -190,11 +190,7 @@ function displayFinalStats(wpm) {
       regression of our data, a score of <strong>${wpmValue} WPM</strong> would approximately correspond to a UPDRS score of <strong>${updrsEstimate}</strong>. 
       
       <br><br>
-      This calculated UPDRS score is an estimate based upon our linear regression model dependent on the data collected. It should NOT be interpreted as a medical diagnosis. 
-
-      Although the model shows a general relationship between typing speed and UPDRS score, there is no definitive threshold that is able to classify an individual’s health status solely based upon
-      typing speed. Any predictions
-       made should be considered speculative and used only for exploratory purposes, NOT for clinical evaluation.`;
+      This calculated UPDRS score is an estimate based upon our linear regression model dependent on the data collected and should <strong>NOT</strong> be interpreted as a medical diagnosis.`;
     });
 
   resultsArea.classList.remove("hidden");
