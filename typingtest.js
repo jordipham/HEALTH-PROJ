@@ -237,11 +237,9 @@ function resetTest() {
   resultsArea.classList.add("hidden");
 
   setTimeout(() => {
-    document
-      .getElementById("typing-test")
-      .scrollIntoView({ behavior: "smooth" });
-  }, 50); // 50ms is enough to let the DOM reflow
-
+  document.querySelector(".typing-test")
+    .scrollIntoView({ behavior: "smooth", block: "center" });
+}, 50);
   restartBtn.blur();
   // input.focus()
 }
