@@ -192,10 +192,8 @@ function displayFinalStats(wpm) {
       <br><br>
       This calculated UPDRS score is an estimate based upon our linear regression model dependent on the data collected. It should NOT be interpreted as a medical diagnosis. 
 
-
-      This calculated UPDRS score is an estimate based on the linear regression 
       Although the model shows a general relationship between typing speed and UPDRS score, there is no definitive threshold that is able to classify an individual’s health status solely based upon
-      typing speed. Due to the variability in typing patterns, and individual differences, it is not possible to have a clear classification or provide a diagnosis based only on the data. Any predictions
+      typing speed. Any predictions
        made should be considered speculative and used only for exploratory purposes, NOT for clinical evaluation.`;
     });
 
