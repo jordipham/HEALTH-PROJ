@@ -17,8 +17,14 @@ body {
   color: var(--text-color); /* Apply main text color */
 }
 
+#big-title, .demo-button {
+  text-align: center;
+  margin: 0 auto; /* Center the big title and demo button */
+  display: block;
+  margin-bottom: 1em; /* Add space below the big title */
+}
 
-#header {
+#intro-text {
   text-align: center;
   max-width: 900px;
   margin: 0 auto; /* Center header */
@@ -369,7 +375,7 @@ h2 {
   display: none;
 } */
 
-.basic-about {
+.basic-about, #conclusion {
   max-width: 900px; /* Constrain text width in these sections */
   margin: 0 auto; /* Center basic-about content */
   padding: 0 1em;
