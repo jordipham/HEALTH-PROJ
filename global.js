@@ -47,17 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("scatterplot").style.display = "block";
       }
 
-      if (stepNum === "6") {
-        document.querySelector(".typing-test").style.display = "block";
-        } else {
-        document.querySelector(".typing-test").style.display = "none";
-        }
-
-        if (stepNum === "7" && testIsDone) {
-        document.getElementById("results-area").classList.remove("hidden");
-        } else {
-        document.getElementById("results-area").classList.add("hidden");
-        }
+      
 
     });
 

@@ -212,6 +212,12 @@ function endTest() {
 // Notify other scripts that test is complete
 window.dispatchEvent(new CustomEvent("testCompleted", { detail: { wpm } }));
 
+const results = document.getElementById("results-area");
+results.classList.remove("hidden");
+results.classList.add("show-results");
+
+document.getElementById("results-area").classList.add("show-results");
+
 // Scroll AFTER dispatch to ensure Scrollama picks up correct state
 setTimeout(() => {
   document.querySelector('[data-step="7"]').scrollIntoView({ behavior: "smooth" });
@@ -233,6 +239,10 @@ function resetTest() {
   timeLeft = 15;
   input.value = "";
   timeLeftSpan.textContent = `Time: ${timeLeft}s`;
+  const results = document.getElementById("results-area");
+  results.classList.remove("show-results");
+  results.classList.add("hidden");
+
   renderWords();
   input.disabled = false;
   //   input.focus();
@@ -244,6 +254,8 @@ function resetTest() {
 }, 50);
   restartBtn.blur();
   window.dispatchEvent(new Event("testRestarted"));
+  document.getElementById("results-area").classList.remove("show-results");
+
   // input.focus()
 }
 
