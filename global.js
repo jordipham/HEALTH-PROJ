@@ -1,23 +1,20 @@
+// global.js — full recode to ensure Back To Top button works and scrollama is active
+
 import scrollama from "https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm";
 
 let testIsDone = false;
 
-// Listen for when the typing test ends
 window.addEventListener("testCompleted", () => {
   testIsDone = true;
 });
 
-// Optional: reset flag when test is restarted
 window.addEventListener("testRestarted", () => {
   testIsDone = false;
 });
 
-// Wait until DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize scrollama instance
+  // ✅ Scrollama setup
   const scroller = scrollama();
-
-  // Setup Scrollama
   scroller
     .setup({
       step: ".step",
@@ -25,31 +22,30 @@ document.addEventListener("DOMContentLoaded", () => {
       debug: false,
     })
     .onStepEnter((response) => {
-      // Make current step active, others inactive
-      document
-        .querySelectorAll(".step")
-        .forEach((step) => step.classList.remove("is-active"));
+      document.querySelectorAll(".step").forEach((step) =>
+        step.classList.remove("is-active")
+      );
       response.element.classList.add("is-active");
 
-      // Get step number from data attribute
       const stepNum = response.element.dataset.step;
 
-      // Hide visuals not in current step
-      if (stepNum !== "4") {
-        document.getElementById("densitytype").style.display = "none";
-      } else {
-        document.getElementById("densitytype").style.display = "block";
-      }
-
-      if (stepNum !== "5") {
-        document.getElementById("scatterplot").style.display = "none";
-      } else {
-        document.getElementById("scatterplot").style.display = "block";
-      }
-
-      
-
+      document.getElementById("densitytype").style.display =
+        stepNum === "4" ? "block" : "none";
+      document.getElementById("scatterplot").style.display =
+        stepNum === "5" ? "block" : "none";
     });
 
   window.addEventListener("resize", scroller.resize);
+
+  // ✅ Back to Top button logic
+  const backBtn = document.getElementById("backtotop");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+  console.log("Back to Top button clicked");
+
+  // Attempt both root scroll targets
+  document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+  document.body.scrollTo({ top: 0, behavior: "smooth" });
+});
+  }
 });

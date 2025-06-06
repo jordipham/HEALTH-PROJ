@@ -1,138 +1,31 @@
-// typingtest.js - Final Version with WPM & Percentile
+// typingtest.js — recoded to avoid auto-scroll on load, only scrolls/focuses on manual restart
 
-const wordsList = [
-  "the",
-  "and",
-  "is",
-  "it",
-  "to",
-  "in",
-  "you",
-  "that",
-  "of",
-  "on",
-  "for",
-  "with",
-  "this",
-  "was",
-  "but",
-  "not",
-  "are",
-  "have",
-  "be",
-  "at",
-  "or",
-  "from",
-  "by",
-  "as",
-  "an",
-  "if",
-  "they",
-  "all",
-  "we",
-  "your",
-  "one",
-  "can",
-  "there",
-  "so",
-  "what",
-  "about",
-  "more",
-  "when",
-  "just",
-  "like",
-  "up",
-  "how",
-  "out",
-  "now",
-  "will",
-  "then",
-  "them",
-  "who",
-  "time",
-  "into",
-  "also",
-  "good",
-  "people",
-  "see",
-  "know",
-  "some",
-  "could",
-  "very",
-  "think",
-  "want",
-  "say",
-  "make",
-  "new",
-  "way",
-  "look",
-  "day",
-  "use",
-  "back",
-  "work",
-  "first",
-  "life",
-  "man",
-  "woman",
-  "child",
-  "world",
-  "over",
-  "after",
-  "again",
-  "still",
-  "right",
-  "find",
-  "help",
-  "long",
-  "place",
-  "too",
-  "never",
-  "under",
-  "same",
-  "high",
-  "small",
-  "while",
-  "few",
-  "last",
-  "leave",
-  "feel",
-  "ask",
-  "keep",
-  "love",
-  "give",
-  "try",
-  "call",
-  "tell",
-  "best",
-  "next",
-  "sure",
+const wordBank = [
+  "the", "and", "is", "it", "to", "in", "you", "that", "of", "on", "for", "with", "this", "was", "but", "not",
+  "are", "have", "be", "at", "or", "from", "by", "as", "an", "if", "they", "all", "we", "your", "one", "can", "there", "so",
+  "what", "about", "more", "when", "just", "like", "up", "how", "out", "now", "will", "then", "them", "who", "time", "into",
+  "also", "good", "people", "see", "know", "some", "could", "very", "think", "want", "say", "make", "new", "way", "look", "day",
+  "use", "back", "work", "first", "life", "man", "woman", "child", "world", "over", "after", "again", "still", "right", "find",
+  "help", "long", "place", "too", "never", "under", "same", "high", "small", "while", "few", "last", "leave", "feel", "ask", "keep",
+  "love", "give", "try", "call", "tell", "best", "next", "sure"
 ];
 
-let words = [];
-let currentWord = 0;
-let totalCharsTyped = 0;
-let correctChars = 0;
-let correctWords = 0;
-let attemptedWords = 0;
-let startTime = null;
-let endTime = null;
-let timerInterval = null;
-let timeLeft = 15;
+let words = [], currentWord = 0;
+let totalCharsTyped = 0, correctChars = 0, correctWords = 0, attemptedWords = 0;
+let startTime = null, timerInterval = null, timeLeft = 15;
 
-const wordsDiv = document.getElementById("words");
 const input = document.getElementById("input");
-const restartBtn = document.getElementById("restart");
+const wordsDiv = document.getElementById("words");
 const timeLeftSpan = document.getElementById("time-left");
-const resultsArea = document.getElementById("results-area");
 const finalWpmSpan = document.getElementById("final-wpm");
 const finalAccuracySpan = document.getElementById("final-accuracy");
 const percentileText = document.getElementById("percentile-text");
+const resultsArea = document.getElementById("results-area");
+const restartBtn1 = document.getElementById("restart");
+const restartBtn2 = document.getElementById("restart-2");
 
 function getRandomWords(n) {
-  return Array.from(
-    { length: n },
-    () => wordsList[Math.floor(Math.random() * wordsList.length)]
-  );
+  return Array.from({ length: n }, () => wordBank[Math.floor(Math.random() * wordBank.length)]);
 }
 
 function renderWords() {
@@ -140,136 +33,84 @@ function renderWords() {
   words.forEach((word, i) => {
     const span = document.createElement("span");
     span.textContent = word + (i < words.length - 1 ? " " : "");
-    if (i < currentWord) {
-      span.classList.add("done");
-    } else if (i === currentWord) {
-      span.classList.add("current");
-    }
+    if (i < currentWord) span.classList.add("done");
+    else if (i === currentWord) span.classList.add("current");
     wordsDiv.appendChild(span);
   });
 }
 
-function displayFinalStats(wpm) {
-  finalWpmSpan.innerHTML = `<strong>WPM:</strong> ${wpm}`;
-  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${
-    attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100
-  }%`;
-
-  // Save WPM for graph
-  localStorage.setItem("latestWPM", wpm);
-
-  // Fetch CSV and compute percentile
-  fetch("combined_data_with_keystroke_averages.csv")
-    .then((response) => response.text())
-    .then((text) => {
-      // ✅ Clamp WPM to zero if negative
-      const rawWPM = parseFloat(localStorage.getItem("latestWPM"));
-      const wpmValue = Math.max(0, isNaN(rawWPM) ? 0 : rawWPM);
-
-      console.log(wpmValue);
-
-      const rows = text.trim().split("\n").slice(1);
-      const speeds = rows
-        .map((r) => parseFloat(r.split(",")[3]))
-        .filter((v) => !isNaN(v))
-        .sort((a, b) => a - b);
-
-      const count = speeds.length;
-      const below = speeds.filter(v => v <= wpmValue).length;
-      const percentile = count > 0 ? Math.round((below / count) * 100) : 0;
-
-      let updrsEstimate = "N/A";
-      if (
-        typeof window.slope !== "undefined" &&
-        typeof window.intercept !== "undefined" &&
-        !isNaN(wpmValue) &&
-        window.slope !== 0
-      ) {
-        updrsEstimate = ((wpmValue - window.intercept) / window.slope).toFixed(2);
-      }
-
-      percentileText.innerHTML = `Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. According to the linear 
-      regression of our data, a score of <strong>${wpmValue} WPM</strong> would approximately correspond to a UPDRS Part 3 Motor Examination score of <strong>${updrsEstimate}</strong>. 
-      
-      <br><br>
-      This calculated UPDRS score is an estimate based upon our linear regression model dependent on the data collected and should <strong>NOT</strong> be interpreted as a medical diagnosis.`;
-    });
-
-  
-}
-
-function endTest() {
-  endTime = Date.now();
-  clearInterval(timerInterval);
-  input.disabled = true;
-
-  const duration = (endTime - startTime) / 1000 / 60;
-  const wordsTyped = totalCharsTyped / 5;
-  const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
-
-  displayFinalStats(wpm);
-
-// Notify other scripts that test is complete
-window.dispatchEvent(new CustomEvent("testCompleted", { detail: { wpm } }));
-
-const results = document.getElementById("results-area");
-results.classList.remove("hidden");
-results.classList.add("show-results");
-
-document.getElementById("results-area").classList.add("show-results");
-
-// Scroll AFTER dispatch to ensure Scrollama picks up correct state
-setTimeout(() => {
-  document.querySelector('[data-step="8"]').scrollIntoView({ behavior: "smooth" });
-}, 150);
-
-
+function initTest() {
+  words = getRandomWords(50);
+  currentWord = totalCharsTyped = correctChars = correctWords = attemptedWords = 0;
+  timeLeft = 15;
+  startTime = null;
+  input.value = "";
+  input.disabled = false;
+  timeLeftSpan.textContent = `Time: ${timeLeft}s`;
+  renderWords();
+  resultsArea.classList.add("hidden");
 }
 
 function resetTest() {
-  clearInterval(timerInterval);
-  words = getRandomWords(50);
-  currentWord = 0;
-  totalCharsTyped = 0;
-  correctChars = 0;
-  correctWords = 0;
-  attemptedWords = 0;
-  startTime = null;
-  endTime = null;
-  timeLeft = 15;
-  input.value = "";
-  timeLeftSpan.textContent = `Time: ${timeLeft}s`;
-  const results = document.getElementById("results-area");
-  results.classList.remove("show-results");
-  results.classList.add("hidden");
+  initTest();
+  resultsArea.classList.remove("hidden");
+  resultsArea.classList.remove("show-results");
 
-  renderWords();
-  input.disabled = false;
-  //   input.focus();
-  resultsArea.classList.add("hidden");
-
-  // Only scroll to typing test if restart was manually triggered
-if (document.activeElement === restartBtn) {
   setTimeout(() => {
-    document.querySelector(".typing-test")
-      .scrollIntoView({ behavior: "smooth", block: "center" });
-  }, 50);
-}
-  restartBtn.blur();
-  window.dispatchEvent(new Event("testRestarted"));
-  document.getElementById("results-area").classList.remove("show-results");
+    document.querySelector('[data-step="7"]').scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 100);
 
-  // input.focus()
+  input.focus();
+  window.dispatchEvent(new Event("testRestarted"));
 }
 
 function startTimer() {
   clearInterval(timerInterval);
-  timeLeftSpan.textContent = `Time: ${timeLeft}s`;
   timerInterval = setInterval(() => {
     timeLeft--;
     timeLeftSpan.textContent = `Time: ${timeLeft}s`;
     if (timeLeft <= 0) endTest();
   }, 1000);
+}
+
+function endTest() {
+  clearInterval(timerInterval);
+  input.disabled = true;
+  const duration = (Date.now() - startTime) / 60000; // ms to min
+  const wpm = duration > 0 ? Math.round((totalCharsTyped / 5) / duration) : 0;
+  displayResults(wpm);
+
+  window.dispatchEvent(new CustomEvent("testCompleted", { detail: { wpm } }));
+  resultsArea.classList.remove("hidden");
+  resultsArea.classList.add("show-results");
+
+  setTimeout(() => {
+    document.querySelector('[data-step="8"]').scrollIntoView({ behavior: "smooth" });
+  }, 150);
+}
+
+function displayResults(wpm) {
+  finalWpmSpan.innerHTML = `<strong>WPM:</strong> ${wpm}`;
+  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100}%`;
+  localStorage.setItem("latestWPM", wpm);
+
+  fetch("combined_data_with_keystroke_averages.csv")
+    .then(r => r.text())
+    .then(text => {
+      const wpmVal = Math.max(0, parseFloat(localStorage.getItem("latestWPM")) || 0);
+      const rows = text.trim().split("\n").slice(1);
+      const speeds = rows.map(r => parseFloat(r.split(",")[3])).filter(v => !isNaN(v)).sort((a, b) => a - b);
+      const percentile = Math.round((speeds.filter(v => v <= wpmVal).length / speeds.length) * 100);
+
+      const slope = window.slope || 0;
+      const intercept = window.intercept || 0;
+      const estimate = slope !== 0 ? ((wpmVal - intercept) / slope).toFixed(2) : "N/A";
+
+      percentileText.innerHTML = `
+        Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants.<br>
+        According to our regression model, a score of <strong>${wpmVal} WPM</strong> corresponds to a UPDRS estimate of <strong>${estimate}</strong>.<br><br>
+        <strong>Note:</strong> This is not a clinical diagnosis.`;
+    });
 }
 
 input.addEventListener("input", () => {
@@ -279,19 +120,15 @@ input.addEventListener("input", () => {
   }
 
   if (timeLeft <= 0) return;
-
   const val = input.value;
   const current = words[currentWord];
 
   if (val.length > 0) totalCharsTyped++;
+  if (val[val.length - 1] === current?.[val.length - 1]) correctChars++;
 
-  let lastIndex = val.length - 1;
-  if (current && val[lastIndex] === current[lastIndex]) correctChars++;
-
-  if ((val.endsWith(" ")) && val.trim().length > 0) {
+  if (val.endsWith(" ") && val.trim().length > 0) {
     attemptedWords++;
     if (val.trim() === current) correctWords++;
-
     currentWord++;
     input.value = "";
     renderWords();
@@ -299,16 +136,14 @@ input.addEventListener("input", () => {
 });
 
 input.addEventListener("keydown", (e) => {
-  if (timeLeft <= 0) return;
   if (e.key === "Backspace" && totalCharsTyped > 0) {
     totalCharsTyped--;
     if (correctChars > 0) correctChars--;
   }
 });
 
-restartBtn.addEventListener("click", () => {
-  resetTest();
+restartBtn1.addEventListener("click", resetTest);
+if (restartBtn2) restartBtn2.addEventListener("click", resetTest);
 
-  input.focus();        // Only happens when restart button is clicked
-});
-resetTest();
+// On first page load — no scroll
+initTest();

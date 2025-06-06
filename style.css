@@ -475,7 +475,7 @@ body {
 
 .demo-button,
 .dataset-button,
-#restart {
+#restart, #restart-2, #backtotop {
   background-color: var(--color-accent);
   color: white;
   font-size: 1em; /* More readable size */
@@ -489,7 +489,7 @@ body {
 
 .demo-button:hover,
 .dataset-button:hover,
-#restart:hover {
+#restart:hover, #restart-2:hover, #backtotop:hover {
   background-color: #0097a7;
   transform: translateY(-2px); /* Subtle lift on hover */
 }
