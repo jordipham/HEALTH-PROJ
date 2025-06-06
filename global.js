@@ -1,5 +1,17 @@
 import scrollama from "https://cdn.jsdelivr.net/npm/scrollama@3.2.0/+esm";
 
+let testIsDone = false;
+
+// Listen for when the typing test ends
+window.addEventListener("testCompleted", () => {
+  testIsDone = true;
+});
+
+// Optional: reset flag when test is restarted
+window.addEventListener("testRestarted", () => {
+  testIsDone = false;
+});
+
 // Wait until DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize scrollama instance
@@ -22,21 +34,31 @@ document.addEventListener("DOMContentLoaded", () => {
       // Get step number from data attribute
       const stepNum = response.element.dataset.step;
 
-      // Hide all visuals by default
-      document.getElementById("densitytype").style.display = "none";
-      document.getElementById("scatterplot").style.display = "none";
-      document.querySelector(".typing-test").style.display = "none";
-      document.getElementById("results-area").classList.add("hidden");
-
-      // Show relevant visual
-      if (stepNum === "4") {
+      // Hide visuals not in current step
+      if (stepNum !== "4") {
+        document.getElementById("densitytype").style.display = "none";
+      } else {
         document.getElementById("densitytype").style.display = "block";
-      } else if (stepNum === "5") {
-        document.getElementById("scatterplot").style.display = "block";
-      } else if (stepNum === "6") {
-        document.querySelector(".typing-test").style.display = "block";
-        document.getElementById("results-area").classList.remove("hidden");
       }
+
+      if (stepNum !== "5") {
+        document.getElementById("scatterplot").style.display = "none";
+      } else {
+        document.getElementById("scatterplot").style.display = "block";
+      }
+
+      if (stepNum === "6") {
+        document.querySelector(".typing-test").style.display = "block";
+        } else {
+        document.querySelector(".typing-test").style.display = "none";
+        }
+
+        if (stepNum === "7" && testIsDone) {
+        document.getElementById("results-area").classList.remove("hidden");
+        } else {
+        document.getElementById("results-area").classList.add("hidden");
+        }
+
     });
 
   window.addEventListener("resize", scroller.resize);

@@ -8,11 +8,15 @@
     <script src="densitytype.js" type="module"></script>
     <script src="results.js" type="module"></script>
     <script src="scatter.js" type="module"></script>
+    <script src="global.js" type="module"></script>
     <script src="typingtest.js" type="module"></script>
+    <script src="https://unpkg.com/scrollama"></script>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   </head>
 
   <body>
+
+    <div id="steps">
     <div class="step" data-step="1">
       <div id="header">
         <h1 id="big-title">
@@ -216,21 +220,19 @@
     </div>
 
     <div class="step" data-step="6">
-      <div class="typing-test-zone">
-        <h2>Typing Test Comparison</h2>
-        <ol>
-          <li>Click "Start typing here…" below to begin the typing test.</li>
-          <li>Type the provided text as accurately and quickly as possible.</li>
-          <li>Make sure to hit space in between words</li>
-          <li>
-            Once you finish, your typing data will be collected for analysis.
-          </li>
-          <li>
-            After completing the test, you will receive feedback on your typing
-            performance.
-          </li>
-        </ol>
-      </div>
+    <div class="typing-test-zone">
+      <h2>Typing Test Comparison</h2>
+      <ol>
+        <li>Click "Start typing here…" below to begin the typing test.</li>
+        <li>Type the provided text as accurately and quickly as possible.</li>
+        <li>Make sure to hit space in between words</li>
+        <li>Once you finish, your typing data will be collected for analysis.</li>
+        <li>
+          After completing the test, you will receive feedback on your typing
+          performance.
+        </li>
+      </ol>
+    </div>
 
       <div class="typing-test">
         <h2>Typing Test</h2>
@@ -249,7 +251,10 @@
       </div>
 
       <button id="restart">Restart Test</button>
+    </div>
 
+
+      <div class="step" data-step="7">
       <div id="results-area" class="hidden">
         <h2>Results</h2>
         <div id="results-content">
@@ -263,7 +268,8 @@
       </div>
     </div>
 
-    <div class="step" data-step="7">
+
+    <div class="step" data-step="8">
       <div id="conclusion">
         <h2>Conclusion</h2>
         <p>
@@ -285,6 +291,7 @@
       </div>
 
 
+    </div>
     </div>
   </body>
 </html>

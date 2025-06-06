@@ -249,6 +249,14 @@ h2 {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for lift */
   text-align: center; /* Center the h2 */
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+#results-area.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
 }
 
 #results-area h2 {
@@ -333,47 +341,73 @@ h2 {
   }
 }
 
-/* #scrolly {
-  position: relative;
-  display: flex;
-  margin: 0 auto;
-  max-width: 1000px;
-  padding: 2em 1em;
-}
-
-#sticky-graphic {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  flex: 1;
-  background: #f9f9f9;
-}
-
-#article {
-  flex: 1;
+#steps {
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
 .step {
-  margin: 0 auto 3em auto;
-  padding: 3em 1em;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.2;
-  transition: opacity 0.4s ease;
-  min-height: 80vh;
+  transform: scale(0.98);
+  filter: blur(2px);
+  transition: opacity 0.5s, transform 0.5s, filter 0.5s;
+  scroll-snap-align: start;
 }
 
 .step.is-active {
   opacity: 1;
+  transform: scale(1);
+  filter: none;
+  z-index: 10;
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.step {
+  transform: scale(0.98);
+  filter: blur(2px);
+}
+
+.step.is-active {
+  transform: scale(1);
+  filter: none;
+}
+
+#results-area {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.step.is-active #results-area {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 #densitytype,
 #scatterplot,
-.typing-test,
-#results-area {
+.typing-test {
   display: none;
-} */
+} 
 
 .basic-about, #conclusion {
   max-width: 900px; /* Constrain text width in these sections */

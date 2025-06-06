@@ -195,7 +195,7 @@ function displayFinalStats(wpm) {
       This calculated UPDRS score is an estimate based upon our linear regression model dependent on the data collected and should <strong>NOT</strong> be interpreted as a medical diagnosis.`;
     });
 
-  resultsArea.classList.remove("hidden");
+  
 }
 
 function endTest() {
@@ -207,17 +207,17 @@ function endTest() {
   const wordsTyped = totalCharsTyped / 5;
   const wpm = duration > 0 ? Math.round(wordsTyped / duration) : 0;
 
-  document.getElementById("grid-container").classList.remove("hidden");
-  setTimeout(() => {
-    document
-      .getElementById("results-area")
-      .scrollIntoView({ behavior: "smooth" });
-  }, 50);
-
   displayFinalStats(wpm);
 
-  const event = new CustomEvent("testCompleted", { detail: { wpm: wpm } });
-  window.dispatchEvent(event);
+// Notify other scripts that test is complete
+window.dispatchEvent(new CustomEvent("testCompleted", { detail: { wpm } }));
+
+// Scroll AFTER dispatch to ensure Scrollama picks up correct state
+setTimeout(() => {
+  document.querySelector('[data-step="7"]').scrollIntoView({ behavior: "smooth" });
+}, 150);
+
+
 }
 
 function resetTest() {
@@ -243,6 +243,7 @@ function resetTest() {
     .scrollIntoView({ behavior: "smooth", block: "center" });
 }, 50);
   restartBtn.blur();
+  window.dispatchEvent(new Event("testRestarted"));
   // input.focus()
 }
 
