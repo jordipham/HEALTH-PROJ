@@ -93,8 +93,6 @@
       <div class="basic-about">
         <h2>About Our Dataset</h2>
 
-        
-
         <p>
           Our original dataset was collected by the Massachusetts Institute of
           Technology (MIT) on 85 subjects (43 with Parkinsons, 42 without) from Madrid, Spain. It
@@ -149,6 +147,9 @@
 
         <div class="bullet-points" id="grid-item-3">
           <h2>Density Histogram Comparison of WPM</h2>
+
+          <p>Hover over the graph to see details!</p>
+
           <ul>
             <!-- <li>
               Density histogram of Word per Minute (WPM) separated by those
@@ -165,22 +166,26 @@
             -->
 
             <li>
-              Although it is expected that there would be a vast difference in WPM
-              since PD impacts movement, but in reality looking at our data,
-              there is not that drastic of a difference in typing speed,
-              considering how similar the distributions appear.
+              Although it would be expected that there would be a vast difference in WPM
+              since PD impacts one's movement, our data shows that 
+              there is <strong><mark>not</mark></strong> a drastic difference in typing speed,
+              as the distributions between subjects with PD and those without appear quite similar.
             </li>
 
             <li>
-              One of the only noticeable differences is the extremities
-              (maximum) in the data with the fastest subject being a patient
+              One noticeable difference, however, is the extremities
+              (maximum) in the data which belong to subjects with Parkinson’s Disease.
               without PD.
             </li>
 
             <li>
-              The maximum WPM in the dataset is approximately 257.2 which is very unexpected as even professional
+              The hightest WPM in the dataset is approximately 257.2, which is very unexpected as even professional
               court reporters often only achieve around 225 WPM with specialized equipment and phonetic shorthands.
             </li>
+
+            <li> <mark> <strong>
+            Due to the similar distributions, it is likely that typing speed alone is not a sufficient metric for diagnosis. We cannot distinguish between those with and without PD, as a subject could belong to either population regardless of their typing speed.
+            </mark></strong></li>
           </ul>
         </div>
       </div>
@@ -194,34 +199,29 @@
 
         <div class="bullet-points" id="grid-item-4">
           <h2>Regressing WPM on UPDRS</h2>
+
+                  <p>Hover over the graph to see details!</p>
           <ul>
-            <li>
+            <!-- <li>
               A scatter plot of those with and without PD and the relationship
               between their typing speed and their UPDRS scores.
-            </li>
+            </li> -->
 
             <li>
-              It is shown that there is a <mark>slight negative</mark> trend in the
-              regression line
+              For both populations, there is a <strong><mark> negative</mark></strong> trend in the
+              regression line, meaning that as the UPDRS score increases, the typing speed (WPM) decreases.
             </li>
 
-            <li>
-              Patients without PD has a much wider range compared to patients
-              with PD
-            </li>
+            <li>The slope of regression line for the combined population is a decrease in XXX WPM per decrease in UPDRS. For subjects with PD it is XXX and for those without it is XXX.</li>
 
             <li>
-              Although the regression line is generally negative, due to
-              overlapping values, <mark>typing speed alone likely isn't sufficient for
-              diagnosis</mark>, other metrics need to be taken into consideration.
+              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of those with PD is more consistent and may be more predicable.
             </li>
 
-            <li>
-              From a classification perspective, we can identify that there is a
-              clear linear division boundary in the UPDRS between the two groups
-              that lingers around <mark>6-7</mark> (this is in consideration that the UPDRS
-              score provided is from section 3 of the UDRS examination that
-              focuses on motor movements).
+            <li> <strong><mark>
+             There is a
+              clear linear division in the UPDRS between the two groups
+              around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing speed! </mark></strong>
             </li>
           </ul>
         </div>
@@ -237,7 +237,6 @@
         <li>Click "Start typing here…" below to begin the typing test.</li>
         <li>Type the provided text as accurately and quickly as possible.</li>
         <li>Make sure to hit space in between words.</li>
-        <li>Once you finish, your typing data will be collected for analysis.</li>
         <li>
           After completing the test, you will receive feedback on your typing
           performance.
@@ -280,9 +279,9 @@
         <div id="results-content">
           <svg id="resultsgraph"></svg>
           <div id="results-text">
-            <p id="final-wpm">0 WPM</p>
-            <p id="final-accuracy">0%</p>
-            <p id="percentile-text">Complete the tests to see results.</p>
+            <p id="final-wpm"><strong>WPM: </strong>0</p>
+            <p id="final-accuracy"><strong>Accuracy: </strong>0%</p>
+            <p id="percentile-text">Complete the test first to see results!</p>
           </div>
         </div>
       </div>
@@ -292,22 +291,23 @@
     <div class="step" data-step="9">
       <div id="conclusion">
         <h2>Conclusion</h2>
-        <p>
-          Although the model shows a general relationship between typing speed and UPDRS score, there is no definitive threshold that is able to classify an individual’s health status solely based upon
-      typing speed. Any predictions
-       made should be considered speculative and used only for exploratory purposes, NOT for clinical evaluation.
 
-          In conclusion, our project aims to explore the relationship between
-          typing patterns and Parkinson's disease risk. By analyzing typing
-          trends, we hope to identify individuals at higher risk of developing
-          PD, enabling earlier interventions and better management of the
-          disease.
-        </p>
         <p>
-          We believe that this approach can provide valuable insights into the
-          early detection of Parkinson's disease and contribute to improving the
-          quality of life for those affected by it.
+          Our project aimed to explore the relationship between typing patterns and Parkinson's disease risk. We hoped to identify individuals at higher risk of developing
+          PD through the analysis of their typing speed, enabling earlier intervention and better management of the disease.
         </p>
+
+        <p>
+          While our analysis of the dataset may have looked promising at the start with the clear divide between the typing speeds of both population, it became clear that typing speed alone is not a sufficient metric for diagnosing Parkinson's disease.
+         </p> 
+
+        <p>
+          The distributions of typing speed between those with and without PD were quite similar, as there was not a definitive threshold that would allow us to classify an individual’s health status solely based on typing speed.
+        </p>
+
+        <p> <strong> <mark>
+          Any predictions made should be considered speculative and used only for exploratory purposes, NOT for clinical evaluation.
+        </p> </strong></mark>
       </div>
 
 
