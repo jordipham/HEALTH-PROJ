@@ -91,10 +91,9 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
       .selectAll(".density, .bar, .overlay, .vertical-line, .empty-message")
       .remove();
 
-    const both = d3.select("#show-both").property("checked");
-    const showTrue = d3.select("#show-true").property("checked");
-    const showFalse = d3.select("#show-false").property("checked");
-
+    const both = d3.select("#show-both-density").property("checked");
+const showTrue = d3.select("#show-true-density").property("checked");
+const showFalse = d3.select("#show-false-density").property("checked");
     let groups = [];
     if (both) {
       groups = [true, false];
