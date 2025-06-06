@@ -107,7 +107,7 @@ function displayResults(wpm) {
       const estimate = slope !== 0 ? ((wpmVal - intercept) / slope).toFixed(2) : "N/A";
 
       percentileText.innerHTML = `
-        Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants.<br>
+        Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. <br><br>
         According to our regression model, a score of <strong>${wpmVal} WPM</strong> corresponds to a UPDRS estimate of <strong>${estimate}</strong>.<br><br>
         <strong>Note:</strong> This is not a clinical diagnosis.`;
     });

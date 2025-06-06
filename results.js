@@ -2,10 +2,10 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
-const container = document.getElementById("grid-item-2").parentElement;
+const container = document.getElementById("results-content").parentElement;
 const boundingBox = container.getBoundingClientRect();
-const width = boundingBox.width * 0.7 - margin.left - margin.right;
-const height = boundingBox.width * 0.4 - margin.top - margin.bottom;
+const width = boundingBox.width - margin.left - margin.right;
+const height = boundingBox.width * 0.5 - margin.top - margin.bottom;
 
 const svg = d3
   .select("#resultsgraph")
