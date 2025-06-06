@@ -525,7 +525,7 @@ body {
 }
 
 mark {
-  text-shadow: 0.35px 0.35px 0.35px var(--text-color);
+  /* text-shadow: 0.35px 0.35px 0.35px var(--text-color); */
   color: var(--color-accent);
   background-color: transparent;
 }
