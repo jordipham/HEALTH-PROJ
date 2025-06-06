@@ -23,6 +23,13 @@ body {
   margin-bottom: 1em; /* Add space below the big title */
 }
 
+#big-title{
+    animation: 
+    typing 2.8s steps(40, end),
+    blink-caret .75s step-end infinite;
+    border-right: .15em solid ; /* The typwriter cursor */
+}
+
 #intro-text {
   text-align: center;
   max-width: 900px;
@@ -37,19 +44,14 @@ h2 {
   text-underline-offset: 11px;
   text-decoration-skip-ink: none;
 
-
 }
 
 h1 {
   font-size: 3em;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid ; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; 
   letter-spacing: .05em;
-  animation: 
-    typing 2.8s steps(40, end),
-    blink-caret .75s step-end infinite;
 }
 
 @keyframes typing {
@@ -609,3 +611,9 @@ h2 {
   margin-bottom: 2em;
 }
 
+.vertical-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em; /* optional spacing between h1 and h2 */
+}
