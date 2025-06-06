@@ -1,18 +1,13 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm";
 
-// Set dimensions and margins
-
-// const margin = { top: 20, right: 30, bottom: 50, left: 60 },
-//       width = window.innerWidth * 0.45 - margin.left - margin.right,
-//       height = window.innerWidth * 0.27 - margin.top - margin.bottom;
-
+// Set up dimensions
 const margin = { top: 20, right: 30, bottom: 50, left: 60 };
-
-const container = document.getElementById("grid-item-2").parentElement; // or 'densitytype'
+const container = document.getElementById("grid-item-2").parentElement;
 const boundingBox = container.getBoundingClientRect();
 const width = boundingBox.width * 0.55 - margin.left - margin.right;
-const height = boundingBox.width * 0.32 - margin.top - margin.bottom; // Adjust ratio as needed
+const height = boundingBox.width * 0.32 - margin.top - margin.bottom;
 
+// Create SVG and group
 const svg = d3
   .select("#scatterplot")
   .attr("width", width + margin.left + margin.right)
@@ -28,7 +23,7 @@ const tooltip = d3
   .style("opacity", 0)
   .style("position", "absolute");
 
-// Load CSV
+// Load and process data
 d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   typingSpeed: +d.typingSpeed,
   updrs108: +d.updrs108,
@@ -38,101 +33,28 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     (d) => !isNaN(d.typingSpeed) && !isNaN(d.updrs108)
   );
 
-  // Scales (swapped axes)
-  const x = d3
-    .scaleLinear()
-    .domain(d3.extent(validData, (d) => d.updrs108))
-    .nice()
-    .range([0, width]);
+  // Scales
+  const x = d3.scaleLinear().range([0, width]);
+  const y = d3.scaleLinear().range([height, 0]);
 
-  const y = d3
-    .scaleLinear()
-    .domain([0, d3.max(validData, (d) => d.typingSpeed)])
-    .nice()
-    .range([height, 0]);
-
-  // Colors
-  const colorMap = { true: " #00bcd4", false: "#F4A261" };
-
-  // Single regression line for all data
-  const xMean = d3.mean(validData, (d) => d.updrs108);
-  const yMean = d3.mean(validData, (d) => d.typingSpeed);
-  const slope =
-    d3.sum(validData, (d) => (d.updrs108 - xMean) * (d.typingSpeed - yMean)) /
-    d3.sum(validData, (d) => Math.pow(d.updrs108 - xMean, 2));
-  const intercept = yMean - slope * xMean;
-
-  window.slope = slope;
-  window.intercept = intercept;
-
-  //make them global
-
-  const xVals = d3.extent(validData, (d) => d.updrs108);
-  const linePoints = xVals.map((xVal) => ({
-    x: xVal,
-    y: slope * xVal + intercept,
-  }));
-
-  svg
-    .append("line")
-    .attr("x1", x(linePoints[0].x))
-    .attr("y1", y(linePoints[0].y))
-    .attr("x2", x(linePoints[1].x))
-    .attr("y2", y(linePoints[1].y))
-    .attr("stroke", "black")
-    .attr("stroke-width", 2)
-    .attr("stroke-dasharray", "4,2");
+  const colorMap = { true: "#00bcd4", false: "#F4A261" };
 
   // Axes
-  svg
-    .append("g")
-    .attr("transform", `translate(0,${height})`)
-    .call(d3.axisBottom(x));
+  svg.append("g")
+    .attr("class", "x-axis")
+    .attr("transform", `translate(0,${height})`);
 
-  svg.append("g").call(d3.axisLeft(y));
+  svg.append("g")
+    .attr("class", "y-axis");
 
-  // Points
-  svg
-    .selectAll("circle")
-    .data(validData)
-    .join("circle")
-    .attr("cx", (d) => x(d.updrs108))
-    .attr("cy", (d) => y(d.typingSpeed))
-    .attr("r", 7)
-    .attr("fill", (d) => colorMap[d.gt])
-    // .attr("opacity", 0.7)
-    .on("mouseover", function (e, d) {
-      d3.select(this).transition().duration(100).attr("r", 12);
-
-      tooltip
-        .style("opacity", 0.9)
-        .html(
-          `
-      <strong>Typing Speed:</strong> ${d.typingSpeed}<br>
-      <strong>UPDRS:</strong> ${d.updrs108}<br>
-      <span style="color:${colorMap[d.gt]}">${
-            d.gt ? "Has Parkinson's" : "No Parkinson's"
-          }</span>
-    `
-        )
-        .style("left", e.pageX + 10 + "px")
-        .style("top", e.pageY - 28 + "px");
-    })
-    .on("mouseout", function () {
-      d3.select(this).transition().duration(100).attr("r", 7);
-      tooltip.style("opacity", 0);
-    });
-
-  // Axis labels (swapped)
-  svg
-    .append("text")
+  // Labels
+  svg.append("text")
     .attr("x", width / 2)
     .attr("y", height + 40)
     .attr("text-anchor", "middle")
     .text("UPDRS (0–108)");
 
-  svg
-    .append("text")
+  svg.append("text")
     .attr("x", -height / 2)
     .attr("y", -40)
     .attr("transform", "rotate(-90)")
@@ -140,17 +62,13 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .text("Typing Speed");
 
   // Legend
-  const legend = svg
-    .append("g")
-    .attr("transform", `translate(${width - 150}, 20)`);
-
+  const legend = svg.append("g").attr("transform", `translate(${width - 150}, 20)`);
   const legendData = [
     { label: "Has Parkinson's", color: colorMap.true },
     { label: "No Parkinson's", color: colorMap.false },
   ];
 
-  legend
-    .selectAll("rect")
+  legend.selectAll("rect")
     .data(legendData)
     .enter()
     .append("rect")
@@ -159,10 +77,8 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .attr("width", 12)
     .attr("height", 12)
     .attr("fill", (d) => d.color);
-  // .attr("opacity", 0.7);
 
-  legend
-    .selectAll("text")
+  legend.selectAll("text")
     .data(legendData)
     .enter()
     .append("text")
@@ -171,4 +87,99 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .text((d) => d.label)
     .attr("font-size", "12px")
     .attr("alignment-baseline", "middle");
+
+  const regressionLabel = svg.append("text")
+    .attr("x", width - 150)
+    .attr("y", 70)
+    .attr("font-size", "12px")
+    .attr("class", "regression-equation");
+
+  function updatePlot(group) {
+    let filteredData =
+      group === "both"
+        ? validData
+        : validData.filter((d) => String(d.gt) === group);
+
+    // Update domains
+    x.domain(d3.extent(filteredData, (d) => d.updrs108)).nice();
+    y.domain([0, d3.max(filteredData, (d) => d.typingSpeed)]).nice();
+
+    // Update axes
+    svg.select(".x-axis")
+      .transition().duration(500)
+      .call(d3.axisBottom(x));
+    svg.select(".y-axis")
+      .transition().duration(500)
+      .call(d3.axisLeft(y));
+
+    // Regression
+    const xMean = d3.mean(filteredData, (d) => d.updrs108);
+    const yMean = d3.mean(filteredData, (d) => d.typingSpeed);
+    const slope = d3.sum(filteredData, (d) => (d.updrs108 - xMean) * (d.typingSpeed - yMean)) /
+                  d3.sum(filteredData, (d) => Math.pow(d.updrs108 - xMean, 2));
+    const intercept = yMean - slope * xMean;
+
+    window.slope = slope;
+    window.intercept = intercept;
+
+    const xVals = x.domain();
+const linePoints = xVals.map(xVal => ({
+  x: xVal,
+  y: slope * xVal + intercept
+}));
+
+    svg.selectAll(".regression-line").remove();
+
+    svg.append("line")
+      .attr("class", "regression-line")
+      .attr("x1", x(linePoints[0].x))
+      .attr("y1", y(linePoints[0].y))
+      .attr("x2", x(linePoints[1].x))
+      .attr("y2", y(linePoints[1].y))
+      .attr("stroke", "black")
+      .attr("stroke-width", 2)
+      .attr("stroke-dasharray", "4,2");
+
+    regressionLabel.text(`y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`);
+
+    // Plot points
+    const circles = svg.selectAll("circle").data(filteredData, (d) => d.updrs108 + "-" + d.typingSpeed);
+
+    circles.exit().remove();
+
+    circles.enter()
+      .append("circle")
+      .merge(circles)
+      .transition().duration(500)
+      .attr("cx", (d) => x(d.updrs108))
+      .attr("cy", (d) => y(d.typingSpeed))
+      .attr("r", 7)
+      .attr("fill", (d) => colorMap[d.gt]);
+
+    svg.selectAll("circle")
+      .on("mouseover", function (e, d) {
+        d3.select(this).transition().duration(100).attr("r", 12);
+        tooltip
+          .style("opacity", 0.9)
+          .html(
+            `<strong>Typing Speed:</strong> ${d.typingSpeed}<br>
+             <strong>UPDRS:</strong> ${d.updrs108}<br>
+             <span style="color:${colorMap[d.gt]}">${d.gt ? "Has Parkinson's" : "No Parkinson's"}</span>`
+          )
+          .style("left", e.pageX + 10 + "px")
+          .style("top", e.pageY - 28 + "px");
+      })
+      .on("mouseout", function () {
+        d3.select(this).transition().duration(100).attr("r", 7);
+        tooltip.style("opacity", 0);
+      });
+  }
+
+  // Initial render
+  updatePlot("both");
+
+  // Attach event listeners
+  d3.selectAll('input[name="group"]').on("change", function () {
+    updatePlot(this.value);
+  });
 });

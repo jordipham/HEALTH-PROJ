@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Silent Signs: Typing Patterns and Parkinson's Risk</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="densitytype.js" type="module"></script>
-    <script src="results.js" type="module"></script>
-    <script src="scatter.js" type="module"></script>
-    <script src="global.js" type="module"></script>
-    <script src="typingtest.js" type="module"></script>
-    <script src="https://unpkg.com/scrollama"></script>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silent Signs: Typing Patterns and Parkinson's Risk</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="densitytype.js" type="module"></script>
+  <script src="results.js" type="module"></script>
+  <script src="scatter.js" type="module"></script>
+  <script src="global.js" type="module"></script>
+  <script src="typingtest.js" type="module"></script>
+  <script src="https://unpkg.com/scrollama"></script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+</head>
 
-    <div id="steps">
+<body>
+
+  <div id="steps">
     <div class="step" data-step="1">
       <div id="header">
         <h1 id="big-title">
           Silent Signs: Typing Patterns and Parkinson's Risk
         </h1>
 
-        <button
-          class="demo-button"
-          onclick="window.open('https://youtu.be/Iv_-LhzJ4ms', '_blank')"
-        >
+        <button class="demo-button" onclick="window.open('https://youtu.be/Iv_-LhzJ4ms', '_blank')">
           View Demo Video
         </button>
         <br>
@@ -37,27 +35,27 @@
           developing PD more easily.
         </p>
         <div id="team-grid">
-        <div class="team-member">
-          <h3>Aiden Lai</h3>
-          <p>Back-End/Interactions</p>
-        </div>
-        <div class="team-member">
-          <h3>Jordi Pham</h3>
-          <p>Front-End/Typing Test</p>
-        </div>
-        <div class="team-member">
-          <h3>Coltrane Gowan</h3>
-          <p>Designer/ScrollyTelly</p>
-        </div>
-        <div class="team-member">
-          <h3>Jennifer Kuei</h3>
-          <p>Write Ups/Video</p>
+          <div class="team-member">
+            <h3>Aiden Lai</h3>
+            <p>Back-End/Interactions</p>
+          </div>
+          <div class="team-member">
+            <h3>Jordi Pham</h3>
+            <p>Front-End/Typing Test</p>
+          </div>
+          <div class="team-member">
+            <h3>Coltrane Gowan</h3>
+            <p>Designer/ScrollyTelly</p>
+          </div>
+          <div class="team-member">
+            <h3>Jennifer Kuei</h3>
+            <p>Write Ups/Video</p>
+          </div>
         </div>
       </div>
     </div>
-      </div>
 
-      
+
 
     <div class="step" data-step="2">
       <div class="basic-about">
@@ -69,22 +67,20 @@
           and impaired balance. Severe PD patients might have troubles with
           walking, talking, and completing other daily tasks. The damage in the
           neurons causes the affected individuals to have a decrease in
-          dopamine. 
+          dopamine.
         </p>
 
         <p>
-          As the modern world has become more digitized, typing and computer usage has become a large part of our lives. People who suffer from PD may have difficulty typing or operasting computes due to reduced motor function.
-          In fact, research has implied that certain typing patterns can serve as an indicator of Parkinson's disease risk.
+          As the modern world has become more digitized, typing and computer usage has become a large part of our lives.
+          People who suffer from PD may have difficulty typing or operasting computes due to reduced motor function.
+          In fact, research has implied that certain typing patterns can serve as an indicator of Parkinson's disease
+          risk.
         </p>
 
-          <p>
-          <mark
-            ><b
-              > Through the analysis of these patterns, we 
+        <p>
+          <mark><b> Through the analysis of these patterns, we
               hope to identify those who may be risk and provide earlier
-              intervention.</b
-            ></mark
-          >
+              intervention.</b></mark>
         </p>
       </div>
     </div>
@@ -100,7 +96,7 @@
           data was collected using standardized equipment across all participants.
         </p>
         <p>
-          Besides the keylogged data (the key pressed, hold time, release time, 
+          Besides the keylogged data (the key pressed, hold time, release time,
           etc.), finger tapping tests were also taken that measured the speed
           and rhythm of finger movements, providing additional insights of the
           likelihood of PD.
@@ -109,19 +105,17 @@
           One of the main takeaway points of the dataset is the Unified
           Parkinson's Disease Rating Scale (UPDRS) score. The score is based
           upon a questionnaire that subjects complete, that assesses subjects on
-          motor and non-motor symptoms, each on a scale from 0-4. 
+          motor and non-motor symptoms, each on a scale from 0-4.
         </p>
-          This dataset focused specifically on Part 3 of the UPDRS, which relates to motor function. 
+        This dataset focused specifically on Part 3 of the UPDRS, which relates to motor function.
         <p>
 
         </p>
-          <button
-          class="dataset-button"
-          onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')"
-        >
+        <button class="dataset-button"
+          onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')">
           View Original Dataset
         </button>
-      
+
       </div>
     </div>
 
@@ -129,18 +123,12 @@
       <div id="grid-container">
         <div id="grid-item-1">
           <div id="controls">
-            <label
-              ><input type="radio" name="groupToggle" id="show-both" checked />
-              Both</label
-            >
-            <label
-              ><input type="radio" name="groupToggle" id="show-true" /> Has
-              Parkinson's</label
-            >
-            <label
-              ><input type="radio" name="groupToggle" id="show-false" /> No
-              Parkinson's</label
-            >
+            <label><input type="radio" name="groupToggle" id="show-both" checked />
+              Both</label>
+            <label><input type="radio" name="groupToggle" id="show-true" /> Has
+              Parkinson's</label>
+            <label><input type="radio" name="groupToggle" id="show-false" /> No
+              Parkinson's</label>
           </div>
           <svg id="densitytype"></svg>
         </div>
@@ -167,7 +155,7 @@
 
             <li>
               Although it would be expected that there would be a vast difference in WPM
-              since PD impacts one's movement, our data shows that 
+              since PD impacts one's movement, our data shows that
               there is <strong><mark>not</mark></strong> a drastic difference in typing speed,
               as the distributions between subjects with PD and those without appear quite similar.
             </li>
@@ -184,8 +172,10 @@
             </li>
 
             <li> <mark> <strong>
-            Due to the similar distributions, it is likely that typing speed alone is not a sufficient metric for diagnosis. We cannot distinguish between those with and without PD, as a subject could belong to either population regardless of their typing speed.
-            </mark></strong></li>
+                  Due to the similar distributions, it is likely that typing speed alone is not a sufficient metric for
+                  diagnosis. We cannot distinguish between those with and without PD, as a subject could belong to
+                  either population regardless of their typing speed.
+              </mark></strong></li>
           </ul>
         </div>
       </div>
@@ -194,13 +184,18 @@
     <div class="step" data-step="5">
       <div id="grid-container">
         <div id="grid-item-2">
+          <div id="controls">
+            <label><input type="radio" name="group" id="show-both" value="both" checked> Both</label>
+            <label><input type="radio" name="group" id="show-true" value="true"> Has Parkinson's</label>
+            <label><input type="radio" name="group" id="show-false" value="false"> No Parkinson's</label>
+          </div>
           <svg id="scatterplot"></svg>
         </div>
 
         <div class="bullet-points" id="grid-item-4">
           <h2>Regressing WPM on UPDRS</h2>
 
-                  <p>Hover over the graph to see details!</p>
+          <p>Hover over the graph to see details!</p>
           <ul>
             <!-- <li>
               A scatter plot of those with and without PD and the relationship
@@ -212,16 +207,19 @@
               regression line, meaning that as the UPDRS score increases, the typing speed (WPM) decreases.
             </li>
 
-            <li>The slope of regression line for the combined population is a decrease in XXX WPM per decrease in UPDRS. For subjects with PD it is XXX and for those without it is XXX.</li>
+            <li>The slope of regression line for the combined population is a decrease in XXX WPM per decrease in UPDRS.
+              For subjects with PD it is XXX and for those without it is XXX.</li>
 
             <li>
-              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of those with PD is more consistent and may be more predicable.
+              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of
+              those with PD is more consistent and may be more predicable.
             </li>
 
             <li> <strong><mark>
-             There is a
-              clear linear division in the UPDRS between the two groups
-              around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing speed! </mark></strong>
+                  There is a
+                  clear linear division in the UPDRS between the two groups
+                  around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing
+                  speed! </mark></strong>
             </li>
           </ul>
         </div>
@@ -231,99 +229,101 @@
     <!-- Step 6: Typing Instructions -->
     <div class="step" data-step="6">
       <div class="typing-test-zone">
-      <h2>Typing Test Instructions</h2>
+        <h2>Typing Test Instructions</h2>
 
-      <ol class="instructions-list">
-        <li>Click "Start typing here…" below to begin the typing test.</li>
-        <li>Type the provided text as accurately and quickly as possible.</li>
-        <li>Make sure to hit space in between words.</li>
-        <li>
-          After completing the test, you will receive feedback on your typing
-          performance.
-        </li>
-      </ol>
+        <ol class="instructions-list">
+          <li>Click "Start typing here…" below to begin the typing test.</li>
+          <li>Type the provided text as accurately and quickly as possible.</li>
+          <li>Make sure to hit space in between words.</li>
+          <li>
+            After completing the test, you will receive feedback on your typing
+            performance.
+          </li>
+        </ol>
 
-      <h3><br><br>Scroll down to take the test!<h3>
-</div>
-
-</div>
-
-    </div>
-
-    <!-- Step 7: Typing Test -->
-    <div class="step" data-step="7">
-      <div class="typing-test">
-        <h2>Typing Test</h2>
-        <div id="timer-area">
-          <span id="time-left">Time: 15s</span>
-        </div>
-        <div id="test-area">
-          <div id="words"></div>
-          <input
-            type="text"
-            id="input"
-            autocomplete="off"
-            placeholder="Start typing here..."
-          />
-        </div>
-        <button id="restart">Restart Test</button>
+        <h3><br><br>Scroll down to take the test!<h3>
       </div>
+
     </div>
 
+  </div>
 
-      
+  <!-- Step 7: Typing Test -->
+  <div class="step" data-step="7">
+    <div class="typing-test">
+      <h2>Typing Test</h2>
+      <div id="timer-area">
+        <span id="time-left">Time: 15s</span>
+      </div>
+      <div id="test-area">
+        <div id="words"></div>
+        <input type="text" id="input" autocomplete="off" placeholder="Start typing here..." />
+      </div>
+      <button id="restart">Restart Test</button>
     </div>
+  </div>
 
 
-      <div class="step" data-step="8">
-      <div id="results-area" class="hidden">
-        <h2>Results</h2>
-        <div id="results-content">
-          <svg id="resultsgraph"></svg>
-          <div id="results-text">
-            <p id="final-wpm"><strong>WPM: </strong>0</p>
-            <p id="final-accuracy"><strong>Accuracy: </strong>0%</p>
-            <p id="percentile-text">Complete the test first to see results!</p>
 
-            <button id="restart-2">Restart Test</button> 
-          </div>
+  </div>
+
+
+  <div class="step" data-step="8">
+    <div id="results-area" class="hidden">
+      <h2>Results</h2>
+      <div id="results-content">
+        <svg id="resultsgraph"></svg>
+        <div id="results-text">
+          <p id="final-wpm"><strong>WPM: </strong>0</p>
+          <p id="final-accuracy"><strong>Accuracy: </strong>0%</p>
+          <p id="percentile-text">Complete the test first to see results!</p>
+
+          <button id="restart-2">Restart Test</button>
         </div>
       </div>
     </div>
+  </div>
 
 
-    <div class="step" data-step="9">
-      <div id="conclusion">
-        <h2>Conclusion</h2>
+  <div class="step" data-step="9">
+    <div id="conclusion">
+      <h2>Conclusion</h2>
 
-        <p>
-          Our project aimed to explore the relationship between typing patterns and Parkinson's disease risk. We hoped to identify individuals at higher risk of developing
-          PD through the analysis of their typing speed, enabling earlier intervention and better management of the disease.
-        </p>
+      <p>
+        Our project aimed to explore the relationship between typing patterns and Parkinson's disease risk. We hoped to
+        identify individuals at higher risk of developing
+        PD through the analysis of their typing speed, enabling earlier intervention and better management of the
+        disease.
+      </p>
 
-        <p>
-          While our analysis of the dataset may have looked promising at the start with the clear divide between the typing speeds of both population, it became clear that typing speed alone is not a sufficient metric for diagnosing Parkinson's disease.
-         </p> 
+      <p>
+        While our analysis of the dataset may have looked promising at the start with the clear divide between the
+        typing speeds of both population, it became clear that typing speed alone is not a sufficient metric for
+        diagnosing Parkinson's disease.
+      </p>
 
-        <p>
-          The distributions of typing speed between those with and without PD were quite similar, as there was not a definitive threshold that would allow us to classify an individual’s health status solely based on typing speed.
-        </p>
+      <p>
+        The distributions of typing speed between those with and without PD were quite similar, as there was not a
+        definitive threshold that would allow us to classify an individual’s health status solely based on typing speed.
+      </p>
 
-        <p> <strong> <mark>
-          Any predictions made should be considered speculative and used only for exploratory purposes, NOT for clinical evaluation.
-        </p> </strong></mark>
+      <p> <strong> <mark>
+            Any predictions made should be considered speculative and used only for exploratory purposes, NOT for
+            clinical evaluation.
+      </p> </strong></mark>
 
 
       <div style="text-align: center; margin-top: 20px;">
-      <button id="backtotop">Back To Top</button>
-    </div>
+        <button id="backtotop">Back To Top</button>
+      </div>
 
     </div>
 
-    </div>
+  </div>
 
 
 
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
