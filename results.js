@@ -18,8 +18,8 @@ const wpmGroup = svg.append("g").attr("id", "wpm-group");
 const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 const colorMap = {
-  true: "#00bcd4",
-  false: "#F4A261"
+  true: "#4b9cd3",
+  false: "#D3824B"
 };
 
 let x, y, densities;
