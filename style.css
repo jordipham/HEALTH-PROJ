@@ -444,6 +444,7 @@ body {
   max-width: 900px; /* Constrain text width in these sections */
   margin: 0 auto; /* Center basic-about content */
   padding: 0 1em;
+  text-align: left;
   font-size: 1.1em;
   line-height: 1.6;
 }
@@ -547,7 +548,7 @@ mark {
   text-align: left;
 }
 
-h2, p {
+h2 {
   text-align: center;
 }
 
