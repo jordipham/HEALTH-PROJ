@@ -17,6 +17,7 @@
 
 <body>
 
+  <!-- Title -->
   <div id="steps">
     <div class="step" data-step="1">
       <div id="header">
@@ -56,7 +57,7 @@
     </div>
 
 
-
+    <!-- About PD -->
     <div class="step" data-step="2">
       <div class="basic-about">
         <h2>About Parkinson's Disease</h2>
@@ -85,6 +86,7 @@
       </div>
     </div>
 
+    <!-- About Dataset -->
     <div class="step" data-step="3">
       <div class="basic-about">
         <h2>About Our Dataset</h2>
@@ -119,7 +121,64 @@
       </div>
     </div>
 
+    <!-- Lets look at data -->
     <div class="step" data-step="4">
+
+    </div>
+    
+
+    <div class="step" data-step="5">
+      <div id="grid-container">
+        <div id="grid-item-2">
+          <div id="controls">
+            <label><input type="radio" name="group" id="show-both" value="both" checked> Both</label>
+            <label><input type="radio" name="group" id="show-true" value="true"> Has Parkinson's</label>
+            <label><input type="radio" name="group" id="show-false" value="false"> No Parkinson's</label>
+          </div>
+          <svg id="scatterplot"></svg>
+        </div>
+
+        <div class="bullet-points" id="grid-item-4">
+          <h2>Regressing WPM on UPDRS</h2>
+
+          <p>Hover over the graph to see details!</p>
+          <ul>
+            <!-- <li>
+              A scatter plot of those with and without PD and the relationship
+              between their typing speed and their UPDRS scores.
+            </li> -->
+
+            <li>
+              For both populations, there is a <mark> negative</mark> trend in the
+              regression line, meaning that as the UPDRS score increases, the typing speed (WPM) decreases.
+            </li>
+
+            <li>The slope of regression line for the combined population is a decrease of <mark>1.24 WPM </mark>for each point decrease in UPDRS score.
+              For subjects with PD there is a decrease of <mark>-2.50 WPM</mark> and for those without it decreases by <mark>-4.26</mark>.</li>
+
+            <li>
+              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of
+              those with PD is more consistent and may be more predicable.
+            </li>
+
+            <li> <mark>
+                  There is a
+                  clear linear division in the UPDRS between the two groups
+                  around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing
+                  speed! </mark>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Can we predict PD? -->
+    <div class="step" data-step="6">
+
+    </div>
+
+    <!-- Density graph -->
+    <div class="step" data-step="7">
       <div id="grid-container">
         <div id="grid-item-1">
           <div id="controls">
@@ -175,53 +234,13 @@
       </div>
     </div>
 
-    <div class="step" data-step="5">
-      <div id="grid-container">
-        <div id="grid-item-2">
-          <div id="controls">
-            <label><input type="radio" name="group" id="show-both" value="both" checked> Both</label>
-            <label><input type="radio" name="group" id="show-true" value="true"> Has Parkinson's</label>
-            <label><input type="radio" name="group" id="show-false" value="false"> No Parkinson's</label>
-          </div>
-          <svg id="scatterplot"></svg>
-        </div>
+    <!-- Let’s see how you compare -->
+    <div class="step" data-step="8">
 
-        <div class="bullet-points" id="grid-item-4">
-          <h2>Regressing WPM on UPDRS</h2>
-
-          <p>Hover over the graph to see details!</p>
-          <ul>
-            <!-- <li>
-              A scatter plot of those with and without PD and the relationship
-              between their typing speed and their UPDRS scores.
-            </li> -->
-
-            <li>
-              For both populations, there is a <mark> negative</mark> trend in the
-              regression line, meaning that as the UPDRS score increases, the typing speed (WPM) decreases.
-            </li>
-
-            <li>The slope of regression line for the combined population is a decrease of <mark>1.24 WPM </mark>for each point decrease in UPDRS score.
-              For subjects with PD there is a decrease of <mark>-2.50 WPM</mark> and for those without it decreases by <mark>-4.26</mark>.</li>
-
-            <li>
-              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of
-              those with PD is more consistent and may be more predicable.
-            </li>
-
-            <li> <mark>
-                  There is a
-                  clear linear division in the UPDRS between the two groups
-                  around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing
-                  speed! </mark>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
-    <!-- Step 6: Typing Instructions -->
-    <div class="step" data-step="6">
+    <!-- Typing Instructions -->
+    <div class="step" data-step="9">
       <div class="typing-test-zone">
         <h2>Typing Test Instructions</h2>
 
@@ -242,8 +261,9 @@
 
   </div>
 
-  <!-- Step 7: Typing Test -->
-  <div class="step" data-step="7">
+
+  <!-- Typing Test -->
+  <div class="step" data-step="10">
     <div class="typing-test">
       <h2>Typing Test</h2>
       <div id="timer-area">
@@ -261,8 +281,8 @@
 
   </div>
 
-
-  <div class="step" data-step="8">
+  <!-- Results -->
+  <div class="step" data-step="11">
     <div id="results-area" class="hidden">
       <h2>Results</h2>
       <div id="results-content">
@@ -279,7 +299,8 @@
   </div>
 
 
-  <div class="step" data-step="9">
+  <!-- Conclusion -->
+  <div class="step" data-step="12">
     <div id="conclusion">
       <h2>Conclusion</h2>
 

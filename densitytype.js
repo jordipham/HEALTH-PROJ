@@ -7,7 +7,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
-const container = document.getElementById("grid-item-2").parentElement; // or 'densitytype'
+const container = document.getElementById("grid-item-1").parentElement; // or 'densitytype'
 const boundingBox = container.getBoundingClientRect();
 const width = boundingBox.width * 0.55 - margin.left - margin.right;
 const height = boundingBox.width * 0.32 - margin.top - margin.bottom; // Adjust ratio as needed
