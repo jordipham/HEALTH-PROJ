@@ -37,7 +37,7 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   const x = d3.scaleLinear().range([0, width]);
   const y = d3.scaleLinear().range([height, 0]);
 
-  const colorMap = { true: "#00bcd4", false: "#F4A261" };
+  const colorMap = { true: "#4B9CD3", false: "#D3824B" };
 
   // Axes
   svg.append("g")
