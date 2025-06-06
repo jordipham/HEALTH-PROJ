@@ -19,7 +19,7 @@ const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 const colorMap = {
   true: "#4b9cd3",
-  false: "#D3824B"
+  false: "#D3824B",
 };
 
 let x, y, densities;

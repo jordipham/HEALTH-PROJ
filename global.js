@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
       debug: false,
     })
     .onStepEnter((response) => {
-      document.querySelectorAll(".step").forEach((step) =>
-        step.classList.remove("is-active")
-      );
+      document
+        .querySelectorAll(".step")
+        .forEach((step) => step.classList.remove("is-active"));
       response.element.classList.add("is-active");
 
       const stepNum = response.element.dataset.step;
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const backBtn = document.getElementById("backtotop");
   if (backBtn) {
     backBtn.addEventListener("click", () => {
-  console.log("Back to Top button clicked");
+      console.log("Back to Top button clicked");
 
-  // Attempt both root scroll targets
-  document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-  document.body.scrollTo({ top: 0, behavior: "smooth" });
-});
+      // Attempt both root scroll targets
+      document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+      document.body.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 });

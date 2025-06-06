@@ -1,18 +1,122 @@
 // typingtest.js — recoded to avoid auto-scroll on load, only scrolls/focuses on manual restart
 
 const wordBank = [
-  "the", "and", "is", "it", "to", "in", "you", "that", "of", "on", "for", "with", "this", "was", "but", "not",
-  "are", "have", "be", "at", "or", "from", "by", "as", "an", "if", "they", "all", "we", "your", "one", "can", "there", "so",
-  "what", "about", "more", "when", "just", "like", "up", "how", "out", "now", "will", "then", "them", "who", "time", "into",
-  "also", "good", "people", "see", "know", "some", "could", "very", "think", "want", "say", "make", "new", "way", "look", "day",
-  "use", "back", "work", "first", "life", "man", "woman", "child", "world", "over", "after", "again", "still", "right", "find",
-  "help", "long", "place", "too", "never", "under", "same", "high", "small", "while", "few", "last", "leave", "feel", "ask", "keep",
-  "love", "give", "try", "call", "tell", "best", "next", "sure"
+  "the",
+  "and",
+  "is",
+  "it",
+  "to",
+  "in",
+  "you",
+  "that",
+  "of",
+  "on",
+  "for",
+  "with",
+  "this",
+  "was",
+  "but",
+  "not",
+  "are",
+  "have",
+  "be",
+  "at",
+  "or",
+  "from",
+  "by",
+  "as",
+  "an",
+  "if",
+  "they",
+  "all",
+  "we",
+  "your",
+  "one",
+  "can",
+  "there",
+  "so",
+  "what",
+  "about",
+  "more",
+  "when",
+  "just",
+  "like",
+  "up",
+  "how",
+  "out",
+  "now",
+  "will",
+  "then",
+  "them",
+  "who",
+  "time",
+  "into",
+  "also",
+  "good",
+  "people",
+  "see",
+  "know",
+  "some",
+  "could",
+  "very",
+  "think",
+  "want",
+  "say",
+  "make",
+  "new",
+  "way",
+  "look",
+  "day",
+  "use",
+  "back",
+  "work",
+  "first",
+  "life",
+  "man",
+  "woman",
+  "child",
+  "world",
+  "over",
+  "after",
+  "again",
+  "still",
+  "right",
+  "find",
+  "help",
+  "long",
+  "place",
+  "too",
+  "never",
+  "under",
+  "same",
+  "high",
+  "small",
+  "while",
+  "few",
+  "last",
+  "leave",
+  "feel",
+  "ask",
+  "keep",
+  "love",
+  "give",
+  "try",
+  "call",
+  "tell",
+  "best",
+  "next",
+  "sure",
 ];
 
-let words = [], currentWord = 0;
-let totalCharsTyped = 0, correctChars = 0, correctWords = 0, attemptedWords = 0;
-let startTime = null, timerInterval = null, timeLeft = 15;
+let words = [],
+  currentWord = 0;
+let totalCharsTyped = 0,
+  correctChars = 0,
+  correctWords = 0,
+  attemptedWords = 0;
+let startTime = null,
+  timerInterval = null,
+  timeLeft = 15;
 
 const input = document.getElementById("input");
 const wordsDiv = document.getElementById("words");
@@ -25,7 +129,10 @@ const restartBtn1 = document.getElementById("restart");
 const restartBtn2 = document.getElementById("restart-2");
 
 function getRandomWords(n) {
-  return Array.from({ length: n }, () => wordBank[Math.floor(Math.random() * wordBank.length)]);
+  return Array.from(
+    { length: n },
+    () => wordBank[Math.floor(Math.random() * wordBank.length)]
+  );
 }
 
 function renderWords() {
@@ -41,7 +148,12 @@ function renderWords() {
 
 function initTest() {
   words = getRandomWords(50);
-  currentWord = totalCharsTyped = correctChars = correctWords = attemptedWords = 0;
+  currentWord =
+    totalCharsTyped =
+    correctChars =
+    correctWords =
+    attemptedWords =
+      0;
   timeLeft = 15;
   startTime = null;
   input.value = "";
@@ -57,7 +169,9 @@ function resetTest() {
   resultsArea.classList.remove("show-results");
 
   setTimeout(() => {
-    document.querySelector('[data-step="10"]').scrollIntoView({ behavior: "smooth", block: "center" });
+    document
+      .querySelector('[data-step="10"]')
+      .scrollIntoView({ behavior: "smooth", block: "center" });
   }, 100);
 
   input.focus();
@@ -77,7 +191,7 @@ function endTest() {
   clearInterval(timerInterval);
   input.disabled = true;
   const duration = (Date.now() - startTime) / 60000; // ms to min
-  const wpm = duration > 0 ? Math.round((totalCharsTyped / 5) / duration) : 0;
+  const wpm = duration > 0 ? Math.round(totalCharsTyped / 5 / duration) : 0;
   displayResults(wpm);
 
   window.dispatchEvent(new CustomEvent("testCompleted", { detail: { wpm } }));
@@ -85,26 +199,39 @@ function endTest() {
   resultsArea.classList.add("show-results");
 
   setTimeout(() => {
-    document.querySelector('[data-step="11"]').scrollIntoView({ behavior: "smooth" });
+    document
+      .querySelector('[data-step="11"]')
+      .scrollIntoView({ behavior: "smooth" });
   }, 150);
 }
 
 function displayResults(wpm) {
   finalWpmSpan.innerHTML = `<strong>WPM:</strong> ${wpm}`;
-  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100}%`;
+  finalAccuracySpan.innerHTML = `<strong>Accuracy:</strong> ${
+    attemptedWords > 0 ? Math.round((correctWords / attemptedWords) * 100) : 100
+  }%`;
   localStorage.setItem("latestWPM", wpm);
 
   fetch("combined_data_with_keystroke_averages.csv")
-    .then(r => r.text())
-    .then(text => {
-      const wpmVal = Math.max(0, parseFloat(localStorage.getItem("latestWPM")) || 0);
+    .then((r) => r.text())
+    .then((text) => {
+      const wpmVal = Math.max(
+        0,
+        parseFloat(localStorage.getItem("latestWPM")) || 0
+      );
       const rows = text.trim().split("\n").slice(1);
-      const speeds = rows.map(r => parseFloat(r.split(",")[3])).filter(v => !isNaN(v)).sort((a, b) => a - b);
-      const percentile = Math.round((speeds.filter(v => v <= wpmVal).length / speeds.length) * 100);
+      const speeds = rows
+        .map((r) => parseFloat(r.split(",")[3]))
+        .filter((v) => !isNaN(v))
+        .sort((a, b) => a - b);
+      const percentile = Math.round(
+        (speeds.filter((v) => v <= wpmVal).length / speeds.length) * 100
+      );
 
       const slope = window.slope || 0;
       const intercept = window.intercept || 0;
-      const estimate = slope !== 0 ? ((wpmVal - intercept) / slope).toFixed(2) : "N/A";
+      const estimate =
+        slope !== 0 ? ((wpmVal - intercept) / slope).toFixed(2) : "N/A";
 
       percentileText.innerHTML = `
         Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. <br><br>

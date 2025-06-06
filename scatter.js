@@ -40,21 +40,23 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
   const colorMap = { true: "#4B9CD3", false: "#D3824B" };
 
   // Axes
-  svg.append("g")
+  svg
+    .append("g")
     .attr("class", "x-axis")
     .attr("transform", `translate(0,${height})`);
 
-  svg.append("g")
-    .attr("class", "y-axis");
+  svg.append("g").attr("class", "y-axis");
 
   // Labels
-  svg.append("text")
+  svg
+    .append("text")
     .attr("x", width / 2)
     .attr("y", height + 40)
     .attr("text-anchor", "middle")
     .text("UPDRS (0–108)");
 
-  svg.append("text")
+  svg
+    .append("text")
     .attr("x", -height / 2)
     .attr("y", -40)
     .attr("transform", "rotate(-90)")
@@ -62,13 +64,16 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .text("Typing Speed");
 
   // Legend
-  const legend = svg.append("g").attr("transform", `translate(${width - 150}, 20)`);
+  const legend = svg
+    .append("g")
+    .attr("transform", `translate(${width - 150}, 20)`);
   const legendData = [
     { label: "Has Parkinson's", color: colorMap.true },
     { label: "No Parkinson's", color: colorMap.false },
   ];
 
-  legend.selectAll("rect")
+  legend
+    .selectAll("rect")
     .data(legendData)
     .enter()
     .append("rect")
@@ -78,7 +83,8 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .attr("height", 12)
     .attr("fill", (d) => d.color);
 
-  legend.selectAll("text")
+  legend
+    .selectAll("text")
     .data(legendData)
     .enter()
     .append("text")
@@ -88,7 +94,8 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     .attr("font-size", "12px")
     .attr("alignment-baseline", "middle");
 
-  const regressionLabel = svg.append("text")
+  const regressionLabel = svg
+    .append("text")
     .attr("x", width - 150)
     .attr("y", 70)
     .attr("font-size", "12px")
@@ -105,32 +112,32 @@ d3.csv("combined_data_with_keystroke_averages.csv", (d) => ({
     y.domain([0, d3.max(filteredData, (d) => d.typingSpeed)]).nice();
 
     // Update axes
-    svg.select(".x-axis")
-      .transition().duration(500)
-      .call(d3.axisBottom(x));
-    svg.select(".y-axis")
-      .transition().duration(500)
-      .call(d3.axisLeft(y));
+    svg.select(".x-axis").transition().duration(500).call(d3.axisBottom(x));
+    svg.select(".y-axis").transition().duration(500).call(d3.axisLeft(y));
 
     // Regression
     const xMean = d3.mean(filteredData, (d) => d.updrs108);
     const yMean = d3.mean(filteredData, (d) => d.typingSpeed);
-    const slope = d3.sum(filteredData, (d) => (d.updrs108 - xMean) * (d.typingSpeed - yMean)) /
-                  d3.sum(filteredData, (d) => Math.pow(d.updrs108 - xMean, 2));
+    const slope =
+      d3.sum(
+        filteredData,
+        (d) => (d.updrs108 - xMean) * (d.typingSpeed - yMean)
+      ) / d3.sum(filteredData, (d) => Math.pow(d.updrs108 - xMean, 2));
     const intercept = yMean - slope * xMean;
 
     window.slope = slope;
     window.intercept = intercept;
 
     const xVals = x.domain();
-const linePoints = xVals.map(xVal => ({
-  x: xVal,
-  y: slope * xVal + intercept
-}));
+    const linePoints = xVals.map((xVal) => ({
+      x: xVal,
+      y: slope * xVal + intercept,
+    }));
 
     svg.selectAll(".regression-line").remove();
 
-    svg.append("line")
+    svg
+      .append("line")
       .attr("class", "regression-line")
       .attr("x1", x(linePoints[0].x))
       .attr("y1", y(linePoints[0].y))
@@ -143,20 +150,25 @@ const linePoints = xVals.map(xVal => ({
     regressionLabel.text(`y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`);
 
     // Plot points
-    const circles = svg.selectAll("circle").data(filteredData, (d) => d.updrs108 + "-" + d.typingSpeed);
+    const circles = svg
+      .selectAll("circle")
+      .data(filteredData, (d) => d.updrs108 + "-" + d.typingSpeed);
 
     circles.exit().remove();
 
-    circles.enter()
+    circles
+      .enter()
       .append("circle")
       .merge(circles)
-      .transition().duration(500)
+      .transition()
+      .duration(500)
       .attr("cx", (d) => x(d.updrs108))
       .attr("cy", (d) => y(d.typingSpeed))
       .attr("r", 7)
       .attr("fill", (d) => colorMap[d.gt]);
 
-    svg.selectAll("circle")
+    svg
+      .selectAll("circle")
       .on("mouseover", function (e, d) {
         d3.select(this).transition().duration(100).attr("r", 12);
         tooltip
@@ -164,7 +176,9 @@ const linePoints = xVals.map(xVal => ({
           .html(
             `<strong>Typing Speed:</strong> ${d.typingSpeed}<br>
              <strong>UPDRS:</strong> ${d.updrs108}<br>
-             <span style="color:${colorMap[d.gt]}">${d.gt ? "Has Parkinson's" : "No Parkinson's"}</span>`
+             <span style="color:${colorMap[d.gt]}">${
+              d.gt ? "Has Parkinson's" : "No Parkinson's"
+            }</span>`
           )
           .style("left", e.pageX + 10 + "px")
           .style("top", e.pageY - 28 + "px");

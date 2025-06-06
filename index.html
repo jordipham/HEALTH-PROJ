@@ -1,347 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Silent Signs: Typing Patterns and Parkinson's Risk</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="densitytype.js" type="module"></script>
+    <script src="results.js" type="module"></script>
+    <script src="scatter.js" type="module"></script>
+    <script src="global.js" type="module"></script>
+    <script src="typingtest.js" type="module"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Silent Signs: Typing Patterns and Parkinson's Risk</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="densitytype.js" type="module"></script>
-  <script src="results.js" type="module"></script>
-  <script src="scatter.js" type="module"></script>
-  <script src="global.js" type="module"></script>
-  <script src="typingtest.js" type="module"></script>
-  <script src="https://unpkg.com/scrollama"></script>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-</head>
+  <body>
+    <div id="steps">
+      <div class="step" data-step="1">
+        <div id="header">
+          <h1 id="big-title">
+            Silent Signs: Typing Patterns and Parkinson's Risk
+          </h1>
 
-<body>
-
-  <!-- Title -->
-  <div id="steps">
-    <div class="step" data-step="1">
-      <div id="header">
-        <h1 id="big-title">
-          Silent Signs: Typing Patterns and Parkinson's Risk
-        </h1>
-
-        <button class="demo-button" onclick="window.open('https://youtu.be/Iv_-LhzJ4ms', '_blank')">
-          View Demo Video
-        </button>
-        <br>
-        <p id="intro-text">
-          This project aims to explore the relationship between individual’s
-          typing trends and their risk of Parkinson’s disease (PD). By analyzing
-          the way people type, we hope to identify those with higher risks of
-          developing PD more easily.
-        </p>
-        <div id="team-grid">
-          <div class="team-member">
-            <h3>Aiden Lai</h3>
-            <p>Back-End/Interactions</p>
-          </div>
-          <div class="team-member">
-            <h3>Jordi Pham</h3>
-            <p>Front-End/Typing Test</p>
-          </div>
-          <div class="team-member">
-            <h3>Coltrane Gowan</h3>
-            <p>Designer/ScrollyTelly</p>
-          </div>
-          <div class="team-member">
-            <h3>Jennifer Kuei</h3>
-            <p>Content Designer/Video</p>
+          <button
+            class="demo-button"
+            onclick="window.open('https://youtu.be/Iv_-LhzJ4ms', '_blank')"
+          >
+            View Demo Video
+          </button>
+          <br />
+          <p id="intro-text">
+            This project aims to explore the relationship between individual’s
+            typing trends and their risk of Parkinson’s disease (PD). By
+            analyzing the way people type, we hope to identify those with higher
+            risks of developing PD more easily.
+          </p>
+          <div id="team-grid">
+            <div class="team-member">
+              <h3>Aiden Lai</h3>
+              <p>Back-End/Interactions</p>
+            </div>
+            <div class="team-member">
+              <h3>Jordi Pham</h3>
+              <p>Front-End/Typing Test</p>
+            </div>
+            <div class="team-member">
+              <h3>Coltrane Gowan</h3>
+              <p>Designer/ScrollyTelly</p>
+            </div>
+            <div class="team-member">
+              <h3>Jennifer Kuei</h3>
+              <p>Content Designer/Video</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="step" data-step="2">
+        <div class="basic-about">
+          <h2>About Parkinson's Disease</h2>
+          <p>
+            Parkinson’s Disease is a movement disorder impacted by the nervous
+            system. It causes neurons in the brain to become damaged and
+            weakened which impacts lifestyle such as movement issues, tremors,
+            stiffness, and impaired balance. Severe PD patients might have
+            troubles with walking, talking, and completing other daily tasks.
+            The damage in the neurons causes the affected individuals to have a
+            decrease in dopamine.
+          </p>
 
-    <!-- About PD -->
-    <div class="step" data-step="2">
-      <div class="basic-about">
-        <h2>About Parkinson's Disease</h2>
-        <p>
-          Parkinson’s Disease is a movement disorder impacted by the nervous
-          system. It causes neurons in the brain to become damaged and weakened
-          which impacts lifestyle such as movement issues, tremors, stiffness,
-          and impaired balance. Severe PD patients might have troubles with
-          walking, talking, and completing other daily tasks. The damage in the
-          neurons causes the affected individuals to have a decrease in
-          dopamine.
-        </p>
+          <p>
+            As the modern world has become more digitized, typing and computer
+            usage has become a large part of our lives. People who suffer from
+            PD may have difficulty typing or operasting computes due to reduced
+            motor function. In fact, research has implied that certain typing
+            patterns can serve as an indicator of Parkinson's disease risk.
+          </p>
 
-        <p>
-          As the modern world has become more digitized, typing and computer usage has become a large part of our lives.
-          People who suffer from PD may have difficulty typing or operasting computes due to reduced motor function.
-          In fact, research has implied that certain typing patterns can serve as an indicator of Parkinson's disease
-          risk.
-        </p>
-
-        <p>
-          <mark><b> Through the analysis of these patterns, we
-              hope to identify those who may be at risk and provide earlier
-              intervention.</b></mark>
-        </p>
+          <p>
+            <mark
+              ><b>
+                Through the analysis of these patterns, we hope to identify
+                those who may be at risk and provide earlier intervention.</b
+              ></mark
+            >
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- About Dataset -->
-    <div class="step" data-step="3">
-      <div class="basic-about">
-        <h2>About Our Dataset</h2>
+      <div class="step" data-step="3">
+        <div class="basic-about">
+          <h2>About Our Dataset</h2>
 
-        <p>
-          Our original dataset was collected by the Massachusetts Institute of
-          Technology (MIT) on 85 subjects (43 with Parkinsons, 42 without) from Madrid, Spain. It
-          contains keystroke logs from subjects both with and without PD. Typing
-          data was collected using standardized equipment across all participants.
-        </p>
-        <p>
-          Besides the keylogged data (the key pressed, hold time, release time,
-          etc.), finger tapping tests were also taken that measured the speed
-          and rhythm of finger movements, providing additional insights of the
-          likelihood of PD.
-        </p>
-        <p>
-          One of the main takeaway points of the dataset is the Unified
-          Parkinson's Disease Rating Scale (UPDRS) score. The score is based
-          upon a questionnaire that subjects complete, that assesses subjects on
-          motor and non-motor symptoms, each on a scale from 0-4.
-        </p>
-        This dataset focused specifically on Part 3 of the UPDRS, which relates to motor function.
-        <p>
-
-        </p>
-        <button class="dataset-button"
-          onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')">
-          View Original Dataset
-        </button>
-
+          <p>
+            Our original dataset was collected by the Massachusetts Institute of
+            Technology (MIT) on 85 subjects (43 with Parkinsons, 42 without)
+            from Madrid, Spain. It contains keystroke logs from subjects both
+            with and without PD. Typing data was collected using standardized
+            equipment across all participants.
+          </p>
+          <p>
+            Besides the keylogged data (the key pressed, hold time, release
+            time, etc.), finger tapping tests were also taken that measured the
+            speed and rhythm of finger movements, providing additional insights
+            of the likelihood of PD.
+          </p>
+          <p>
+            One of the main takeaway points of the dataset is the Unified
+            Parkinson's Disease Rating Scale (UPDRS) score. The score is based
+            upon a questionnaire that subjects complete, that assesses subjects
+            on motor and non-motor symptoms, each on a scale from 0-4.
+          </p>
+          This dataset focused specifically on Part 3 of the UPDRS, which
+          relates to motor function.
+          <p></p>
+          <button
+            class="dataset-button"
+            onclick="window.open('https://physionet.org/content/nqmitcsxpd/1.0.0/', '_blank')"
+          >
+            View Original Dataset
+          </button>
+        </div>
       </div>
-    </div>
 
-    <!-- Lets look at data -->
-    <div class="step" data-step="4">
-      <h1>Let's Look At The Data!</h1>
-    </div>
-    
+      <div class="step" data-step="4">
+        <h1>Let's Look At The Data!</h1>
+      </div>
 
-    <div class="step" data-step="5">
-      <div id="grid-container">
-        <div id="grid-item-2">
-          <div id="controls">
-            <label><input type="radio" name="group" id="show-both" value="both" checked> Both</label>
-            <label><input type="radio" name="group" id="show-true" value="true"> Has Parkinson's</label>
-            <label><input type="radio" name="group" id="show-false" value="false"> No Parkinson's</label>
+      <div class="step" data-step="5">
+        <div id="grid-container">
+          <div id="grid-item-2">
+            <div id="controls">
+              <label
+                ><input
+                  type="radio"
+                  name="group"
+                  id="show-both"
+                  value="both"
+                  checked
+                />
+                Both</label
+              >
+              <label
+                ><input type="radio" name="group" id="show-true" value="true" />
+                Has Parkinson's</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="group"
+                  id="show-false"
+                  value="false"
+                />
+                No Parkinson's</label
+              >
+            </div>
+            <svg id="scatterplot"></svg>
           </div>
-          <svg id="scatterplot"></svg>
-        </div>
 
-        <div class="bullet-points" id="grid-item-4">
-          <h2>Regressing WPM on UPDRS</h2>
+          <div class="bullet-points" id="grid-item-4">
+            <h2>Regressing WPM on UPDRS</h2>
 
-          <p>Hover over the graph to see details!</p>
-          <ul>
-            <!-- <li>
-              A scatter plot of those with and without PD and the relationship
-              between their typing speed and their UPDRS scores.
-            </li> -->
-
-            <li>
-              For both populations, there is a <mark> negative</mark> trend in the
-              regression line, meaning that as the UPDRS score increases, the typing speed (WPM) decreases.
-            </li>
-
-            <li>The slope of regression line for the combined population is a decrease of <mark>1.24 WPM </mark>for each point decrease in UPDRS score.
-              For subjects with PD there is a decrease of <mark>-2.50 WPM</mark> and for those without it decreases by <mark>-4.26</mark>.</li>
-
-            <li>
-              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of
-              those with PD is more consistent and may be more predicable.
-            </li>
-
-            <li> <mark>
-                  There is a
-                  clear linear division in the UPDRS between the two groups
-                  around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing
-                  speed! </mark>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Can we predict PD? -->
-    <div class="step" data-step="6">
-        <h1>Can We Predict Parkinson’s Disease?</h1>
-    </div>
-
-    <!-- Density graph -->
-    <div class="step" data-step="7">
-      <div id="grid-container">
-        <div id="grid-item-1">
-<div id="controls">
-  <label><input type="radio" name="groupToggle" id="show-both-density" checked />
-    Both</label>
-  <label><input type="radio" name="groupToggle" id="show-true-density" /> Has
-    Parkinson's</label>
-  <label><input type="radio" name="groupToggle" id="show-false-density" /> No
-    Parkinson's</label>
-</div>
-          <svg id="densitytype"></svg>
-        </div>
-
-        <div class="bullet-points" id="grid-item-3">
-          <h2>Density Histogram Comparison of WPM</h2>
-
-          <p>Hover over the graph to see details!</p>
-
-          <ul>
-            <!-- <li>
-              Density histogram of Word per Minute (WPM) separated by those
-              affected by PD and those that are not
-            </li>
-
-            <li>
-              Parkinson data is displayed in blue while non-PD is displayed in
-              orange
-            </li> 
-            
-            I dont think we should have to explain to the viewers what they are looking at?
-
-            -->
-
-            <li>
-              Although it would be expected that there would be a vast difference in WPM
-              since PD impacts one's movement, our data shows that
-              there is <mark>not</mark> a drastic difference in typing speed,
-              as the distributions between subjects with PD and those without appear quite similar.
-            </li>
-
-            <li>
-              One noticeable difference, however, is the extremities
-              in the data which belong to subjects without Parkinson’s Disease. The highest WPM in the dataset is 257.2, which is considered exceptionally fast.
+            <p>Hover over the graph to see details!</p>
+            <ul>
+              <li>
+                For both populations, there is a <mark> negative</mark> trend in
+                the regression line, meaning that as the UPDRS score increases,
+                the typing speed (WPM) decreases.
               </li>
 
-            <li> <mark> 
-                  Due to the similar distributions, it is likely that typing speed alone is not a sufficient metric for
-                  diagnosis. We cannot distinguish between those with and without PD, as a subject could belong to
-                  either population regardless of their typing speed.
-              </mark></li>
-          </ul>
+              <li>
+                The slope of regression line for the combined population is a
+                decrease of <mark>1.24 WPM </mark>for each point decrease in
+                UPDRS score. For subjects with PD there is a decrease of
+                <mark>-2.50 WPM</mark> and for those without it decreases by
+                <mark>-4.26</mark>.
+              </li>
+
+              <li>
+                Subjects without PD have a much wider range compared to those
+                with PD sugguesting that the typing speed of those with PD is
+                more consistent and may be more predicable.
+              </li>
+
+              <li>
+                <mark>
+                  There is a clear linear division in the UPDRS between the two
+                  groups around 6-7. It may be possible to classify an
+                  individual’s Parkinson's risk based on their typing speed!
+                </mark>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Let’s see how you compare -->
-    <div class="step" data-step="8">
+      <div class="step" data-step="6">
+        <h1>Can We Predict Parkinson’s Disease?</h1>
+      </div>
+
+      <div class="step" data-step="7">
+        <div id="grid-container">
+          <div id="grid-item-1">
+            <div id="controls">
+              <label
+                ><input
+                  type="radio"
+                  name="groupToggle"
+                  id="show-both-density"
+                  checked
+                />
+                Both</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="groupToggle"
+                  id="show-true-density"
+                />
+                Has Parkinson's</label
+              >
+              <label
+                ><input
+                  type="radio"
+                  name="groupToggle"
+                  id="show-false-density"
+                />
+                No Parkinson's</label
+              >
+            </div>
+            <svg id="densitytype"></svg>
+          </div>
+
+          <div class="bullet-points" id="grid-item-3">
+            <h2>Density Histogram Comparison of WPM</h2>
+
+            <p>Hover over the graph to see details!</p>
+
+            <ul>
+              <li>
+                Although it would be expected that there would be a vast
+                difference in WPM since PD impacts one's movement, our data
+                shows that there is <mark>not</mark> a drastic difference in
+                typing speed, as the distributions between subjects with PD and
+                those without appear quite similar.
+              </li>
+
+              <li>
+                One noticeable difference, however, is the extremities in the
+                data which belong to subjects without Parkinson’s Disease. The
+                highest WPM in the dataset is 257.2, which is considered
+                exceptionally fast.
+              </li>
+
+              <li>
+                <mark>
+                  Due to the similar distributions, it is likely that typing
+                  speed alone is not a sufficient metric for diagnosis. We
+                  cannot distinguish between those with and without PD, as a
+                  subject could belong to either population regardless of their
+                  typing speed.
+                </mark>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step" data-step="8">
         <div class="vertical-text">
-    <h1>It's Too Difficult To Predict!</h1>
-    <h2>Let's See How YOU Compare</h2>
-  </div>
-    </div>
-
-    <!-- Typing Instructions -->
-    <div class="step" data-step="9">
-      <div class="typing-test-zone">
-        <h2>Typing Test Instructions</h2>
-
-        <ol class="instructions-list">
-          <li>Click "Start typing here…" below to begin the typing test.</li>
-          <li>Type the provided text as accurately and quickly as possible.</li>
-          <li>Make sure to hit space in between words.</li>
-          <li>
-            After completing the test, you will receive feedback on your typing
-            performance.
-          </li>
-        </ol>
-
-        <h3><br><br>Scroll down to take the test!<h3>
+          <h1>It's Too Difficult To Predict!</h1>
+          <h2>Let's See How YOU Compare</h2>
+        </div>
       </div>
 
-    </div>
+      <div class="step" data-step="9">
+        <div class="typing-test-zone">
+          <h2>Typing Test Instructions</h2>
 
-  </div>
+          <ol class="instructions-list">
+            <li>Click "Start typing here…" below to begin the typing test.</li>
+            <li>
+              Type the provided text as accurately and quickly as possible.
+            </li>
+            <li>Make sure to hit space in between words.</li>
+            <li>
+              After completing the test, you will receive feedback on your
+              typing performance.
+            </li>
+          </ol>
 
-
-  <!-- Typing Test -->
-  <div class="step" data-step="10">
-    <div class="typing-test">
-      <h2>Typing Test</h2>
-      <div id="timer-area">
-        <span id="time-left">Time: 15s</span>
+          <h3><br /><br />Scroll down to take the test!</h3>
+        </div>
       </div>
-      <div id="test-area">
-        <div id="words"></div>
-        <input type="text" id="input" autocomplete="off" placeholder="Start typing here..." />
+
+      <div class="step" data-step="10">
+        <div class="typing-test">
+          <h2>Typing Test</h2>
+          <div id="timer-area">
+            <span id="time-left">Time: 15s</span>
+          </div>
+          <div id="test-area">
+            <div id="words"></div>
+            <input
+              type="text"
+              id="input"
+              autocomplete="off"
+              placeholder="Start typing here..."
+            />
+          </div>
+          <button id="restart">Restart Test</button>
+        </div>
       </div>
-      <button id="restart">Restart Test</button>
-    </div>
-  </div>
 
+      <div class="step" data-step="11">
+        <div id="results-area" class="hidden">
+          <h2>Results</h2>
+          <div id="results-content">
+            <svg id="resultsgraph"></svg>
+            <div id="results-text">
+              <p id="final-wpm"><strong>WPM: </strong>0</p>
+              <p id="final-accuracy"><strong>Accuracy: </strong>0%</p>
+              <p id="percentile-text">
+                Complete the test first to see results!
+              </p>
 
+              <button id="restart-2">Restart Test</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  </div>
+      <div class="step" data-step="12">
+        <div id="conclusion">
+          <h2>Conclusion</h2>
 
-  <!-- Results -->
-  <div class="step" data-step="11">
-    <div id="results-area" class="hidden">
-      <h2>Results</h2>
-      <div id="results-content">
-        <svg id="resultsgraph"></svg>
-        <div id="results-text">
-          <p id="final-wpm"><strong>WPM: </strong>0</p>
-          <p id="final-accuracy"><strong>Accuracy: </strong>0%</p>
-          <p id="percentile-text">Complete the test first to see results!</p>
+          <p>
+            Our project aimed to explore the relationship between typing
+            patterns and Parkinson's disease risk. We hoped to identify
+            individuals at higher risk of developing PD through the analysis of
+            their typing speed, enabling earlier intervention and better
+            management of the disease.
+          </p>
 
-          <button id="restart-2">Restart Test</button>
+          <p>
+            While our analysis of the dataset may have looked promising at the
+            start with the clear divide between the typing speeds of both
+            population, it became clear that typing speed alone is not a
+            sufficient metric for diagnosing Parkinson's disease.
+          </p>
+
+          <p>
+            The distributions of typing speed between those with and without PD
+            were quite similar, as there was not a definitive threshold that
+            would allow us to classify an individual’s health status solely
+            based on typing speed.
+          </p>
+
+          <p>
+            <strong>
+              <mark>
+                Any predictions made should be considered speculative and used
+                only for exploratory purposes, NOT for clinical evaluation.
+              </mark>
+            </strong>
+          </p>
+
+          <div style="text-align: center; margin-top: 20px">
+            <button id="backtotop">Back To Top</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-
-  <!-- Conclusion -->
-  <div class="step" data-step="12">
-    <div id="conclusion">
-      <h2>Conclusion</h2>
-
-      <p>
-        Our project aimed to explore the relationship between typing patterns and Parkinson's disease risk. We hoped to
-        identify individuals at higher risk of developing
-        PD through the analysis of their typing speed, enabling earlier intervention and better management of the
-        disease.
-      </p>
-
-      <p>
-        While our analysis of the dataset may have looked promising at the start with the clear divide between the
-        typing speeds of both population, it became clear that typing speed alone is not a sufficient metric for
-        diagnosing Parkinson's disease.
-      </p>
-
-      <p>
-        The distributions of typing speed between those with and without PD were quite similar, as there was not a
-        definitive threshold that would allow us to classify an individual’s health status solely based on typing speed.
-      </p>
-
-      <p> <strong> <mark>
-            Any predictions made should be considered speculative and used only for exploratory purposes, NOT for
-            clinical evaluation.
-      </p> </strong></mark>
-
-
-      <div style="text-align: center; margin-top: 20px;">
-        <button id="backtotop">Back To Top</button>
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  </div>
-</body>
-
+  </body>
 </html>

@@ -1,7 +1,7 @@
 /* Work on Body - Centering, Margins, Width, and In-Line */
 :root {
   --text-color: #2c3e50; /* Navy blue-gray for main text */
-  --color-accent: #4B9CD3; /* Existing accent color */ /* alt color choice: #1E88E5 */
+  --color-accent: #4b9cd3; /* Existing accent color */ /* alt color choice: #1E88E5 */
   --super-light-gray: #f2f2f2; /* Super light gray for background */
 }
 
@@ -16,18 +16,17 @@ body {
   color: var(--text-color); /* Apply main text color */
 }
 
-#big-title, .demo-button {
+#big-title,
+.demo-button {
   text-align: center;
   margin: 0 auto; /* Center the big title and demo button */
   display: block;
   margin-bottom: 1em; /* Add space below the big title */
 }
 
-#big-title{
-    animation: 
-    typing 2.8s steps(40, end),
-    blink-caret .75s step-end infinite;
-    border-right: .15em solid ; /* The typwriter cursor */
+#big-title {
+  animation: typing 2.8s steps(40, end), blink-caret 0.75s step-end infinite;
+  border-right: 0.15em solid; /* The typwriter cursor */
 }
 
 #intro-text {
@@ -40,29 +39,37 @@ h1,
 h2 {
   color: var(--text-color); /* Ensure headings use the theme color */
   text-decoration: underline;
-  text-decoration-thickness: 3px; 
+  text-decoration-thickness: 3px;
   text-underline-offset: 11px;
   text-decoration-skip-ink: none;
-
 }
 
 h1 {
   font-size: 3em;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; 
-  letter-spacing: .05em;
+  margin: 0 auto;
+  letter-spacing: 0.05em;
 }
 
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--color-accent); }
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-accent);
+  }
 }
 
 h2 {
@@ -162,8 +169,7 @@ label {
   margin: 0 auto;
   padding: 20px;
   text-align: center;
-} 
-
+}
 
 .typing-test-zone h2 {
   margin-bottom: 1em;
@@ -186,7 +192,6 @@ label {
   max-width: 600px;
   display: block;
 }
-
 
 .typing-test-zone li {
   margin-bottom: 10px;
@@ -227,7 +232,6 @@ label {
   transform: translateY(0);
   pointer-events: auto;
 }
-
 
 /* This was a duplicate of h1, h2 at the top, removed. */
 /* h1,
@@ -438,8 +442,8 @@ h2 {
   z-index: 10;
 }
 
-
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -465,9 +469,10 @@ body {
 #densitytype,
 #scatterplot {
   display: none;
-} 
+}
 
-.basic-about, #conclusion {
+.basic-about,
+#conclusion {
   max-width: 900px; /* Constrain text width in these sections */
   margin: 0 auto; /* Center basic-about content */
   padding: 0 1em;
@@ -503,7 +508,9 @@ body {
 
 .demo-button,
 .dataset-button,
-#restart, #restart-2, #backtotop {
+#restart,
+#restart-2,
+#backtotop {
   background-color: var(--color-accent);
   color: white;
   font-size: 1em; /* More readable size */
@@ -517,7 +524,9 @@ body {
 
 .demo-button:hover,
 .dataset-button:hover,
-#restart:hover, #restart-2:hover, #backtotop:hover {
+#restart:hover,
+#restart-2:hover,
+#backtotop:hover {
   background-color: #0097a7;
   transform: translateY(-2px); /* Subtle lift on hover */
 }
@@ -563,7 +572,6 @@ mark {
   color: var(--color-accent); /* Make bullet points use the accent color */
 }
 
-
 .step.is-active #results-area.show-results {
   opacity: 1;
   transform: translateY(0);
@@ -603,7 +611,7 @@ h2 {
 #conclusion {
   /* background-color: #f9f9f9; */
   /* border: 2px solid #ccc; */
-  
+
   /* border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   padding: 2em;
