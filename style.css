@@ -572,11 +572,12 @@ h2, p {
 }
 
 #conclusion {
-  background-color: #f9f9f9;
-  border: 2px solid #ccc;
+  /* background-color: #f9f9f9; */
+  /* border: 2px solid #ccc; */
+  
+  /* border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   padding: 2em;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: 2em;
   margin-bottom: 2em;
 }
