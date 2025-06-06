@@ -424,7 +424,6 @@ html, body {
 body {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  height: 100vh;
 }
 
 .step {
@@ -571,4 +570,14 @@ h2, p {
 .dataset-button:hover {
   background-color: #0097a7;
   transform: translateY(-2px);
+}
+
+#conclusion {
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
