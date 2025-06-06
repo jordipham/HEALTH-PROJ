@@ -57,7 +57,7 @@ function resetTest() {
   resultsArea.classList.remove("show-results");
 
   setTimeout(() => {
-    document.querySelector('[data-step="7"]').scrollIntoView({ behavior: "smooth", block: "center" });
+    document.querySelector('[data-step="10"]').scrollIntoView({ behavior: "smooth", block: "center" });
   }, 100);
 
   input.focus();
@@ -85,7 +85,7 @@ function endTest() {
   resultsArea.classList.add("show-results");
 
   setTimeout(() => {
-    document.querySelector('[data-step="8"]').scrollIntoView({ behavior: "smooth" });
+    document.querySelector('[data-step="11"]').scrollIntoView({ behavior: "smooth" });
   }, 150);
 }
 

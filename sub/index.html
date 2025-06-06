@@ -17,7 +17,8 @@
 
 <body>
 
-  <div id="steps">
+    <!-- Title -->
+    <div id="steps">
     <div class="step" data-step="1">
       <div id="header">
         <h1 id="big-title">
@@ -45,7 +46,7 @@
           </div>
           <div class="team-member">
             <h3>Coltrane Gowan</h3>
-            <p>Designer/ScrollyTelly</p>
+            <p>Designer/ScrollyTelling</p>
           </div>
           <div class="team-member">
             <h3>Jennifer Kuei</h3>
@@ -57,6 +58,7 @@
 
 
 
+    <!-- About PD -->
     <div class="step" data-step="2">
       <div class="basic-about">
         <h2>About Parkinson's Disease</h2>
@@ -85,6 +87,7 @@
       </div>
     </div>
 
+    <!-- About Our Dataset -->
     <div class="step" data-step="3">
       <div class="basic-about">
         <h2>About Our Dataset</h2>
@@ -119,7 +122,66 @@
       </div>
     </div>
 
+    <!-- Lets take a look at the data -->
     <div class="step" data-step="4">
+
+    </div>
+
+    <!-- Scatterplot -->
+    <div class="step" data-step="5">
+      <div id="grid-container">
+        <div id="grid-item-2">
+                    <div id="controls">
+            <label><input type="radio" name="group" id="show-both" value="both" checked> Both</label>
+            <label><input type="radio" name="group" id="show-true" value="true"> Has Parkinson's</label>
+            <label><input type="radio" name="group" id="show-false" value="false"> No Parkinson's</label>
+          </div>
+          <svg id="scatterplot"></svg>
+        </div>
+
+        <div class="bullet-points" id="grid-item-4">
+          <h2>Regressing WPM on UPDRS</h2>
+          <ul>
+            <li>
+              A scatter plot of those with and without PD and the relationship
+              between their typing speed and their UPDRS scores.
+            </li>
+
+            <li>
+              It is shown that there is a <mark>slight negative</mark> trend in the
+              regression line
+            </li>
+
+            <li>
+              Patients without PD has a much wider range compared to patients
+              with PD
+            </li>
+
+            <li>
+              Although the regression line is generally negative, due to
+              overlapping values, <mark>typing speed alone likely isn't sufficient for
+              diagnosis</mark>, other metrics need to be taken into consideration.
+            </li>
+
+            <li>
+              From a classification perspective, we can identify that there is a
+              clear linear division boundary in the UPDRS between the two groups
+              that lingers around <mark>6-7</mark> (this is in consideration that the UPDRS
+              score provided is from section 3 of the UDRS examination that
+              focuses on motor movements).
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Can we predict PD? -->
+    <div class="step" data-step="6">
+
+    </div>
+
+    <!-- Density Plot -->
+    <div class="step" data-step="7">
       <div id="grid-container">
         <div id="grid-item-1">
           <div id="controls">
@@ -175,53 +237,14 @@
       </div>
     </div>
 
-    <div class="step" data-step="5">
-      <div id="grid-container">
-        <div id="grid-item-2">
-          <div id="controls">
-            <label><input type="radio" name="group" id="show-both" value="both" checked> Both</label>
-            <label><input type="radio" name="group" id="show-true" value="true"> Has Parkinson's</label>
-            <label><input type="radio" name="group" id="show-false" value="false"> No Parkinson's</label>
-          </div>
-          <svg id="scatterplot"></svg>
-        </div>
+    <!-- See how you compare -->
+    <div class="step" data-step="8">
 
-        <div class="bullet-points" id="grid-item-4">
-          <h2>Regressing WPM on UPDRS</h2>
-
-          <p>Hover over the graph to see details!</p>
-          <ul>
-            <!-- <li>
-              A scatter plot of those with and without PD and the relationship
-              between their typing speed and their UPDRS scores.
-            </li> -->
-
-            <li>
-              For both populations, there is a <mark> negative</mark> trend in the
-              regression line, meaning that as the UPDRS score increases, the typing speed (WPM) decreases.
-            </li>
-
-            <li>The slope of regression line for the combined population is a decrease of <mark>1.24 WPM </mark>for each point decrease in UPDRS score.
-              For subjects with PD there is a decrease of <mark>-2.50 WPM</mark> and for those without it decreases by <mark>-4.26</mark>.</li>
-
-            <li>
-              Subjects without PD have a much wider range compared to those with PD sugguesting that the typing speed of
-              those with PD is more consistent and may be more predicable.
-            </li>
-
-            <li> <mark>
-                  There is a
-                  clear linear division in the UPDRS between the two groups
-                  around 6-7. It may be possible to classify an individual’s Parkinson's risk based on their typing
-                  speed! </mark>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
-    <!-- Step 6: Typing Instructions -->
-    <div class="step" data-step="6">
+
+    <!-- Typing Instructions -->
+    <div class="step" data-step="9">
       <div class="typing-test-zone">
         <h2>Typing Test Instructions</h2>
 
@@ -242,73 +265,66 @@
 
   </div>
 
-  <!-- Step 7: Typing Test -->
-  <div class="step" data-step="7">
-    <div class="typing-test">
-      <h2>Typing Test</h2>
-      <div id="timer-area">
-        <span id="time-left">Time: 15s</span>
+    <!-- Typing Test -->
+    <div class="step" data-step="10">
+      <div class="typing-test">
+        <h2>Typing Test</h2>
+        <div id="timer-area">
+          <span id="time-left">Time: 15s</span>
+        </div>
+        <div id="test-area">
+          <div id="words"></div>
+          <input
+            type="text"
+            id="input"
+            autocomplete="off"
+            placeholder="Start typing here..."
+          />
+        </div>
+        <button id="restart">Restart Test</button>
       </div>
-      <div id="test-area">
-        <div id="words"></div>
-        <input type="text" id="input" autocomplete="off" placeholder="Start typing here..." />
-      </div>
-      <button id="restart">Restart Test</button>
     </div>
-  </div>
 
 
 
   </div>
 
-
-  <div class="step" data-step="8">
-    <div id="results-area" class="hidden">
-      <h2>Results</h2>
-      <div id="results-content">
-        <svg id="resultsgraph"></svg>
-        <div id="results-text">
-          <p id="final-wpm"><strong>WPM: </strong>0</p>
-          <p id="final-accuracy"><strong>Accuracy: </strong>0%</p>
-          <p id="percentile-text">Complete the test first to see results!</p>
-
-          <button id="restart-2">Restart Test</button>
+      <!-- Results -->
+      <div class="step" data-step="11">
+      <div id="results-area" class="hidden">
+        <h2>Results</h2>
+        <div id="results-content">
+          <svg id="resultsgraph"></svg>
+          <div id="results-text">
+            <p id="final-wpm"></p>
+            <p id="final-accuracy"></p>
+            <p id="percentile-text"></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <div class="step" data-step="9">
-    <div id="conclusion">
-      <h2>Conclusion</h2>
+    <!-- Conclusion -->
+    <div class="step" data-step=12">
+      <div id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          Although the model shows a general relationship between typing speed and UPDRS score, there is no definitive threshold that is able to classify an individual’s health status solely based upon
+      typing speed. Any predictions
+       made should be considered speculative and used only for exploratory purposes, NOT for clinical evaluation.
 
-      <p>
-        Our project aimed to explore the relationship between typing patterns and Parkinson's disease risk. We hoped to
-        identify individuals at higher risk of developing
-        PD through the analysis of their typing speed, enabling earlier intervention and better management of the
-        disease.
-      </p>
-
-      <p>
-        While our analysis of the dataset may have looked promising at the start with the clear divide between the
-        typing speeds of both population, it became clear that typing speed alone is not a sufficient metric for
-        diagnosing Parkinson's disease.
-      </p>
-
-      <p>
-        The distributions of typing speed between those with and without PD were quite similar, as there was not a
-        definitive threshold that would allow us to classify an individual’s health status solely based on typing speed.
-      </p>
-
-      <p> <strong> <mark>
-            Any predictions made should be considered speculative and used only for exploratory purposes, NOT for
-            clinical evaluation.
-      </p> </strong></mark>
-
-
-      <div style="text-align: center; margin-top: 20px;">
-        <button id="backtotop">Back To Top</button>
+          In conclusion, our project aims to explore the relationship between
+          typing patterns and Parkinson's disease risk. By analyzing typing
+          trends, we hope to identify individuals at higher risk of developing
+          PD, enabling earlier interventions and better management of the
+          disease.
+        </p>
+        <p>
+          We believe that this approach can provide valuable insights into the
+          early detection of Parkinson's disease and contribute to improving the
+          quality of life for those affected by it.
+        </p>
       </div>
 
     </div>

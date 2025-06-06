@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const stepNum = response.element.dataset.step;
 
       document.getElementById("densitytype").style.display =
-        stepNum === "4" ? "block" : "none";
+        stepNum === "7" ? "block" : "none";
       document.getElementById("scatterplot").style.display =
         stepNum === "5" ? "block" : "none";
     });
