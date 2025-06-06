@@ -308,6 +308,7 @@ input.addEventListener("keydown", (e) => {
 
 restartBtn.addEventListener("click", () => {
   resetTest();
+
   input.focus();        // Only happens when restart button is clicked
 });
 resetTest();
