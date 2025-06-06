@@ -124,6 +124,7 @@ const timeLeftSpan = document.getElementById("time-left");
 const finalWpmSpan = document.getElementById("final-wpm");
 const finalAccuracySpan = document.getElementById("final-accuracy");
 const percentileText = document.getElementById("percentile-text");
+const realityCheck = document.getElementById("reality-check");
 const resultsArea = document.getElementById("results-area");
 const restartBtn1 = document.getElementById("restart");
 const restartBtn2 = document.getElementById("restart-2");
@@ -235,8 +236,12 @@ function displayResults(wpm) {
 
       percentileText.innerHTML = `
         Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. <br><br>
-        According to our regression model, a score of <strong>${wpmVal} WPM</strong> corresponds to a UPDRS estimate of <strong>${estimate}</strong>.<br><br>
-        <strong>Note:</strong> This is not a clinical diagnosis.`;
+        According to our regression model, a score of <strong>${wpmVal} WPM</strong> corresponds to a UPDRS estimate of <strong>${estimate}</strong>.`;
+
+      realityCheck.innerHTML = `
+        <strong>Reality Check:</strong> 
+        <br>
+        You may have been assigned a high UPDRS! This is proof that you cannot determine Parkinson's severity from just WPM alone.`;
     });
 }
 

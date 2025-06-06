@@ -397,11 +397,16 @@ h2 {
   display: inline-block;
 }
 
-#percentile-text {
+#percentile-text, #reality-check {
   font-size: 1.1em; /* Standard font for percentile text */
   line-height: 1.5;
   color: var(--text-color); /* Ensure theme color */
   text-align: left;
+}
+
+#reality-check {
+  background-color: #d3824b;
+  opacity: .5;
 }
 
 /* Media query for responsiveness: stack graph and text on smaller screens */
