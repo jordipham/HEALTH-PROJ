@@ -10,7 +10,6 @@ body {
          and use the OS’s UI font as the website font
        */
   font: 100% / 1.5 system-ui;
-  max-width: 150ch; /*helps with content width*/
   margin-inline: max(1em, (100% - 150ch) / 2); /* helps with L&R margin */
   accent-color: var(--color-accent); /* Added for Step 2.4 */
   background-color: var(--super-light-gray); /* Super light gray background */
