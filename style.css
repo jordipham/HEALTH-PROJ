@@ -332,9 +332,9 @@ h2 {
   margin: 1em auto 0 auto;
 }
 
-.hidden {
+/* .hidden {
   display: none !important;
-}
+} */
 
 #results-content {
   display: grid;

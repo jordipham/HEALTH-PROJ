@@ -63,25 +63,26 @@
       <div class="basic-about">
         <h2>About Parkinson's Disease</h2>
         <p>
-          Parkinson’s disease is a movement disorder impacted by the nervous
+          Parkinson’s Disease is a movement disorder impacted by the nervous
           system. It causes neurons in the brain to become damaged and weakened
           which impacts lifestyle such as movement issues, tremors, stiffness,
-          and impaired balances. Severe PD patients might have troubles with
+          and impaired balance. Severe PD patients might have troubles with
           walking, talking, and completing other daily tasks. The damage in the
           neurons causes the affected individuals to have a decrease in
-          dopamine. The decrease in dopamine is why the main treatment for PD,
-          Levodopa (L-DOPA), attempts to replace dopamine although a major side
-          effect is that it can cause paralysis or involuntary movement. Both
-          symptoms of PD and the side effects of the treatment impacts movement,
-          leading back to our project goal to see the interaction it has with
-          typing.</p>
+          dopamine. 
+        </p>
+
+        <p>
+          As the modern world has become more digitized, typing and computer usage has become a large part of our lives. People who suffer from PD may have difficulty typing or operasting computes due to reduced motor function.
+          In fact, research has implied that certain typing patterns can serve as an indicator of Parkinson's disease risk.
+        </p>
+
           <p>
           <mark
             ><b
-              >Research has implied that varying typing patterns can be an
-              indicator of PD. By utilizing and analysing these patterns, we can
-              hopefully identify those at risk and provide earlier
-              interventions.</b
+              > Through the analysis of these patterns, we 
+              hope to identify those who may be risk and provide earlier
+              intervention.</b
             ></mark
           >
         </p>
@@ -95,24 +96,26 @@
         
 
         <p>
-          The original dataset was collected by the Massachusetts Institute of
-          Technology (MIT) on 85 subjects from Madrid, Spain. The dataset
+          Our original dataset was collected by the Massachusetts Institute of
+          Technology (MIT) on 85 subjects (43 with Parkinsons, 42 without) from Madrid, Spain. It
           contains keystroke logs from subjects both with and without PD. Typing
-          data was collected on standardized equipment.
+          data was collected using standardized equipment across all participants.
         </p>
         <p>
-          Besides the keylogged data (measuring the key pressed, hold time,
+          Besides the keylogged data (the key pressed, hold time, release time, 
           etc.), finger tapping tests were also taken that measured the speed
           and rhythm of finger movements, providing additional insights of the
           likelihood of PD.
         </p>
         <p>
-          One of the main takeaway points of the dataset is also the Unified
+          One of the main takeaway points of the dataset is the Unified
           Parkinson's Disease Rating Scale (UPDRS) score. The score is based
           upon a questionnaire that subjects complete, that assesses subjects on
-          motor and non-motor symptoms on a scale from 0-4. It provides a final
-          score range from 0-108 with 0 being minimal chances of PD and 108
-          being higher risk.
+          motor and non-motor symptoms, each on a scale from 0-4. 
+        </p>
+          This dataset focused specifically on Part 3 of the UPDRS, which relates to motor function. 
+        <p>
+
         </p>
           <button
           class="dataset-button"
@@ -147,7 +150,7 @@
         <div class="bullet-points" id="grid-item-3">
           <h2>Density Histogram Comparison of WPM</h2>
           <ul>
-            <li>
+            <!-- <li>
               Density histogram of Word per Minute (WPM) separated by those
               affected by PD and those that are not
             </li>
@@ -155,10 +158,14 @@
             <li>
               Parkinson data is displayed in blue while non-PD is displayed in
               orange
-            </li>
+            </li> 
+            
+            I dont think we should have to explain to the viewers what they are looking at?
+
+            -->
 
             <li>
-              Although it is expected that there’d be a vast difference in WPM
+              Although it is expected that there would be a vast difference in WPM
               since PD impacts movement, but in reality looking at our data,
               there is not that drastic of a difference in typing speed,
               considering how similar the distributions appear.
@@ -273,9 +280,9 @@
         <div id="results-content">
           <svg id="resultsgraph"></svg>
           <div id="results-text">
-            <p id="final-wpm"></p>
-            <p id="final-accuracy"></p>
-            <p id="percentile-text"></p>
+            <p id="final-wpm">0 WPM</p>
+            <p id="final-accuracy">0%</p>
+            <p id="percentile-text">Complete the tests to see results.</p>
           </div>
         </div>
       </div>
