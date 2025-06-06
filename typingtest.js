@@ -220,7 +220,7 @@ document.getElementById("results-area").classList.add("show-results");
 
 // Scroll AFTER dispatch to ensure Scrollama picks up correct state
 setTimeout(() => {
-  document.querySelector('[data-step="7"]').scrollIntoView({ behavior: "smooth" });
+  document.querySelector('[data-step="8"]').scrollIntoView({ behavior: "smooth" });
 }, 150);
 
 
@@ -248,10 +248,13 @@ function resetTest() {
   //   input.focus();
   resultsArea.classList.add("hidden");
 
+  // Only scroll to typing test if restart was manually triggered
+if (document.activeElement === restartBtn) {
   setTimeout(() => {
-  document.querySelector(".typing-test")
-    .scrollIntoView({ behavior: "smooth", block: "center" });
-}, 50);
+    document.querySelector(".typing-test")
+      .scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 50);
+}
   restartBtn.blur();
   window.dispatchEvent(new Event("testRestarted"));
   document.getElementById("results-area").classList.remove("show-results");
