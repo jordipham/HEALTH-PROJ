@@ -4,7 +4,7 @@ const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
 const container = document.getElementById("results-content").parentElement;
 const boundingBox = container.getBoundingClientRect();
-const width = boundingBox.width - margin.left - margin.right;
+const width = boundingBox.width * 0.9 - margin.left - margin.right;
 const height = boundingBox.width * 0.5 - margin.top - margin.bottom;
 
 const svg = d3
