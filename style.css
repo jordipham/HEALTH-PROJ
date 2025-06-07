@@ -396,6 +396,10 @@ h2 {
   display: inline-block;
 }
 
+#final-accuracy {
+  margin-bottom: 10px; /* Add some space below */
+}
+
 #percentile-text, #reality-check {
   font-size: 1.1em; /* Standard font for percentile text */
   line-height: 1.5;
@@ -404,6 +408,7 @@ h2 {
 }
 
 #reality-check:not(:empty) {
+  display: show;
   margin-top: 0;
   background-color: rgba(211, 130, 75, 0.35);
   border: 2px solid #d3824b;   
@@ -535,7 +540,7 @@ body {
 #restart:hover,
 #restart-2:hover,
 #backtotop:hover {
-  background-color: #0097a7;
+  background-color: #4682B4;
   transform: translateY(-2px); /* Subtle lift on hover */
 }
 
