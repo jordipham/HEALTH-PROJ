@@ -242,7 +242,7 @@ function displayResults(wpm) {
       `<span style="display: block; text-align: center; margin-top: 0;">
         &#10082 Reality Check &#10082
       </span>
-      You may have been assigned a high UPDRS and not have PD! This is proof that you cannot determine Parkinson's severity from just 
+      You may have been assigned a high UPDRS! This highlights that you cannot determine Parkinson's severity from just 
       WPM alone.`;
     });
 }
