@@ -405,9 +405,14 @@ h2 {
   text-align: left;
 }
 
-#reality-check {
-  background-color: #d3824b;
-  opacity: .5;
+#reality-check:not(:empty) {
+  margin-top: 0;
+  background-color: rgba(211, 130, 75, 0.35);
+  border: 2px solid #d3824b;   
+  border-radius: 10px;
+  padding: 1em;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(211, 130, 75, 0.3);
 }
 
 /* Media query for responsiveness: stack graph and text on smaller screens */

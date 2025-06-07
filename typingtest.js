@@ -238,10 +238,12 @@ function displayResults(wpm) {
         Your typing speed is higher than approximately <strong>${percentile}%</strong> of test participants. <br><br>
         According to our regression model, a score of <strong>${wpmVal} WPM</strong> corresponds to a UPDRS estimate of <strong>${estimate}</strong>.`;
 
-      realityCheck.innerHTML = `
-        <strong>Reality Check:</strong> 
-        <br>
-        You may have been assigned a high UPDRS! This is proof that you cannot determine Parkinson's severity from just WPM alone.`;
+      realityCheck.innerHTML = 
+      `<span style="display: block; text-align: center; margin-top: 0;">
+        &#10082 Reality Check &#10082
+      </span>
+      You may have been assigned a high UPDRS and not have PD! This is proof that you cannot determine Parkinson's severity from just 
+      WPM alone.`;
     });
 }
 
