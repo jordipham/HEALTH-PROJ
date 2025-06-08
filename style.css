@@ -382,8 +382,6 @@ h2 {
 #results-text {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Increased gap between text results */
-  justify-content: center; /* Center text vertically if space allows */
 }
 
 #final-wpm,
@@ -391,11 +389,15 @@ h2 {
   font-size: 2em; /* Larger font for key stats */
   /* font-weight: bold; */
   color: var(--text-color); /* Ensure theme color */
-  margin-bottom: 2px; /* Add some space below */
+  margin-bottom: -10px; /* Add some space below */
   background-color: #e0f7fa;
   padding: 0.4em 0.8em;
   border-radius: 8px;
   display: inline-block;
+}
+
+#final-accuracy {
+  margin-bottom: 10px; /* Add some space below */
 }
 
 #percentile-text, #reality-check {
@@ -405,9 +407,15 @@ h2 {
   text-align: left;
 }
 
-#reality-check {
-  background-color: #d3824b;
-  opacity: .5;
+#reality-check:not(:empty) {
+  display: show;
+  margin-top: 0;
+  background-color: rgba(211, 130, 75, 0.35);
+  border: 2px solid #d3824b;   
+  border-radius: 10px;
+  padding: 1em;
+  /* font-weight: 600; */
+  box-shadow: 0 4px 10px rgba(211, 130, 75, 0.3);
 }
 
 /* Media query for responsiveness: stack graph and text on smaller screens */
@@ -418,7 +426,6 @@ h2 {
 
   #results-text {
     text-align: center; /* Center text when stacked */
-    margin-top: 20px; /* Add space between graph and text when stacked */
   }
 }
 
@@ -533,7 +540,7 @@ body {
 #restart:hover,
 #restart-2:hover,
 #backtotop:hover {
-  background-color: #0097a7;
+  background-color: #4682B4;
   transform: translateY(-2px); /* Subtle lift on hover */
 }
 
