@@ -638,3 +638,12 @@ h2 {
   align-items: center;
   gap: 1em; /* optional spacing between h1 and h2 */
 }
+
+.corner-image {
+  position: fixed;
+  bottom: -10px;
+  right: -130px;
+  width: 500px;      /* Adjust size as needed */
+  height: auto;
+  z-index: 1000;     /* Make sure it’s on top */
+}
